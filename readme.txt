@@ -14,11 +14,11 @@ Inspired by Yelp compliments system BuddyPress Compliments is a BuddyPress addon
 
 BuddyPress compliments adds a smart way for BuddyPress members to interact with each other via compliments.
 
-1. Install the plugin
-2. Create unlimited number of Compliment types (eg: Thank you - Good Writer - Cute Pic - Like your Profile - etc.)
-3. A Compliment button and Compliments tab will appear in each member's profile.
-4. When you click the Compliments button, a popup will show up with compliment types
-5. Submitted compliments will be visible in user’s compliments section.
+* Install the plugin
+* Create unlimited number of Compliment types (eg: Thank you - Good Writer - Cute Pic - Like your Profile - etc.)
+* A Compliment button and Compliments tab will appear in each member's profile.
+* When you click the Compliments button, a popup will show up with compliment types
+* Submitted compliments will be visible in user's compliments section.
 
 We built this plugin especially for Whoop! our upcoming WordPress Directory Theme powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
