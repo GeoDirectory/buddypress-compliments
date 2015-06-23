@@ -39,20 +39,19 @@ function create_compliment_taxonomies() {
 //compliment icons
 add_action( 'admin_enqueue_scripts', 'compliments_enqueue_color_picker' );
 function compliments_enqueue_color_picker( $hook_suffix ) {
-    wp_enqueue_script('thickbox');
-    wp_enqueue_style('thickbox');
-    wp_enqueue_script('media-upload');
-    wp_enqueue_script( 'littlemisscat-colorpicker', constant( 'BP_COMPLIMENTS_URL' ) . '/js/admin.js', array(), false, true );
+    wp_enqueue_media();
+    wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . '/js/admin.js', array(), false, true );
 }
 function compliments_taxonomy_add_new_meta_field() {
     ?>
-    <div class="form-field">
+    <div class="form-field form-required">
 	<span class='caticon-upload upload'>
-     	<label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', 'compliments' ); ?></label>
-        <input type='text' id='compliments_icon' class='regular-text text-upload compliments-icon-field' name='term_meta[compliments_icon]' value=''/>
-        <input type='button' class='button button-upload' value='Upload Icon'/></br>
-        <p>Recommended icon size: 20px x 20px</p>
-<!--        <img style='max-width: 300px; display:block' src='' class='preview-upload'/>-->
+        <label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', 'compliments' ); ?></label>
+        <img id="comp-icon-preview" class="image_preview" src="" style="display: none;" /><br/>
+        <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , BP_COMP_TEXTDOMAIN ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , BP_COMP_TEXTDOMAIN ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
+        <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
+        <input id="comp-icon-value" class="image_data_field" type="hidden" name="term_meta[compliments_icon]" value=""/><br/>
+        <p><?php echo __( 'Recommended icon size: 20px x 20px' , BP_COMP_TEXTDOMAIN ); ?></p>
     </span>
     </div>
 <?php
@@ -61,14 +60,16 @@ add_action( 'compliment_add_form_fields', 'compliments_taxonomy_add_new_meta_fie
 function compliments_taxonomy_edit_meta_field($term) {
     $t_id = $term->term_id;
     $term_meta = get_option( "taxonomy_$t_id" ); ?>
-    <tr class="form-field">
+    <tr class="form-field form-required">
         <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', 'compliments' ); ?></label></th>
         <td>
-		<span class='caticon-upload upload'>
-     	<input type='text' id='compliments_icon' class='regular-text text-upload compliments-icon-field' name='term_meta[compliments_icon]' value='<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>'/>
-        <input type='button' class='button button-upload' value='Upload Icon'/></br>
-            <img style='max-width: 300px; display:block' src='<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>' class='preview-upload'/>
-    </span>
+		    <span class='caticon-upload upload'>
+                <img id="comp-icon-preview" class="image_preview" src="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>" /><br/>
+                <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , BP_COMP_TEXTDOMAIN ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , BP_COMP_TEXTDOMAIN ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
+                <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
+                <input id="comp-icon-value" class="image_data_field" type="hidden" name="term_meta[compliments_icon]" value=""/><br/>
+                <p><?php echo __( 'Recommended icon size: 20px x 20px' , BP_COMP_TEXTDOMAIN ); ?></p>
+            </span>
         </td>
     </tr>
 <?php

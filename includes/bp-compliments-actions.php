@@ -29,7 +29,7 @@ function handle_compliments_form_data() {
         }
 
         if ( ! bp_compliments_start_compliment($args)) {
-            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', 'bp-follow' ), bp_get_displayed_user_fullname() ), 'error' );
+            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), bp_get_displayed_user_fullname() ), 'error' );
         } else {
             bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), bp_get_displayed_user_fullname() ) );
         }

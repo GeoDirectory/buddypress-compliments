@@ -40,6 +40,7 @@ class BP_Compliments_Component extends BP_Component {
         require( $this->path . '/bp-compliments-screens.php' );
         require( $this->path . '/bp-compliments-templatetags.php' );
         require( $this->path . '/bp-compliments-actions.php' );
+        require( $this->path . '/bp-compliments-notifications.php' );
         require( $this->path . '/bp-compliments-forms.php' );
     }
 
@@ -56,6 +57,7 @@ class BP_Compliments_Component extends BP_Component {
 
         // Set up the $globals array
         $globals = array(
+            'notification_callback' => 'bp_compliments_format_notifications',
             'global_tables'         => array(
                 'table_name' => BP_COMPLIMENTS_TABLE,
             )
@@ -101,6 +103,7 @@ class BP_Compliments_Component extends BP_Component {
     public function setup_nav( $main_nav = array(), $sub_nav = array() ) {
         global $bp;
 
+        do_action( 'bp_compliments_before_setup_nav' );
         // Need to change the user ID, so if we're not on a member page, $counts variable is still calculated
         $user_id = bp_is_user() ? bp_displayed_user_id() : bp_loggedin_user_id();
         $counts  = bp_compliments_total_counts( array( 'user_id' => $user_id ) );

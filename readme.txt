@@ -62,11 +62,11 @@ No questions so far, but don't hesitate to ask!
 1. The compliments page where you can add compliment types.
 2. A Compliment button and Compliments tab are added to each profile page.
 3. Click the Compliments button and a popup will be displayed with compliment types for submission.
-4. Submitted compliments will be visible in user’s compliments section.
+4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
 
-= 1.0 =
+= 0.0.1 =
 * First release.
 
 == Upgrade Notice ==

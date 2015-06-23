@@ -1,46 +1,50 @@
-(function($) {
-    $(function() {
-        $.fn.complimentscatimg = function(options) {
-            var selector = $(this).selector; // Get the selector
-            // Set default options
-            var defaults = {
-                'preview' : '.preview-upload',
-                'text'    : '.text-upload',
-                'button'  : '.button-upload'
-            };
-            var options  = $.extend(defaults, options);
+var $ = jQuery.noConflict();
+jQuery(document).ready(function ($) {
+    var file_frame;
 
-            // When the Button is clicked...
-            $(options.button).click(function() {
-                // Get the Text element.
-                var text = $(this).siblings(options.text);
+    jQuery.fn.uploadMediaFile = function( button, preview_media ) {
+        var button_id = button.attr('id');
+        var field_id = button_id.replace( 'upload', 'value' );
+        var preview_id = button_id.replace( 'upload', 'preview' );
 
-                // Show WP Media Uploader popup
-                tb_show('Upload Icon', 'media-upload.php?referer=complimentscatimg&type=image&TB_iframe=true&post_id=0', false);
-
-                // Re-define the global function 'send_to_editor'
-                // Define where the new value will be sent to
-                window.send_to_editor = function(html) {
-                    // Get the URL of new image
-                    var src = $('img', html).attr('src');
-                    // Send this value to the Text field.
-                    text.attr('value', src).trigger('change');
-                    tb_remove(); // Then close the popup window
-                }
-                return false;
-            });
-
-            $(options.text).bind('change', function() {
-                // Get the value of current object
-                var url = this.value;
-                // Determine the Preview field
-                var preview = $(this).siblings(options.preview);
-                // Bind the value to Preview field
-                $(preview).attr('src', url);
-            });
+        // If the media frame already exists, reopen it.
+        if ( file_frame ) {
+            file_frame.open();
+            return;
         }
 
-        // Usage
-        $('.caticon-upload').complimentscatimg(); // Use as default option.
+        // Create the media frame.
+        file_frame = wp.media.frames.file_frame = wp.media({
+            title: jQuery( this ).data( 'uploader_title' ),
+            button: {
+                text: jQuery( this ).data( 'uploader_button_text' )
+            },
+            multiple: false,
+            library: {
+                type: 'image' //Only allow images
+            }
+        });
+
+        // When an image is selected, run a callback.
+        file_frame.on( 'select', function() {
+            attachment = file_frame.state().get('selection').first().toJSON();
+            jQuery("#"+field_id).val(attachment.url);
+            if( preview_media ) {
+                jQuery("#"+preview_id).attr('src',attachment.url).show();
+            }
+        });
+
+        // Finally, open the modal
+        file_frame.open();
+    };
+
+    jQuery('.image_upload_button').click(function() {
+        jQuery.fn.uploadMediaFile( jQuery(this), true );
     });
-}(jQuery));
+
+    jQuery('.image_delete_button').click(function() {
+        jQuery( '.image_data_field' ).val( '' );
+        jQuery( '.image_preview' ).attr('src','').hide();
+        return false;
+    });
+});
