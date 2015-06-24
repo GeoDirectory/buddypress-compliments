@@ -1,4 +1,11 @@
 <?php
+/**
+ * Functions related to compliment forms.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
     ?>
     <div class="comp-modal">
@@ -66,6 +73,11 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
 <?php
 }
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_modal_ajax()
 {
     check_ajax_referer('bp-compliments-nonce', 'bp_compliments_nonce');
@@ -78,6 +90,11 @@ add_action('wp_ajax_bp_compliments_modal_ajax', 'bp_compliments_modal_ajax');
 
 //Javascript
 add_action('wp_footer', 'bp_compliments_modal_init');
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_modal_init() {
     if (!bp_is_user() || !is_user_logged_in()){
         return;

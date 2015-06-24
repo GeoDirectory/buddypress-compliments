@@ -1,12 +1,30 @@
 <?php
 /**
+ * Functions related to compliment buttons and template tags.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
+/**
  * Output a compliment button for a given user.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
  */
 function bp_compliments_add_compliment_button( $args = '' ) {
     echo bp_compliments_get_add_compliment_button( $args );
 }
+
 /**
  * Returns a compliment button for a given user.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param string $args
+ * @return string
+ * @global object $bp BuddyPress instance.
  */
 function bp_compliments_get_add_compliment_button( $args = '' ) {
     global $bp, $members_template;
@@ -89,11 +107,23 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
     return bp_get_button( apply_filters( 'bp_compliments_get_add_compliment_button', $button, $r['receiver_id'], $r['sender_id'] ) );
 }
 
+/**
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_add_profile_compliment_button() {
     bp_compliments_add_compliment_button();
 }
 add_action( 'bp_member_header_actions', 'bp_compliments_add_profile_compliment_button' );
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param string $args
+ * @return mixed|void
+ */
 function bp_compliments_get_compliments( $args = '' ) {
     $r = wp_parse_args( $args, array(
         'user_id' => bp_displayed_user_id(),

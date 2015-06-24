@@ -1,6 +1,18 @@
 <?php
 /**
+ * Functions related to compliment component.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
+/**
  * Start compliment.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
  * @param string $args
  * @return bool
  */
@@ -25,8 +37,16 @@ function bp_compliments_start_compliment( $args = '' ) {
 
     return true;
 }
+
 /**
  * Get the total compliment counts for a user.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param string $args
+ * @return mixed|void
+ * @global object $bp BuddyPress instance.
  */
 function bp_compliments_total_counts( $args = '' ) {
 
@@ -63,6 +83,13 @@ function bp_compliments_total_counts( $args = '' ) {
     return apply_filters( 'bp_compliments_total_counts', $count, $r['user_id'] );
 }
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param $user_id
+ */
 function bp_compliments_remove_data( $user_id ) {
     do_action( 'bp_compliments_before_remove_data', $user_id );
 

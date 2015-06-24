@@ -1,4 +1,11 @@
 <?php
+/**
+ * Class that interact with the custom db table.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
@@ -37,6 +44,9 @@ class BP_Compliments {
     /**
      * Constructor.
      *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
      * @param int $receiver_id The user ID of the user you want to compliment.
      * @param int $sender_id The user ID initiating the compliment request.
      * @param int $term_id The term ID of the compliment type.
@@ -61,6 +71,9 @@ class BP_Compliments {
 
     /**
      * Saves a compliment into the database.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
      */
     public function save() {
         global $wpdb, $bp;
@@ -89,6 +102,10 @@ class BP_Compliments {
 
     /**
      * Deletes a compliment from the database.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
      * @param $c_id
      * @return
      */
@@ -100,6 +117,11 @@ class BP_Compliments {
 
     /**
      * Get the compliments for a given user.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      * @param $user_id
      * @param $offset
      * @param $limit
@@ -118,6 +140,11 @@ class BP_Compliments {
 
     /**
      * Get the senders / receivers counts for a given user.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      * @param $user_id
      * @return array
      */
@@ -133,6 +160,11 @@ class BP_Compliments {
 
     /**
      * Deletes all compliments for a given user.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      * @param $user_id
      */
     public static function delete_all_for_user( $user_id ) {

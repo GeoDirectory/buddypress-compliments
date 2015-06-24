@@ -1,7 +1,22 @@
 <?php
+/**
+ * Functions related to activity component.
+ *
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ */
+
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * 
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ * 
+ * @param string $args
+ * @return bool|int
+ */
 function compliments_record_activity( $args = '' ) {
 
     if ( ! bp_is_active( 'activity' ) ) {
@@ -24,6 +39,13 @@ function compliments_record_activity( $args = '' ) {
     return bp_activity_add( $r );
 }
 
+/**
+ * 
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ * 
+ * @param BP_Compliments $compliment
+ */
 function compliments_record_sent_activity( BP_Compliments $compliment ) {
     if ( ! bp_is_active( 'activity' ) ) {
         return;
@@ -50,6 +72,9 @@ add_action( 'bp_compliments_start_compliment', 'compliments_record_sent_activity
 
 /**
  * Register the activity actions.
+ * 
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
  */
 function compliments_register_activity_actions() {
 
@@ -85,7 +110,9 @@ add_action( 'bp_register_activity_actions', 'compliments_register_activity_actio
  * Format 'compliment_received' activity actions.
  *
  * @since 0.0.2
+ * @package BuddyPress_Compliments
  *
+ * @global object $bp BuddyPress instance.
  * @param object $activity Activity data.
  * @return string $action Formatted activity action.
  */
@@ -115,7 +142,9 @@ function compliments_format_activity_action_compliment_received( $action, $activ
  * Format 'compliment_sent' activity actions.
  *
  * @since 0.0.2
+ * @package BuddyPress_Compliments
  *
+ * @global object $bp BuddyPress instance.
  * @param string $action Static activity action.
  * @param object $activity Activity data.
  * @return string $action Formatted activity action.
@@ -142,6 +171,13 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
 }
 
 
+/**
+ * 
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ * 
+ * @param $c_id
+ */
 function compliments_delete_activity( $c_id ) {
     if ( ! bp_is_active( 'activity' ) ) {
         return;
@@ -154,6 +190,13 @@ function compliments_delete_activity( $c_id ) {
 }
 add_action('bp_compliments_after_remove_compliment', 'compliments_delete_activity');
 
+/**
+ * 
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ * 
+ * @param $user_id
+ */
 function compliments_delete_activity_for_user( $user_id ) {
     if ( ! bp_is_active( 'activity' ) ) {
         return;
