@@ -1,7 +1,19 @@
 <?php
+/**
+ * Functions related to handling user submitted data and actions.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function handle_compliments_form_data() {
 
     if (isset($_POST['comp-modal-form'])) {
@@ -40,6 +52,11 @@ function handle_compliments_form_data() {
 }
 add_action( 'bp_actions', 'handle_compliments_form_data', 99 );
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function delete_single_complement() {
     if (!bp_is_user()) {
         return;

@@ -1,8 +1,27 @@
 <?php
+/**
+ * Functions related to notification component.
+ *
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ */
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+/**
+ *
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ * @param $action
+ * @param $item_id
+ * @param $secondary_item_id
+ * @param $total_items
+ * @param string $format
+ * @return bool|mixed|void
+ */
 function bp_compliments_format_notifications( $action, $item_id, $secondary_item_id, $total_items, $format = 'string' ) {
     global $bp;
 
@@ -36,6 +55,13 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
     }
 }
 
+/**
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ * @param BP_Compliments $compliment
+ */
 function bp_compliments_notifications_add_on_compliment( BP_Compliments $compliment ) {
     // Add a screen notification
     // BP 1.9+
@@ -67,6 +93,13 @@ function bp_compliments_notifications_add_on_compliment( BP_Compliments $complim
 }
 add_action( 'bp_compliments_start_compliment', 'bp_compliments_notifications_add_on_compliment' );
 
+/**
+ *
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ * @return bool
+ */
 function bp_compliments_new_compliment_email_notification() {
     $args = '';
 
@@ -123,6 +156,13 @@ To disable these notifications please log in and go to:
     wp_mail( $to, $subject, $message );
 }
 
+/**
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ * @param $retval
+ * @return mixed
+ */
 function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
     if ( bp_is_current_action( 'read' ) ) {
         // if notifications loop has finished rendering, stop now!
@@ -137,6 +177,11 @@ function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
 }
 add_filter( 'bp_compliments_new_compliment_notification', 'bp_compliments_notifications_remove_queryarg_from_userlink' );
 
+/**
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ */
 function bp_compliments_screen_notification_settings() {
     if ( !$notify = bp_get_user_meta( bp_displayed_user_id(), 'notification_on_compliments', true ) )
         $notify = 'yes';
@@ -167,6 +212,12 @@ function bp_compliments_screen_notification_settings() {
 }
 add_action( 'bp_notification_settings', 'bp_compliments_screen_notification_settings' );
 
+/**
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ */
 function bp_compliments_notifications_mark_compliments_as_read() {
     if (!bp_is_user() || !is_user_logged_in()){
         return;
@@ -200,6 +251,13 @@ function bp_compliments_notifications_mark_compliments_as_read() {
 add_action( 'bp_actions', 'bp_compliments_notifications_mark_compliments_as_read' );
 
 
+/**
+ * @since 0.0.2
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ * @param int $user_id
+ */
 function bp_compliments_remove_notifications_for_user( $user_id = 0 ) {
     // BP 1.9+
     if ( bp_is_active( 'notifications' ) ) {

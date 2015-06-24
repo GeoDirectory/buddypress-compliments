@@ -1,6 +1,18 @@
 <?php
+/**
+ * Functions related to compliment types and icons.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 add_action('admin_menu', 'register_my_custom_submenu_page');
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function register_my_custom_submenu_page() {
     add_submenu_page( 'options-general.php', 'Compliments', 'Compliments', 'manage_options', 'edit-tags.php?taxonomy=compliment' );
 }
@@ -8,6 +20,11 @@ function register_my_custom_submenu_page() {
 add_action( 'init', 'create_compliment_taxonomies', 0 );
 
 // create two taxonomies, compliments and writers for the post type "compliment"
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function create_compliment_taxonomies() {
     // Add new taxonomy, make it hierarchical (like categories)
     $labels = array(
@@ -38,10 +55,23 @@ function create_compliment_taxonomies() {
 
 //compliment icons
 add_action( 'admin_enqueue_scripts', 'compliments_enqueue_color_picker' );
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param $hook_suffix
+ */
 function compliments_enqueue_color_picker( $hook_suffix ) {
     wp_enqueue_media();
     wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . '/js/admin.js', array(), false, true );
 }
+
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function compliments_taxonomy_add_new_meta_field() {
     ?>
     <div class="form-field form-required">
@@ -57,6 +87,13 @@ function compliments_taxonomy_add_new_meta_field() {
 <?php
 }
 add_action( 'compliment_add_form_fields', 'compliments_taxonomy_add_new_meta_field', 10, 2 );
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param $term
+ */
 function compliments_taxonomy_edit_meta_field($term) {
     $t_id = $term->term_id;
     $term_meta = get_option( "taxonomy_$t_id" ); ?>
@@ -75,6 +112,13 @@ function compliments_taxonomy_edit_meta_field($term) {
 <?php
 }
 add_action( 'compliment_edit_form_fields', 'compliments_taxonomy_edit_meta_field', 10, 2 );
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param $term_id
+ */
 function save_taxonomy_custom_meta( $term_id ) {
     if ( isset( $_POST['term_meta'] ) ) {
         $t_id = $term_id;
@@ -93,6 +137,14 @@ add_action( 'edited_compliment', 'save_taxonomy_custom_meta', 10, 2 );
 add_action( 'create_compliment', 'save_taxonomy_custom_meta', 10, 2 );
 
 add_filter("manage_edit-compliment_columns", 'modify_compliment_columns');
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param $columns
+ * @return array
+ */
 function modify_compliment_columns($columns) {
     $new_columns = array(
         'cb' => '<input type="checkbox" />',
@@ -103,6 +155,16 @@ function modify_compliment_columns($columns) {
 }
 
 add_filter("manage_compliment_custom_column", 'manage_theme_columns', 10, 3);
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param $out
+ * @param $column_name
+ * @param $t_id
+ * @return string
+ */
 function manage_theme_columns($out, $column_name, $t_id) {
     $term_meta = get_option( "taxonomy_$t_id" );
     $term_icon = esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : "";
@@ -118,6 +180,11 @@ function manage_theme_columns($out, $column_name, $t_id) {
 }
 
 add_action( 'admin_head-edit-tags.php', 'compliment_remove_parent_dropdown' );
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function compliment_remove_parent_dropdown()
 {
     if ( 'compliment' != $_GET['taxonomy'] )

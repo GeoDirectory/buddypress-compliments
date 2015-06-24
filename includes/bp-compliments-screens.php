@@ -1,7 +1,21 @@
 <?php
+/**
+ * Functions related to frontend content display.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ */
 function bp_compliments_screen_compliments() {
     global $bp;
 
@@ -9,6 +23,16 @@ function bp_compliments_screen_compliments() {
     bp_core_load_template( 'members/single/compliments' );
 }
 
+/**
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ * @param $found_template
+ * @param $templates
+ * @return mixed|string|void
+ */
 function bp_compliments_load_template_filter( $found_template, $templates ) {
     global $bp;
 
@@ -41,6 +65,12 @@ function bp_compliments_load_template_filter( $found_template, $templates ) {
 }
 add_filter( 'bp_located_template', 'bp_compliments_load_template_filter', 10, 2 );
 
+/**
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @return mixed|void
+ */
 function bp_compliments_get_template_directory() {
     return apply_filters( 'bp_compliments_get_template_directory', constant( 'BP_COMPLIMENTS_DIR' ) . '/includes/templates' );
 }

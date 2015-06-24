@@ -1,4 +1,11 @@
 <?php
+/**
+ * This is the main BuddyPress Compliments plugin file, here we declare and call the important stuff
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+
 /*
 Plugin Name: BuddyPress Compliments
 Plugin URI: http://wpgeodirectory.com/
@@ -11,9 +18,16 @@ Author URI: http://wpgeodirectory.com
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+/**
+ * BuddyPress compliments text domain.
+ */
 define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
+
 /**
  * Only load the plugin code if BuddyPress is activated.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
  */
 function bp_compliments_init() {
     global $wpdb, $bp;
@@ -42,6 +56,13 @@ function bp_compliments_init() {
 }
 add_action( 'bp_include', 'bp_compliments_init' );
 
+/**
+ * Creates Custom table for BuddyPress compliments.
+ *
+ * @global object $bp BuddyPress instance.
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
 function bp_compliments_activate() {
     global $bp, $wpdb;
     $version = get_option( 'bp_compliments_version');
@@ -72,10 +93,8 @@ register_activation_hook( __FILE__, 'bp_compliments_activate' );
 /**
  * Custom text domain loader.
  *
- * Checks WP_LANG_DIR for the .mo file first, then the plugin's language folder.
- * Allows for a custom language file other than those packaged with the plugin.
- *
- * @uses load_textdomain() Loads a .mo file into WP
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
  */
 function bp_compliments_localization() {
     $locale = apply_filters('plugin_locale', get_locale(), BP_COMP_TEXTDOMAIN);
