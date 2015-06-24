@@ -11,6 +11,7 @@ Author URI: http://wpgeodirectory.com
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
 /**
  * Only load the plugin code if BuddyPress is activated.
  */
@@ -23,7 +24,6 @@ function bp_compliments_init() {
     if ( !$table_prefix = $bp->table_prefix )
         $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
     define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
-    define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
 
     // only supported in BP 1.5+
     if ( version_compare( BP_VERSION, '1.3', '>' ) ) {
@@ -78,16 +78,11 @@ register_activation_hook( __FILE__, 'bp_compliments_activate' );
  * @uses load_textdomain() Loads a .mo file into WP
  */
 function bp_compliments_localization() {
-    $mo_file		= sprintf( 'bp-compliments-%s.mo', get_locale() );
-    $mo_file_global	= trailingslashit( WP_LANG_DIR ) . $mo_file;
-    $mo_file_local	= plugin_dir_path( __FILE__ ) . 'languages/' . $mo_file;
+    $locale = apply_filters('plugin_locale', get_locale(), BP_COMP_TEXTDOMAIN);
 
-    if ( is_readable( $mo_file_global ) )
-        return load_textdomain( 'bp-compliments', $mo_file_global );
-    elseif ( is_readable( $mo_file_local ) )
-        return load_textdomain( 'bp-compliments', $mo_file_local );
-    else
-        return false;
+    load_textdomain(BP_COMP_TEXTDOMAIN, WP_LANG_DIR . '/' . BP_COMP_TEXTDOMAIN . '/' . BP_COMP_TEXTDOMAIN . '-' . $locale . '.mo');
+    load_plugin_textdomain(BP_COMP_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
+
 }
 add_action( 'plugins_loaded', 'bp_compliments_localization' );
 
