@@ -89,24 +89,31 @@ class BP_Compliments {
 
     /**
      * Deletes a compliment from the database.
+     * @param $c_id
+     * @return
      */
-    public function delete() {
+    public static function delete($c_id) {
         global $wpdb, $bp;
         $table_name = BP_COMPLIMENTS_TABLE;
-        return $wpdb->query( $wpdb->prepare( "DELETE FROM {$table_name} WHERE id = %d", $this->id ) );
+        return $wpdb->query( $wpdb->prepare( "DELETE FROM {$table_name} WHERE id = %d", $c_id ) );
     }
 
     /**
-     * Get the sender IDs for a given user.
+     * Get the compliments for a given user.
      * @param $user_id
      * @param $offset
      * @param $limit
+     * @param bool|int $c_id
      * @return mixed
      */
-    public static function get_compliments( $user_id, $offset, $limit ) {
+    public static function get_compliments( $user_id, $offset, $limit, $c_id = false ) {
         global $bp, $wpdb;
         $table_name = BP_COMPLIMENTS_TABLE;
-        return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE receiver_id = %d ORDER BY created_at DESC LIMIT %d, %d", $user_id, $offset, $limit ) );
+        if ($c_id) {
+            return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE receiver_id = %d AND id = %d ORDER BY created_at DESC LIMIT %d, %d", $user_id, $c_id, $offset, $limit ) );
+        } else {
+            return $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE receiver_id = %d ORDER BY created_at DESC LIMIT %d, %d", $user_id, $offset, $limit ) );
+        }
     }
 
     /**

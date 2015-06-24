@@ -3,6 +3,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
 
 <div class="bp-compliments-wrap">
     <?php
+    $c_id = false;
     $count_args = array(
         'user_id' => bp_displayed_user_id()
     );
@@ -15,6 +16,13 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         'offset' => $offset,
         'limit' => $items_per_page
     );
+    if (isset($_GET['c_id'])) {
+        $c_id = (int) strip_tags(esc_sql($_GET['c_id']));
+        if ($c_id) {
+            $args['c_id'] = $c_id;
+        }
+
+    }
     $compliments = bp_compliments_get_compliments($args);
     $start = $offset ? $offset : 1;
     $end = $offset + $items_per_page;
@@ -40,6 +48,14 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                             <em>
                                 <?php echo date_i18n(get_option('date_format'), strtotime($comp->created_at)); ?>
                             </em>
+                            <?php
+                            global $bp;
+                            if (is_user_logged_in() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
+                                $receiver_url    = bp_core_get_userlink( $comp->receiver_id, false, true );
+                                $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$comp->id.'&action=delete';
+                                ?>
+                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;">Delete</a>
+                            <?php } ?>
                         </div>
                         <div class="comp-user-msg-wrap">
                             <div class="comp-user-message">
@@ -67,10 +83,10 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
             </ul>
         </div>
         <?php
-        if ($total > $items_per_page) { ?>
+        if (($total > $items_per_page) && !$c_id) { ?>
             <div id="pag-top" class="pagination">
                 <div class="pag-count" id="member-dir-count-top">
-                    <?php echo sprintf(_n('1 of 1', '%1$s to %2$s of %3$s', $total, 'buddypress'), $start, $end, $total); ?>
+                    <?php echo sprintf(_n('1 of 1', '%1$s to %2$s of %3$s', $total, BP_COMP_TEXTDOMAIN), $start, $end, $total); ?>
                 </div>
                 <div class="pagination-links">
                     <span class="bp-comp-pagination-text"><?php echo __('Go to Page', BP_COMP_TEXTDOMAIN) ?></span>

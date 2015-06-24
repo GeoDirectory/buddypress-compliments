@@ -41,6 +41,7 @@ class BP_Compliments_Component extends BP_Component {
         require( $this->path . '/bp-compliments-templatetags.php' );
         require( $this->path . '/bp-compliments-actions.php' );
         require( $this->path . '/bp-compliments-notifications.php' );
+        require( $this->path . '/bp-compliments-activity.php' );
         require( $this->path . '/bp-compliments-forms.php' );
     }
 

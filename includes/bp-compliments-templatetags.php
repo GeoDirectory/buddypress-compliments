@@ -98,8 +98,9 @@ function bp_compliments_get_compliments( $args = '' ) {
     $r = wp_parse_args( $args, array(
         'user_id' => bp_displayed_user_id(),
         'offset' => 0,
-        'limit' => 100
+        'limit' => 100,
+        'c_id' => false
     ) );
 
-    return apply_filters( 'bp_compliments_get_compliments', BP_Compliments::get_compliments( $r['user_id'], $r['offset'], $r['limit'] ) );
+    return apply_filters( 'bp_compliments_get_compliments', BP_Compliments::get_compliments( $r['user_id'], $r['offset'], $r['limit'], $r['c_id'] ) );
 }
