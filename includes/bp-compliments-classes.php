@@ -89,11 +89,13 @@ class BP_Compliments {
 
     /**
      * Deletes a compliment from the database.
+     * @param $c_id
+     * @return
      */
-    public function delete() {
+    public static function delete($c_id) {
         global $wpdb, $bp;
         $table_name = BP_COMPLIMENTS_TABLE;
-        return $wpdb->query( $wpdb->prepare( "DELETE FROM {$table_name} WHERE id = %d", $this->id ) );
+        return $wpdb->query( $wpdb->prepare( "DELETE FROM {$table_name} WHERE id = %d", $c_id ) );
     }
 
     /**

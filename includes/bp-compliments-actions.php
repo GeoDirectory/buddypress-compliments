@@ -39,3 +39,34 @@ function handle_compliments_form_data() {
     }
 }
 add_action( 'bp_actions', 'handle_compliments_form_data', 99 );
+
+function delete_single_complement() {
+    if (!bp_is_user()) {
+        return;
+    }
+
+    if ( bp_displayed_user_id() != bp_loggedin_user_id() ) {
+        return;
+    }
+
+    if (!isset($_GET['c_id']) OR !isset($_GET['action']) ) {
+        return;
+    }
+
+    $c_id = (int) strip_tags(esc_sql($_GET['c_id']));
+
+    if (!$c_id) {
+        return;
+    }
+
+    do_action( 'bp_compliments_before_remove_compliment', $c_id );
+
+    BP_Compliments::delete( $c_id );
+
+    do_action( 'bp_compliments_after_remove_compliment', $c_id );
+
+    $redirect = bp_displayed_user_domain().'compliments/';
+    bp_core_redirect( $redirect );
+}
+add_action( 'bp_actions', 'delete_single_complement');
+

@@ -1,6 +1,8 @@
 <?php
 /**
  * Start compliment.
+ * @param string $args
+ * @return bool
  */
 function bp_compliments_start_compliment( $args = '' ) {
     global $bp;

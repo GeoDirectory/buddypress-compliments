@@ -91,13 +91,13 @@ add_action( 'bp_register_activity_actions', 'compliments_register_activity_actio
  */
 function compliments_format_activity_action_compliment_received( $action, $activity ) {
     global $bp;
-    $sender_link = bp_core_get_userlink( $activity->user_id );
-    $receiver_link    = bp_core_get_userlink( $activity->secondary_item_id );
-    $receiver_url    = bp_core_get_userlink( $activity->secondary_item_id, false, true );
+    $receiver_link = bp_core_get_userlink( $activity->user_id );
+    $sender_link    = bp_core_get_userlink( $activity->secondary_item_id );
+    $receiver_url    = bp_core_get_userlink( $activity->user_id, false, true );
     $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$activity->item_id;
     $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment").'</a>';
 
-    $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, $compliment_link, $receiver_link );
+    $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $compliment_link, $sender_link );
 
 
     /**
@@ -140,3 +140,33 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
      */
     return apply_filters( 'compliments_format_activity_action_compliment_sent', $action, $activity );
 }
+
+
+function compliments_delete_activity( $c_id ) {
+    if ( ! bp_is_active( 'activity' ) ) {
+        return;
+    }
+
+    bp_activity_delete( array(
+        'component' => buddypress()->compliments->id,
+        'item_id'   => $c_id
+    ) );
+}
+add_action('bp_compliments_after_remove_compliment', 'compliments_delete_activity');
+
+function compliments_delete_activity_for_user( $user_id ) {
+    if ( ! bp_is_active( 'activity' ) ) {
+        return;
+    }
+
+    bp_activity_delete( array(
+        'component' => buddypress()->compliments->id,
+        'user_id'   => $user_id
+    ) );
+
+    bp_activity_delete( array(
+        'component' => buddypress()->compliments->id,
+        'secondary_item_id'   => $user_id
+    ) );
+}
+add_action('bp_compliments_after_remove_data', 'compliments_delete_activity_for_user');
