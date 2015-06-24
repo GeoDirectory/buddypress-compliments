@@ -3,6 +3,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
 
 <div class="bp-compliments-wrap">
     <?php
+    $c_id = false;
     $count_args = array(
         'user_id' => bp_displayed_user_id()
     );
@@ -15,6 +16,13 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         'offset' => $offset,
         'limit' => $items_per_page
     );
+    if (isset($_GET['c_id'])) {
+        $c_id = (int) strip_tags(esc_sql($_GET['c_id']));
+        if ($c_id) {
+            $args['c_id'] = $c_id;
+        }
+
+    }
     $compliments = bp_compliments_get_compliments($args);
     $start = $offset ? $offset : 1;
     $end = $offset + $items_per_page;
@@ -67,7 +75,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
             </ul>
         </div>
         <?php
-        if ($total > $items_per_page) { ?>
+        if (($total > $items_per_page) && !$c_id) { ?>
             <div id="pag-top" class="pagination">
                 <div class="pag-count" id="member-dir-count-top">
                     <?php echo sprintf(_n('1 of 1', '%1$s to %2$s of %3$s', $total, 'buddypress'), $start, $end, $total); ?>

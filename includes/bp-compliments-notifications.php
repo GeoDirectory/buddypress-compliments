@@ -198,3 +198,18 @@ function bp_compliments_notifications_mark_compliments_as_read() {
     bp_core_redirect( bp_displayed_user_domain() . BP_COMPLIMENTS_SLUG . '/' );
 }
 add_action( 'bp_actions', 'bp_compliments_notifications_mark_compliments_as_read' );
+
+
+function bp_compliments_remove_notifications_for_user( $user_id = 0 ) {
+    // BP 1.9+
+    if ( bp_is_active( 'notifications' ) ) {
+        bp_notifications_delete_all_notifications_by_type( $user_id, buddypress()->compliments->id, 'new_compliment' );
+
+        // BP < 1.9 - delete notifications the old way
+    } elseif ( ! class_exists( 'BP_Core_Login_Widget' ) ) {
+        global $bp;
+
+        bp_core_delete_notifications_from_user( $user_id, $bp->compliments->id, 'new_compliment' );
+    }
+}
+add_action( 'bp_compliments_after_remove_data', 'bp_compliments_remove_notifications_for_user' );

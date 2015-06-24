@@ -60,3 +60,14 @@ function bp_compliments_total_counts( $args = '' ) {
 
     return apply_filters( 'bp_compliments_total_counts', $count, $r['user_id'] );
 }
+
+function bp_compliments_remove_data( $user_id ) {
+    do_action( 'bp_compliments_before_remove_data', $user_id );
+
+    BP_Compliments::delete_all_for_user( $user_id );
+
+    do_action( 'bp_compliments_after_remove_data', $user_id );
+}
+add_action( 'wpmu_delete_user',	'bp_compliments_remove_data' );
+add_action( 'delete_user',	'bp_compliments_remove_data' );
+add_action( 'make_spam_user',	'bp_compliments_remove_data' );

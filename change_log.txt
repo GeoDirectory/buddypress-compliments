@@ -2,5 +2,6 @@ v0.0.2
 BP compliments now supports notification component - ADDED
 Send compliment modal form z-index bug - FIXED
 Compliment Icon upload form uses latest media uploader - CHANGED
+BP compliments now supports activity component - ADDED
 
 
