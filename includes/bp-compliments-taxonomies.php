@@ -64,7 +64,7 @@ add_action( 'admin_enqueue_scripts', 'compliments_enqueue_color_picker' );
  */
 function compliments_enqueue_color_picker( $hook_suffix ) {
     wp_enqueue_media();
-    wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . '/js/admin.js', array(), false, true );
+    wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . 'js/admin.js', array(), false, true );
 }
 
 /**
