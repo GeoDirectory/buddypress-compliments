@@ -47,4 +47,14 @@ jQuery(document).ready(function ($) {
         jQuery( '.image_preview' ).attr('src','').hide();
         return false;
     });
+
+    jQuery(".taxonomy-compliment").find('#addtag #submit').click(function(e) {
+        var image_url_val = jQuery('.image_data_field').val();
+        var tag_name = jQuery('#tag-name').val();
+        if( image_url_val && tag_name ) {
+            jQuery( '.image_data_field' ).val( '' );
+            jQuery( '.image_preview' ).attr('src','').hide();
+            return false;
+        }
+    });
 });
