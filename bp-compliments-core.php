@@ -20,9 +20,10 @@ class BP_Compliments_Component extends BP_Component {
     /**
      * Initialize BP_Compliments_Component class.
      *
-     * @global object $bp BuddyPress instance.
      * @since 0.0.1
      * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      */
     public function __construct() {
         global $bp;
@@ -71,10 +72,11 @@ class BP_Compliments_Component extends BP_Component {
     /**
      * Setup globals.
      *
-     * @global object $bp BuddyPress instance.
-     * @param array $args Not being used.
      * @since 0.0.1
      * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
+     * @param array $args Not being used.
      */
     public function setup_globals( $args = array() ) {
         global $bp;
@@ -130,11 +132,12 @@ class BP_Compliments_Component extends BP_Component {
     /**
      * Setup profile navigation.
      *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
      * @global object $bp BuddyPress instance.
      * @param array $main_nav Not being used.
      * @param array $sub_nav Not being used.
-     * @since 0.0.1
-     * @package BuddyPress_Compliments
      */
     public function setup_nav( $main_nav = array(), $sub_nav = array() ) {
         global $bp;
@@ -187,9 +190,10 @@ class BP_Compliments_Component extends BP_Component {
 /**
  * Adds the Compliments component to BuddyPress.
  *
- * @global object $bp BuddyPress instance.
  * @since 0.0.1
  * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
  */
 function bp_compliments_setup_component() {
     global $bp;

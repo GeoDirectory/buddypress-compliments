@@ -22,9 +22,20 @@ function bp_compliments_add_compliment_button( $args = '' ) {
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param string $args
- * @return string
  * @global object $bp BuddyPress instance.
+ * @param array|string $args {
+ *    Attributes of the $args.
+ *
+ *    @type int $receiver_id Compliment receiver ID.
+ *    @type int $sender_id Compliment sender ID.
+ *    @type string $link_text Link text.
+ *    @type string $link_title Link title.
+ *    @type string $wrapper_class Link wrapper class.
+ *    @type string $link_class Link class. Default "compliments-popup".
+ *    @type string $wrapper Link wrapper. Default "div".
+ *
+ * }
+ * @return string Button HTML.
  */
 function bp_compliments_get_add_compliment_button( $args = '' ) {
     global $bp, $members_template;
@@ -108,6 +119,8 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
 }
 
 /**
+ * Add compliment button to the profile page.
+ *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  */
@@ -117,11 +130,20 @@ function bp_compliments_add_profile_compliment_button() {
 add_action( 'bp_member_header_actions', 'bp_compliments_add_profile_compliment_button' );
 
 /**
+ * Get compliments for a given user.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param string $args
+ * @param array|string $args {
+ *    Attributes of the $args.
+ *
+ *    @type int $user_id User ID.
+ *    @type int $offset Query results offset.
+ *    @type int $limit Query results limit.
+ *    @type int $c_id Compliment ID.
+ *
+ * }
  * @return mixed|void
  */
 function bp_compliments_get_compliments( $args = '' ) {

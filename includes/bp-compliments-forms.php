@@ -6,6 +6,15 @@
  * @package BuddyPress_Compliments
  */
 
+/**
+ * Front end modal form.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param int $pid The post ID.
+ * @param int $receiver_id Compliment receiver ID.
+ */
 function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
     ?>
     <div class="comp-modal">
@@ -74,6 +83,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
 }
 
 /**
+ * Compliments ajax modal form.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -91,6 +101,7 @@ add_action('wp_ajax_bp_compliments_modal_ajax', 'bp_compliments_modal_ajax');
 //Javascript
 add_action('wp_footer', 'bp_compliments_modal_init');
 /**
+ * Initialize modal form.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments

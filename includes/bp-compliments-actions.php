@@ -10,6 +10,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Handle submitted modal form data.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -53,6 +54,7 @@ function handle_compliments_form_data() {
 add_action( 'bp_actions', 'handle_compliments_form_data', 99 );
 
 /**
+ * Delete a single complement using compliment ID.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments

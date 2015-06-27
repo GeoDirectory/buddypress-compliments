@@ -10,6 +10,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Loads template for the user compliments tab.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -24,14 +25,15 @@ function bp_compliments_screen_compliments() {
 }
 
 /**
+ * Filters template for the user compliments tab.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param $found_template
- * @param $templates
- * @return mixed|string|void
+ * @param string $found_template Found template file.
+ * @param array $templates The template array.
+ * @return string Template file.
  */
 function bp_compliments_load_template_filter( $found_template, $templates ) {
     global $bp;
@@ -66,10 +68,12 @@ function bp_compliments_load_template_filter( $found_template, $templates ) {
 add_filter( 'bp_located_template', 'bp_compliments_load_template_filter', 10, 2 );
 
 /**
+ * Get template directory for compliment page templates.
+ *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @return mixed|void
+ * @return string Template directory.
  */
 function bp_compliments_get_template_directory() {
     return apply_filters( 'bp_compliments_get_template_directory', constant( 'BP_COMPLIMENTS_DIR' ) . '/includes/templates' );

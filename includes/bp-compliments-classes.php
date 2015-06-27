@@ -74,6 +74,10 @@ class BP_Compliments {
      *
      * @since 0.0.1
      * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
+     * @global object $wpdb WordPress db object.
+     * @return bool|mixed
      */
     public function save() {
         global $wpdb, $bp;
@@ -106,8 +110,10 @@ class BP_Compliments {
      * @since 0.0.1
      * @package BuddyPress_Compliments
      *
-     * @param $c_id
-     * @return
+     * @global object $bp BuddyPress instance.
+     * @global object $wpdb WordPress db object.
+     * @param int $c_id The compliment ID.
+     * @return mixed
      */
     public static function delete($c_id) {
         global $wpdb, $bp;
@@ -122,10 +128,11 @@ class BP_Compliments {
      * @package BuddyPress_Compliments
      *
      * @global object $bp BuddyPress instance.
-     * @param $user_id
-     * @param $offset
-     * @param $limit
-     * @param bool|int $c_id
+     * @global object $wpdb WordPress db object.
+     * @param int $user_id The user ID.
+     * @param int $offset Query results offset.
+     * @param int $limit Query results limit.
+     * @param bool|int $c_id The compliment ID.
      * @return mixed
      */
     public static function get_compliments( $user_id, $offset, $limit, $c_id = false ) {
@@ -145,8 +152,9 @@ class BP_Compliments {
      * @package BuddyPress_Compliments
      *
      * @global object $bp BuddyPress instance.
-     * @param $user_id
-     * @return array
+     * @global object $wpdb WordPress db object.
+     * @param int $user_id The user ID.
+     * @return array The count array.
      */
     public static function get_counts( $user_id ) {
         global $bp, $wpdb;
@@ -165,7 +173,8 @@ class BP_Compliments {
      * @package BuddyPress_Compliments
      *
      * @global object $bp BuddyPress instance.
-     * @param $user_id
+     * @global object $wpdb WordPress db object.
+     * @param int $user_id The user ID.
      */
     public static function delete_all_for_user( $user_id ) {
         global $bp, $wpdb;

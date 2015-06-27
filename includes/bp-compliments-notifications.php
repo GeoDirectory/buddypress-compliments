@@ -10,16 +10,17 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Format the items of notifications tab.
  *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param $action
- * @param $item_id
- * @param $secondary_item_id
- * @param $total_items
- * @param string $format
+ * @param string $action The action type.
+ * @param int $item_id User ID.
+ * @param int $secondary_item_id Secondary Item ID.
+ * @param int $total_items Total items.
+ * @param string $format Format.
  * @return bool|mixed|void
  */
 function bp_compliments_format_notifications( $action, $item_id, $secondary_item_id, $total_items, $format = 'string' ) {
@@ -56,11 +57,13 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
 }
 
 /**
+ * Add a notification when a compliment get submitted.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param BP_Compliments $compliment
+ * @param BP_Compliments $compliment The compliment object.
  */
 function bp_compliments_notifications_add_on_compliment( BP_Compliments $compliment ) {
     // Add a screen notification
@@ -94,6 +97,7 @@ function bp_compliments_notifications_add_on_compliment( BP_Compliments $complim
 add_action( 'bp_compliments_start_compliment', 'bp_compliments_notifications_add_on_compliment' );
 
 /**
+ * Send an email to the receiver when a compliment get posted.
  *
  * @since 0.0.2
  * @package BuddyPress_Compliments
@@ -157,11 +161,13 @@ To disable these notifications please log in and go to:
 }
 
 /**
+ * Remove query arg from link when the current notification sub tab is "read".
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
- * @param $retval
- * @return mixed
+ * @param string $retval Link.
+ * @return string Modified link.
  */
 function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
     if ( bp_is_current_action( 'read' ) ) {
@@ -178,6 +184,8 @@ function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
 add_filter( 'bp_compliments_new_compliment_notification', 'bp_compliments_notifications_remove_queryarg_from_userlink' );
 
 /**
+ * Adds Notification settings to the form.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
@@ -213,6 +221,8 @@ function bp_compliments_screen_notification_settings() {
 add_action( 'bp_notification_settings', 'bp_compliments_screen_notification_settings' );
 
 /**
+ * Marks a compliment as read when 'bpc_read' is set.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
@@ -252,6 +262,8 @@ add_action( 'bp_actions', 'bp_compliments_notifications_mark_compliments_as_read
 
 
 /**
+ * Removes compliment notifications for the given user id.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *

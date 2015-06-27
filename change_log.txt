@@ -6,3 +6,4 @@ BP compliments now supports activity component - ADDED
 Translation support - ADDED
 Compliments can be deleted by the receiver - ADDED
 Validation added when adding compliment, icon required - FIXED
+Some strings are not translatable - FIXED

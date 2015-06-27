@@ -13,7 +13,16 @@
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param string $args
+ * @param string|array $args {
+ *    Attributes of the $args.
+ *
+ *    @type int $receiver_id Received ID.
+ *    @type int $sender_id Sender ID.
+ *    @type int $term_id Compliment Icon Term ID.
+ *    @type int $post_id Post ID.
+ *    @type string $message The compliment Message.
+ *
+ * }
  * @return bool
  */
 function bp_compliments_start_compliment( $args = '' ) {
@@ -44,9 +53,14 @@ function bp_compliments_start_compliment( $args = '' ) {
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param string $args
- * @return mixed|void
  * @global object $bp BuddyPress instance.
+ * @param string|array $args {
+ *    Attributes of the $args.
+ *
+ *    @type int $user_id User ID.
+ *
+ * }
+ * @return mixed|void
  */
 function bp_compliments_total_counts( $args = '' ) {
 
@@ -84,11 +98,12 @@ function bp_compliments_total_counts( $args = '' ) {
 }
 
 /**
+ * Remove compliments data for the given user id.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param $user_id
+ * @param int $user_id The user ID.
  */
 function bp_compliments_remove_data( $user_id ) {
     do_action( 'bp_compliments_before_remove_data', $user_id );
