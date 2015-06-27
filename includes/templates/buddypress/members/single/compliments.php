@@ -54,7 +54,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                 $receiver_url    = bp_core_get_userlink( $comp->receiver_id, false, true );
                                 $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$comp->id.'&action=delete';
                                 ?>
-                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;">Delete</a>
+                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;"><?php echo __('Delete', BP_COMP_TEXTDOMAIN); ?></a>
                             <?php } ?>
                         </div>
                         <div class="comp-user-msg-wrap">
