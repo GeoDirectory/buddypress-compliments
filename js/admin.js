@@ -6,6 +6,7 @@ jQuery(document).ready(function ($) {
         var button_id = button.attr('id');
         var field_id = button_id.replace( 'upload', 'value' );
         var preview_id = button_id.replace( 'upload', 'preview' );
+        var validation_id = button_id.replace( 'upload', 'value' );
 
         // If the media frame already exists, reopen it.
         if ( file_frame ) {
@@ -31,6 +32,7 @@ jQuery(document).ready(function ($) {
             jQuery("#"+field_id).val(attachment.url);
             if( preview_media ) {
                 jQuery("#"+preview_id).attr('src',attachment.url).show();
+                jQuery("#"+validation_id).val(attachment.url);
             }
         });
 
@@ -54,7 +56,10 @@ jQuery(document).ready(function ($) {
         if( image_url_val && tag_name ) {
             jQuery( '.image_data_field' ).val( '' );
             jQuery( '.image_preview' ).attr('src','').hide();
+            jQuery( '.caticon-upload').removeClass('form-invalid');
             return false;
         }
     });
+
+
 });
