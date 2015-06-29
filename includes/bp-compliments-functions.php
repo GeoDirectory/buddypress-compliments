@@ -42,6 +42,14 @@ function bp_compliments_start_compliment( $args = '' ) {
         return false;
     }
 
+    /**
+     * Functions hooked to this action will be processed after compliments data stored into the db.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param object $compliment The compliment data object.
+     */
     do_action_ref_array( 'bp_compliments_start_compliment', array( &$compliment ) );
 
     return true;
@@ -94,6 +102,21 @@ function bp_compliments_total_counts( $args = '' ) {
         $count = BP_Compliments::get_counts( $r['user_id'] );
     }
 
+    /**
+     * Filters the compliment count array.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param array $count {
+     *    Attributes of the $count.
+     *
+     *    @type int $received Count of total compliments received.
+     *    @type int $sent Count of total compliments sent.
+     *
+     * }
+     * @param int $r['user_id'] User ID.
+     */
     return apply_filters( 'bp_compliments_total_counts', $count, $r['user_id'] );
 }
 
@@ -106,10 +129,26 @@ function bp_compliments_total_counts( $args = '' ) {
  * @param int $user_id The user ID.
  */
 function bp_compliments_remove_data( $user_id ) {
+    /**
+     * Functions hooked to this action will be processed before deleting the user's complement data.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $user_id The User ID.
+     */
     do_action( 'bp_compliments_before_remove_data', $user_id );
 
     BP_Compliments::delete_all_for_user( $user_id );
 
+    /**
+     * Functions hooked to this action will be processed after deleting the user's complement data.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $user_id The User ID.
+     */
     do_action( 'bp_compliments_after_remove_data', $user_id );
 }
 add_action( 'wpmu_delete_user',	'bp_compliments_remove_data' );

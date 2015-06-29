@@ -27,7 +27,9 @@ function handle_compliments_form_data() {
             return;
         }
 
+
         $term_id = strip_tags(esc_sql($_POST['term_id']));
+        // post id is required for geodirectory's whoop theme.
         $post_id = strip_tags(esc_sql($_POST['post_id']));
         $receiver_id = strip_tags(esc_sql($_POST['receiver_id']));
         $message = strip_tags(esc_sql($_POST['message']));
@@ -78,10 +80,26 @@ function delete_single_complement() {
         return;
     }
 
+    /**
+     * Functions hooked to this action will be processed before deleting the complement.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $c_id The compliment ID.
+     */
     do_action( 'bp_compliments_before_remove_compliment', $c_id );
 
     BP_Compliments::delete( $c_id );
 
+    /**
+     * Functions hooked to this action will be processed after deleting the complement.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $c_id The compliment ID.
+     */
     do_action( 'bp_compliments_after_remove_compliment', $c_id );
 
     $redirect = bp_displayed_user_domain().'compliments/';

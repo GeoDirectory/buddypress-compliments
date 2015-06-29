@@ -20,6 +20,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 function bp_compliments_screen_compliments() {
     global $bp;
 
+    /**
+     * Functions hooked to this action will be processed before loading compliments page screen .
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     */
     do_action( 'bp_compliments_screen_compliments' );
     bp_core_load_template( 'members/single/compliments' );
 }
@@ -31,7 +37,7 @@ function bp_compliments_screen_compliments() {
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param string $found_template Found template file.
+ * @param string $found_template Located template file.
  * @param array $templates The template array.
  * @return string Template file.
  */
@@ -63,6 +69,14 @@ function bp_compliments_load_template_filter( $found_template, $templates ) {
 		" ) );
     }
 
+    /**
+     * Filters the compliment page template.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $found_template Located template file.
+     */
     return apply_filters( 'bp_compliments_load_template_filter', $found_template );
 }
 add_filter( 'bp_located_template', 'bp_compliments_load_template_filter', 10, 2 );
@@ -76,5 +90,11 @@ add_filter( 'bp_located_template', 'bp_compliments_load_template_filter', 10, 2 
  * @return string Template directory.
  */
 function bp_compliments_get_template_directory() {
+    /**
+     * Filters the compliment template directory.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     */
     return apply_filters( 'bp_compliments_get_template_directory', constant( 'BP_COMPLIMENTS_DIR' ) . '/includes/templates' );
 }

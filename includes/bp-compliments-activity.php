@@ -118,6 +118,12 @@ function compliments_register_activity_actions() {
         array( 'activity' )
     );
 
+    /**
+     * Use this hook to register additional activity actions.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     */
     do_action( 'compliments_register_activity_actions' );
 }
 add_action( 'bp_register_activity_actions', 'compliments_register_activity_actions' );

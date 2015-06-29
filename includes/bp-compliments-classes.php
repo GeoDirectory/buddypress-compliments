@@ -83,12 +83,65 @@ class BP_Compliments {
         global $wpdb, $bp;
         $table_name = BP_COMPLIMENTS_TABLE;
 
+        /**
+         * Filters the value of compliment receiver ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->receiver_id Compliment receiver ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->receiver_id   = apply_filters( 'bp_compliments_receiver_id_before_save',   $this->receiver_id,   $this->id );
+        /**
+         * Filters the value of compliment sender ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->sender_id Compliment sender ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->sender_id = apply_filters( 'bp_compliments_sender_id_before_save', $this->sender_id, $this->id );
+        /**
+         * Filters the value of compliment term ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->term_id Compliment term ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->term_id = apply_filters( 'bp_compliments_term_id_before_save', $this->term_id, $this->id );
+        /**
+         * Filters the value of compliment post ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->post_id Compliment post ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->post_id = apply_filters( 'bp_compliments_post_id_before_save', $this->post_id, $this->id );
+        /**
+         * Filters the value of compliment message.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param string $this->message Compliment message.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->message = apply_filters( 'bp_compliments_message_before_save', $this->message, $this->id );
 
+        /**
+         * Functions hooked to this action will be processed before saving the complement data.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param object $this The compliment data object.
+         */
         do_action_ref_array( 'bp_compliments_before_save', array( &$this ) );
 
         if (!$this->term_id OR !$this->receiver_id OR !$this->sender_id) {
@@ -99,6 +152,14 @@ class BP_Compliments {
 
         $this->id = $wpdb->insert_id;
 
+        /**
+         * Functions hooked to this action will be processed after saving the complement data.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param object $this The compliment data object.
+         */
         do_action_ref_array( 'bp_compliments_after_save', array( &$this ) );
 
         return $result;
@@ -146,7 +207,7 @@ class BP_Compliments {
     }
 
     /**
-     * Get the senders / receivers counts for a given user.
+     * Get the compliment received / sent count for a given user.
      *
      * @since 0.0.1
      * @package BuddyPress_Compliments
@@ -159,10 +220,10 @@ class BP_Compliments {
     public static function get_counts( $user_id ) {
         global $bp, $wpdb;
         $table_name = BP_COMPLIMENTS_TABLE;
-        $senders = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE receiver_id = %d", $user_id ) );
-        $receivers = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE sender_id = %d", $user_id ) );
+        $received = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE receiver_id = %d", $user_id ) );
+        $sent = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE sender_id = %d", $user_id ) );
 
-        return array( 'senders' => $senders, 'receivers' => $receivers );
+        return array( 'received' => $received, 'sent' => $sent );
     }
 
 

@@ -23,6 +23,7 @@ function bp_compliments_add_compliment_button( $args = '' ) {
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
+ * @global object $members_template Members template object.
  * @param array|string $args {
  *    Attributes of the $args.
  *
@@ -70,6 +71,15 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
     $id        = 'compliments';
     $action    = 'start';
     $class     = 'compliments';
+    /**
+     * Filters the compliment receiver name.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $receiver_fullname Receiver full name.
+     * @param int $r['receiver_id'] Receiver ID.
+     */
     $link_text = sprintf( _x( 'Send Compliment', 'Button', BP_COMP_TEXTDOMAIN ), apply_filters( 'bp_compliments_receiver_name', bp_get_user_firstname( $receiver_fullname ), $r['receiver_id'] ) );
 
     if ( empty( $r['link_text'] ) ) {
@@ -115,6 +125,17 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
     );
 
     // Filter and return the HTML button
+
+    /**
+     * Filters the compliment button.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $button Button HTML.
+     * @param int $r['receiver_id'] Receiver ID.
+     * @param int $r['sender_id'] Sender ID.
+     */
     return bp_get_button( apply_filters( 'bp_compliments_get_add_compliment_button', $button, $r['receiver_id'], $r['sender_id'] ) );
 }
 
@@ -154,5 +175,16 @@ function bp_compliments_get_compliments( $args = '' ) {
         'c_id' => false
     ) );
 
+    /**
+     * Filters the compliment query results.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $r['user_id'] The user ID.
+     * @param int $r['offset'] Query results offset.
+     * @param int $r['limit'] Query results limit.
+     * @param bool|int $r['c_id'] The compliment ID.
+     */
     return apply_filters( 'bp_compliments_get_compliments', BP_Compliments::get_compliments( $r['user_id'], $r['offset'], $r['limit'], $r['c_id'] ) );
 }
