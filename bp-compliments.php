@@ -18,6 +18,9 @@ Author URI: http://wpgeodirectory.com
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
+// Define the plugin version.
+define( 'BP_COMPLIMENTS_VER', '0.0.3' );
+
 /**
  * BuddyPress compliments text domain.
  */
@@ -34,11 +37,7 @@ define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
  */
 function bp_compliments_init() {
     global $wpdb, $bp;
-    // get plugin version from plugin data.
-    $plugin_data = get_plugin_data( __FILE__ );
-    $version = $plugin_data['Version'];
-    //define the plugin version.
-    define( 'BP_COMPLIMENTS_VER', $version );
+
     //define the plugin path.
     define( 'BP_COMPLIMENTS_DIR', dirname( __FILE__ ) );
     //define the plugin url.
