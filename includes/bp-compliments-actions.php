@@ -43,13 +43,16 @@ function handle_compliments_form_data() {
             $args['receiver_id'] = $receiver_id;
         }
 
+        $receiver_name = bp_core_get_user_displayname($receiver_id);
+        $redirect_url = bp_core_get_user_domain($receiver_id);
+
         if ( ! bp_compliments_start_compliment($args)) {
-            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), bp_get_displayed_user_fullname() ), 'error' );
+            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), $receiver_name ), 'error' );
         } else {
-            bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), bp_get_displayed_user_fullname() ) );
+            bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), $receiver_name ) );
         }
 
-        $redirect = bp_displayed_user_domain().'compliments/';
+        $redirect = $redirect_url.'compliments/';
         bp_core_redirect( $redirect );
     }
 }
