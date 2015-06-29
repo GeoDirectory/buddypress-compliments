@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: BuddyPress Compliments 0.0.2\n"
-"POT-Creation-Date: 2015-06-24 13:47+0530\n"
-"PO-Revision-Date: 2015-06-24 13:47+0530\n"
+"POT-Creation-Date: 2015-06-27 20:19+0530\n"
+"PO-Revision-Date: 2015-06-27 20:19+0530\n"
 "Last-Translator: \n"
 "Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -10,80 +10,83 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.1\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ../\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bp-compliments-core.php:18 includes/bp-compliments-activity.php:67
-#: includes/bp-compliments-activity.php:76
-#: includes/bp-compliments-notifications.php:149
+#: bp-compliments-core.php:39 includes/bp-compliments-activity.php:108
+#: includes/bp-compliments-activity.php:117
+#: includes/bp-compliments-notifications.php:202
+#: includes/bp-compliments-taxonomies.php:20
+#: includes/bp-compliments-taxonomies.php:21
+#: includes/bp-compliments-taxonomies.php:38
 msgid "Compliments"
 msgstr ""
 
-#: bp-compliments-core.php:113
+#: bp-compliments-core.php:151
 #, php-format
 msgid "Compliments <span>%d</span>"
 msgstr ""
 
-#: bp-compliments.php:34
+#: bp-compliments.php:51
 msgid "Hey! BP Compliments requires BuddyPress 1.5 or higher."
 msgstr ""
 
-#: includes/bp-compliments-actions.php:32
+#: includes/bp-compliments-actions.php:45
 #, php-format
 msgid ""
 "There was a problem when trying to send compliment to %s, please contact "
 "administrator."
 msgstr ""
 
-#: includes/bp-compliments-actions.php:34
+#: includes/bp-compliments-actions.php:47
 #, php-format
 msgid "Your compliment sent to %s."
 msgstr ""
 
-#: includes/bp-compliments-activity.php:65
+#: includes/bp-compliments-activity.php:106
 msgid "Compliment Received"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:74
+#: includes/bp-compliments-activity.php:115
 msgid "Compliment Sent"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:98
-#: includes/bp-compliments-activity.php:129
+#: includes/bp-compliments-activity.php:141
+#: includes/bp-compliments-activity.php:174
 msgid "compliment"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:100
+#: includes/bp-compliments-activity.php:143
 #, php-format
 msgid "%1$s has received a %2$s from %3$s"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:131
+#: includes/bp-compliments-activity.php:176
 #, php-format
 msgid "%1$s has sent a %2$s to %3$s"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:7
+#: includes/bp-compliments-forms.php:23
 msgid "Choose Your Compliment Type:"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:44
+#: includes/bp-compliments-forms.php:60
 msgid "Send"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:45
+#: includes/bp-compliments-forms.php:61
 msgid "Cancel"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:17
-#: includes/bp-compliments-notifications.php:102
+#: includes/bp-compliments-notifications.php:37
+#: includes/bp-compliments-notifications.php:139
 #, php-format
 msgid "%s has sent you a compliment"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:105
+#: includes/bp-compliments-notifications.php:142
 #, php-format
 msgid ""
 "%s has sent you a compliment.\n"
@@ -91,7 +94,7 @@ msgid ""
 "To view %s's compliment: %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:112
+#: includes/bp-compliments-notifications.php:149
 #, php-format
 msgid ""
 "\n"
@@ -101,109 +104,118 @@ msgid ""
 "%s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:150
+#: includes/bp-compliments-notifications.php:203
 msgid "Yes"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:151
+#: includes/bp-compliments-notifications.php:204
 msgid "No"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:158
+#: includes/bp-compliments-notifications.php:211
 msgid "A member sends you a compliment"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:16
-msgid "Search Compliments"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:17
-msgid "All Compliments"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:18
-msgid "Parent Compliment"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:19
-msgid "Parent Compliment:"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:20
-msgid "Edit Compliment"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:21
-msgid "Update Compliment"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:22
-msgid "Add New Compliment"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:23
-msgid "New Compliment Name"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:24
+#: includes/bp-compliments-taxonomies.php:39
+#: includes/bp-compliments-taxonomies.php:48
 msgid "Compliment"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:49
-#: includes/bp-compliments-taxonomies.php:64
+#: includes/bp-compliments-taxonomies.php:40
+msgid "Search Compliments"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:41
+msgid "All Compliments"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:42
+msgid "Parent Compliment"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:43
+msgid "Parent Compliment:"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:44
+msgid "Edit Compliment"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:45
+msgid "Update Compliment"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:46
+msgid "Add New Compliment"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:47
+msgid "New Compliment Name"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:87
+#: includes/bp-compliments-taxonomies.php:110
 msgid "Compliment Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:51
-#: includes/bp-compliments-taxonomies.php:68
+#: includes/bp-compliments-taxonomies.php:90
+#: includes/bp-compliments-taxonomies.php:115
 msgid "Upload Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:51
-#: includes/bp-compliments-taxonomies.php:68
+#: includes/bp-compliments-taxonomies.php:90
+#: includes/bp-compliments-taxonomies.php:115
 msgid "Use Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:51
-#: includes/bp-compliments-taxonomies.php:68
+#: includes/bp-compliments-taxonomies.php:90
+#: includes/bp-compliments-taxonomies.php:115
 msgid "Upload new Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:52
-#: includes/bp-compliments-taxonomies.php:69
+#: includes/bp-compliments-taxonomies.php:91
+#: includes/bp-compliments-taxonomies.php:116
 msgid "Remove Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:54
-#: includes/bp-compliments-taxonomies.php:71
+#: includes/bp-compliments-taxonomies.php:93
+#: includes/bp-compliments-taxonomies.php:118
 msgid "Recommended icon size: 20px x 20px"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:99
+#: includes/bp-compliments-taxonomies.php:163
 msgid "Name"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:100
+#: includes/bp-compliments-taxonomies.php:164
 msgid "Icon"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:81
+#: includes/bp-compliments-templatetags.php:73
+msgid "Send Compliment"
+msgstr ""
+
+#: includes/templates/buddypress/members/single/compliments.php:57
+msgid "Delete"
+msgstr ""
+
+#: includes/templates/buddypress/members/single/compliments.php:89
 #, php-format
 msgid "1 of 1"
 msgid_plural "%1$s to %2$s of %3$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/templates/buddypress/members/single/compliments.php:84
+#: includes/templates/buddypress/members/single/compliments.php:92
 msgid "Go to Page"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:101
+#: includes/templates/buddypress/members/single/compliments.php:109
 msgid ""
 "Aw, you have no compliments yet. To get some try sending compliments to "
 "others."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:107
+#: includes/templates/buddypress/members/single/compliments.php:115
 msgid "Sorry, no compliments just yet."
 msgstr ""

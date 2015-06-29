@@ -10,12 +10,27 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * 
+ * Records activity when a compliment get posted.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  * 
- * @param string $args
- * @return bool|int
+ * @param array|string $args {
+ *    Attributes of the $args.
+ *
+ *    @type int $user_id The user to record the activity for, can be false if this activity is not for a user.
+ *    @type string $action The activity action - e.g. "Jon Doe posted an update".
+ *    @type string $content Optional: The content of the activity item e.g. "BuddyPress is awesome guys!".
+ *    @type string $primary_link Optional: The primary URL for this item in RSS feeds (defaults to activity permalink).
+ *    @type string $component The name/ID of the component e.g. groups, profile, mycomponent.
+ *    @type bool $type The activity type e.g. activity_update, profile_updated.
+ *    @type bool $item_id Optional: The ID of the specific item being recorded, e.g. a blog_id.
+ *    @type bool $secondary_item_id Optional: A second ID used to further filter e.g. a comment_id.
+ *    @type string $recorded_time The GMT time that this activity was recorded.
+ *    @type bool $hide_sitewide Should this be hidden on the sitewide activity stream?.
+ *
+ * }
+ * @return bool|int The ID of the activity on success. False on error.
  */
 function compliments_record_activity( $args = '' ) {
 
@@ -40,13 +55,14 @@ function compliments_record_activity( $args = '' ) {
 }
 
 /**
- * 
+ * Records activity in two ways when a compliment get posted.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  * 
- * @param BP_Compliments $compliment
+ * @param BP_Compliments $compliment The compliment object.
  */
-function compliments_record_sent_activity( BP_Compliments $compliment ) {
+function compliments_record_sent_received_activity( BP_Compliments $compliment ) {
     if ( ! bp_is_active( 'activity' ) ) {
         return;
     }
@@ -67,11 +83,11 @@ function compliments_record_sent_activity( BP_Compliments $compliment ) {
         'secondary_item_id' => $compliment->sender_id
     ) );
 }
-add_action( 'bp_compliments_start_compliment', 'compliments_record_sent_activity' );
+add_action( 'bp_compliments_start_compliment', 'compliments_record_sent_received_activity' );
 
 
 /**
- * Register the activity actions.
+ * Register the activity actions for compliments.
  * 
  * @since 0.0.2
  * @package BuddyPress_Compliments
@@ -102,12 +118,18 @@ function compliments_register_activity_actions() {
         array( 'activity' )
     );
 
+    /**
+     * Use this hook to register additional activity actions.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     */
     do_action( 'compliments_register_activity_actions' );
 }
 add_action( 'bp_register_activity_actions', 'compliments_register_activity_actions' );
 
 /**
- * Format 'compliment_received' activity actions.
+ * Format activity actions for 'compliment_received'.
  *
  * @since 0.0.2
  * @package BuddyPress_Compliments
@@ -122,7 +144,7 @@ function compliments_format_activity_action_compliment_received( $action, $activ
     $sender_link    = bp_core_get_userlink( $activity->secondary_item_id );
     $receiver_url    = bp_core_get_userlink( $activity->user_id, false, true );
     $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$activity->item_id;
-    $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment").'</a>';
+    $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment", BP_COMP_TEXTDOMAIN).'</a>';
 
     $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $compliment_link, $sender_link );
 
@@ -139,7 +161,7 @@ function compliments_format_activity_action_compliment_received( $action, $activ
 }
 
 /**
- * Format 'compliment_sent' activity actions.
+ * Format activity actions for 'compliment_sent'.
  *
  * @since 0.0.2
  * @package BuddyPress_Compliments
@@ -155,7 +177,7 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
     $receiver_link    = bp_core_get_userlink( $activity->secondary_item_id );
     $receiver_url    = bp_core_get_userlink( $activity->secondary_item_id, false, true );
     $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$activity->item_id;
-    $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment").'</a>';
+    $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment", BP_COMP_TEXTDOMAIN).'</a>';
 
     $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, $compliment_link, $receiver_link );
 
@@ -172,11 +194,12 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
 
 
 /**
- * 
+ * Delete a compliment activity using compliment ID.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  * 
- * @param $c_id
+ * @param int $c_id Compliment ID.
  */
 function compliments_delete_activity( $c_id ) {
     if ( ! bp_is_active( 'activity' ) ) {
@@ -191,11 +214,12 @@ function compliments_delete_activity( $c_id ) {
 add_action('bp_compliments_after_remove_compliment', 'compliments_delete_activity');
 
 /**
- * 
+ * Delete all compliment activities for user using user ID.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  * 
- * @param $user_id
+ * @param int $user_id User ID.
  */
 function compliments_delete_activity_for_user( $user_id ) {
     if ( ! bp_is_active( 'activity' ) ) {

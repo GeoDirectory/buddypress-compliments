@@ -20,19 +20,25 @@ class BP_Compliments_Component extends BP_Component {
     /**
      * Initialize BP_Compliments_Component class.
      *
-     * @global object $bp BuddyPress instance.
      * @since 0.0.1
      * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
      */
     public function __construct() {
         global $bp;
 
-        // setup misc parameters
+
+        /**
+         * Filters the value of compliment nav position.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         */
         $this->params = array(
             'adminbar_myaccount_order' => apply_filters( 'bp_compliments_nav_position', 71 )
         );
 
-        // let's start the show!
         parent::start(
             'compliments',
             __( 'Compliments', BP_COMP_TEXTDOMAIN ),
@@ -57,24 +63,34 @@ class BP_Compliments_Component extends BP_Component {
      * @package BuddyPress_Compliments
      */
     public function includes( $includes = array() ) {
+        // Include the Class that interact with the custom db table.
         require( $this->path . '/bp-compliments-classes.php' );
+        // Functions related to compliment component.
         require( $this->path . '/bp-compliments-functions.php' );
+        // Functions related to compliment types and icons.
         require( $this->path . '/bp-compliments-taxonomies.php' );
+        // Functions related to frontend content display.
         require( $this->path . '/bp-compliments-screens.php' );
+        // Functions related to compliment buttons and template tags.
         require( $this->path . '/bp-compliments-templatetags.php' );
+        // Functions related to handling user submitted data and actions.
         require( $this->path . '/bp-compliments-actions.php' );
+        // Functions related to notification component.
         require( $this->path . '/bp-compliments-notifications.php' );
+        // Functions related to activity component.
         require( $this->path . '/bp-compliments-activity.php' );
+        // Functions related to compliment forms.
         require( $this->path . '/bp-compliments-forms.php' );
     }
 
     /**
      * Setup globals.
      *
-     * @global object $bp BuddyPress instance.
-     * @param array $args Not being used.
      * @since 0.0.1
      * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
+     * @param array $args Not being used.
      */
     public function setup_globals( $args = array() ) {
         global $bp;
@@ -130,22 +146,29 @@ class BP_Compliments_Component extends BP_Component {
     /**
      * Setup profile navigation.
      *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
      * @global object $bp BuddyPress instance.
      * @param array $main_nav Not being used.
      * @param array $sub_nav Not being used.
-     * @since 0.0.1
-     * @package BuddyPress_Compliments
      */
     public function setup_nav( $main_nav = array(), $sub_nav = array() ) {
         global $bp;
 
+        /**
+         * Functions hooked to this action will be processed before compliments navigation setup.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         */
         do_action( 'bp_compliments_before_setup_nav' );
         // Need to change the user ID, so if we're not on a member page, $counts variable is still calculated
         $user_id = bp_is_user() ? bp_displayed_user_id() : bp_loggedin_user_id();
         $counts  = bp_compliments_total_counts( array( 'user_id' => $user_id ) );
         
         bp_core_new_nav_item( array(
-            'name'                => sprintf( __( 'Compliments <span>%d</span>', BP_COMP_TEXTDOMAIN ), $counts['senders'] ),
+            'name'                => sprintf( __( 'Compliments <span>%d</span>', BP_COMP_TEXTDOMAIN ), $counts['received'] ),
             'slug'                => $bp->compliments->compliments->slug,
             'position'            => $this->params['adminbar_myaccount_order'],
             'screen_function'     => 'bp_compliments_screen_compliments',
@@ -153,7 +176,13 @@ class BP_Compliments_Component extends BP_Component {
             'item_css_id'         => 'members-compliments'
         ) );
 
-        do_action( 'bp_compliments_setup_nav' );
+        /**
+         * Functions hooked to this action will be processed after compliments navigation setup.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         */
+        do_action( 'bp_compliments_after_setup_nav' );
 
     }
 
@@ -187,9 +216,10 @@ class BP_Compliments_Component extends BP_Component {
 /**
  * Adds the Compliments component to BuddyPress.
  *
- * @global object $bp BuddyPress instance.
  * @since 0.0.1
  * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
  */
 function bp_compliments_setup_component() {
     global $bp;

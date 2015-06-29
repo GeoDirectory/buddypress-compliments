@@ -10,21 +10,34 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Format the items of notifications tab.
  *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param $action
- * @param $item_id
- * @param $secondary_item_id
- * @param $total_items
- * @param string $format
+ * @param string $action The action type.
+ * @param int $item_id User ID.
+ * @param int $secondary_item_id Secondary Item ID.
+ * @param int $total_items Total items.
+ * @param string $format Format.
  * @return bool|mixed|void
  */
 function bp_compliments_format_notifications( $action, $item_id, $secondary_item_id, $total_items, $format = 'string' ) {
     global $bp;
 
+    /**
+     * Functions hooked to this action will be processed before formatting compliment notifications.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $action The action type.
+     * @param int $item_id User ID.
+     * @param int $secondary_item_id Secondary Item ID.
+     * @param int $total_items Total items.
+     * @param string $format Format.
+     */
     do_action( 'bp_compliments_format_notifications', $action, $item_id, $secondary_item_id, $total_items, $format );
 
     switch ( $action ) {
@@ -39,7 +52,29 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
             break;
 
         default :
+            /**
+             * Filters the notification link.
+             *
+             * @since 0.0.1
+             * @package BuddyPress_Compliments
+             *
+             * @param string $action The action type.
+             * @param int $item_id User ID.
+             * @param int $secondary_item_id Secondary Item ID.
+             * @param int $total_items Total items.
+             */
             $link = apply_filters( 'bp_compliments_extend_notification_link', false, $action, $item_id, $secondary_item_id, $total_items );
+            /**
+             * Filters the notification text.
+             *
+             * @since 0.0.1
+             * @package BuddyPress_Compliments
+             *
+             * @param string $action The action type.
+             * @param int $item_id User ID.
+             * @param int $secondary_item_id Secondary Item ID.
+             * @param int $total_items Total items.
+             */
             $text = apply_filters( 'bp_compliments_extend_notification_text', false, $action, $item_id, $secondary_item_id, $total_items );
             break;
     }
@@ -49,6 +84,18 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
     }
 
     if ( 'string' == $format ) {
+        /**
+         * Filters the notification link.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $total_items Total items.
+         * @param string $link Notification URL.
+         * @param string $text Notification Text.
+         * @param int $item_id User ID.
+         * @param int $secondary_item_id Secondary Item ID.
+         */
         return apply_filters( 'bp_compliments_new_compliment_notification', '<a href="' . $link . '">' . $text . '</a>', $total_items, $link, $text, $item_id, $secondary_item_id );
     } else {
         return false;
@@ -56,11 +103,13 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
 }
 
 /**
+ * Add a notification when a compliment get submitted.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
  * @global object $bp BuddyPress instance.
- * @param BP_Compliments $compliment
+ * @param BP_Compliments $compliment The compliment object.
  */
 function bp_compliments_notifications_add_on_compliment( BP_Compliments $compliment ) {
     // Add a screen notification
@@ -94,6 +143,7 @@ function bp_compliments_notifications_add_on_compliment( BP_Compliments $complim
 add_action( 'bp_compliments_start_compliment', 'bp_compliments_notifications_add_on_compliment' );
 
 /**
+ * Send an email to the receiver when a compliment get posted.
  *
  * @since 0.0.2
  * @package BuddyPress_Compliments
@@ -150,18 +200,48 @@ To disable these notifications please log in and go to:
     }
 
     // Send the message
+
+    /**
+     * Filters the notification receiver email.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $to Notification receiver email.
+     */
     $to      = apply_filters( 'bp_compliments_notification_to', $to );
+    /**
+     * Filters the notification subject.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $to Notification subject.
+     * @param string $sender_name Sender Name.
+     */
     $subject = apply_filters( 'bp_compliments_notification_subject', $subject, $sender_name );
+    /**
+     * Filters the notification message.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param string $message Notification message.
+     * @param string $sender_name Compliment Sender Name.
+     * @param string $compliment_link Compliment Link.
+     */
     $message = apply_filters( 'bp_compliments_notification_message', $message, $sender_name, $compliment_link );
     wp_mail( $to, $subject, $message );
 }
 
 /**
+ * Remove query arg from link when the current notification sub tab is "read".
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
- * @param $retval
- * @return mixed
+ * @param string $retval Link.
+ * @return string Modified link.
  */
 function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
     if ( bp_is_current_action( 'read' ) ) {
@@ -178,6 +258,8 @@ function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
 add_filter( 'bp_compliments_new_compliment_notification', 'bp_compliments_notifications_remove_queryarg_from_userlink' );
 
 /**
+ * Adds Notification settings to the form.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
@@ -206,13 +288,23 @@ function bp_compliments_screen_notification_settings() {
         </tr>
         </tbody>
 
-        <?php do_action( 'bp_compliments_screen_notification_settings' ); ?>
+        <?php
+        /**
+         * Use this hook to register additional compliment settings fields.
+         *
+         * @since 0.0.2
+         * @package BuddyPress_Compliments
+         */
+        do_action( 'bp_compliments_screen_notification_settings' );
+        ?>
     </table>
 <?php
 }
 add_action( 'bp_notification_settings', 'bp_compliments_screen_notification_settings' );
 
 /**
+ * Marks a compliment as read when 'bpc_read' is set.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
@@ -252,6 +344,8 @@ add_action( 'bp_actions', 'bp_compliments_notifications_mark_compliments_as_read
 
 
 /**
+ * Removes compliment notifications for the given user id.
+ *
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *

@@ -74,17 +74,74 @@ class BP_Compliments {
      *
      * @since 0.0.1
      * @package BuddyPress_Compliments
+     *
+     * @global object $bp BuddyPress instance.
+     * @global object $wpdb WordPress db object.
+     * @return bool|mixed
      */
     public function save() {
         global $wpdb, $bp;
         $table_name = BP_COMPLIMENTS_TABLE;
 
+        /**
+         * Filters the value of compliment receiver ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->receiver_id Compliment receiver ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->receiver_id   = apply_filters( 'bp_compliments_receiver_id_before_save',   $this->receiver_id,   $this->id );
+        /**
+         * Filters the value of compliment sender ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->sender_id Compliment sender ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->sender_id = apply_filters( 'bp_compliments_sender_id_before_save', $this->sender_id, $this->id );
+        /**
+         * Filters the value of compliment term ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->term_id Compliment term ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->term_id = apply_filters( 'bp_compliments_term_id_before_save', $this->term_id, $this->id );
+        /**
+         * Filters the value of compliment post ID.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param int $this->post_id Compliment post ID.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->post_id = apply_filters( 'bp_compliments_post_id_before_save', $this->post_id, $this->id );
+        /**
+         * Filters the value of compliment message.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param string $this->message Compliment message.
+         * @param int $this->id Optional Compliment ID.
+         */
         $this->message = apply_filters( 'bp_compliments_message_before_save', $this->message, $this->id );
 
+        /**
+         * Functions hooked to this action will be processed before saving the complement data.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param object $this The compliment data object.
+         */
         do_action_ref_array( 'bp_compliments_before_save', array( &$this ) );
 
         if (!$this->term_id OR !$this->receiver_id OR !$this->sender_id) {
@@ -95,6 +152,14 @@ class BP_Compliments {
 
         $this->id = $wpdb->insert_id;
 
+        /**
+         * Functions hooked to this action will be processed after saving the complement data.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param object $this The compliment data object.
+         */
         do_action_ref_array( 'bp_compliments_after_save', array( &$this ) );
 
         return $result;
@@ -106,8 +171,10 @@ class BP_Compliments {
      * @since 0.0.1
      * @package BuddyPress_Compliments
      *
-     * @param $c_id
-     * @return
+     * @global object $bp BuddyPress instance.
+     * @global object $wpdb WordPress db object.
+     * @param int $c_id The compliment ID.
+     * @return mixed
      */
     public static function delete($c_id) {
         global $wpdb, $bp;
@@ -122,10 +189,11 @@ class BP_Compliments {
      * @package BuddyPress_Compliments
      *
      * @global object $bp BuddyPress instance.
-     * @param $user_id
-     * @param $offset
-     * @param $limit
-     * @param bool|int $c_id
+     * @global object $wpdb WordPress db object.
+     * @param int $user_id The user ID.
+     * @param int $offset Query results offset.
+     * @param int $limit Query results limit.
+     * @param bool|int $c_id The compliment ID.
      * @return mixed
      */
     public static function get_compliments( $user_id, $offset, $limit, $c_id = false ) {
@@ -139,22 +207,23 @@ class BP_Compliments {
     }
 
     /**
-     * Get the senders / receivers counts for a given user.
+     * Get the compliment received / sent count for a given user.
      *
      * @since 0.0.1
      * @package BuddyPress_Compliments
      *
      * @global object $bp BuddyPress instance.
-     * @param $user_id
-     * @return array
+     * @global object $wpdb WordPress db object.
+     * @param int $user_id The user ID.
+     * @return array The count array.
      */
     public static function get_counts( $user_id ) {
         global $bp, $wpdb;
         $table_name = BP_COMPLIMENTS_TABLE;
-        $senders = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE receiver_id = %d", $user_id ) );
-        $receivers = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE sender_id = %d", $user_id ) );
+        $received = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE receiver_id = %d", $user_id ) );
+        $sent = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(id) FROM {$table_name} WHERE sender_id = %d", $user_id ) );
 
-        return array( 'senders' => $senders, 'receivers' => $receivers );
+        return array( 'received' => $received, 'sent' => $sent );
     }
 
 
@@ -165,7 +234,8 @@ class BP_Compliments {
      * @package BuddyPress_Compliments
      *
      * @global object $bp BuddyPress instance.
-     * @param $user_id
+     * @global object $wpdb WordPress db object.
+     * @param int $user_id The user ID.
      */
     public static function delete_all_for_user( $user_id ) {
         global $bp, $wpdb;

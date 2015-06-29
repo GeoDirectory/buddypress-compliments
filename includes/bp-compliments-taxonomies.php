@@ -6,21 +6,28 @@
  * @package BuddyPress_Compliments
  */
 
-add_action('admin_menu', 'register_my_custom_submenu_page');
+add_action('admin_menu', 'register_compliments_submenu_page');
 
 /**
+ * Register compliments submenu under Settings page.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  */
-function register_my_custom_submenu_page() {
-    add_submenu_page( 'options-general.php', 'Compliments', 'Compliments', 'manage_options', 'edit-tags.php?taxonomy=compliment' );
+function register_compliments_submenu_page() {
+    add_submenu_page(
+        'options-general.php',
+        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        'manage_options',
+        'edit-tags.php?taxonomy=compliment'
+    );
 }
 // hook into the init action and call create_book_taxonomies when it fires
 add_action( 'init', 'create_compliment_taxonomies', 0 );
 
-// create two taxonomies, compliments and writers for the post type "compliment"
 /**
+ * Create compliment taxonomies for creating compliment types.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -28,17 +35,17 @@ add_action( 'init', 'create_compliment_taxonomies', 0 );
 function create_compliment_taxonomies() {
     // Add new taxonomy, make it hierarchical (like categories)
     $labels = array(
-        'name'              => _x( 'Compliments', 'taxonomy general name' ),
-        'singular_name'     => _x( 'Compliment', 'taxonomy singular name' ),
-        'search_items'      => __( 'Search Compliments' ),
-        'all_items'         => __( 'All Compliments' ),
-        'parent_item'       => __( 'Parent Compliment' ),
-        'parent_item_colon' => __( 'Parent Compliment:' ),
-        'edit_item'         => __( 'Edit Compliment' ),
-        'update_item'       => __( 'Update Compliment' ),
-        'add_new_item'      => __( 'Add New Compliment' ),
-        'new_item_name'     => __( 'New Compliment Name' ),
-        'menu_name'         => __( 'Compliment' ),
+        'name'              => _x( 'Compliments', 'taxonomy general name', BP_COMP_TEXTDOMAIN ),
+        'singular_name'     => _x( 'Compliment', 'taxonomy singular name', BP_COMP_TEXTDOMAIN ),
+        'search_items'      => __( 'Search Compliments', BP_COMP_TEXTDOMAIN ),
+        'all_items'         => __( 'All Compliments', BP_COMP_TEXTDOMAIN ),
+        'parent_item'       => __( 'Parent Compliment', BP_COMP_TEXTDOMAIN ),
+        'parent_item_colon' => __( 'Parent Compliment:', BP_COMP_TEXTDOMAIN ),
+        'edit_item'         => __( 'Edit Compliment', BP_COMP_TEXTDOMAIN ),
+        'update_item'       => __( 'Update Compliment', BP_COMP_TEXTDOMAIN ),
+        'add_new_item'      => __( 'Add New Compliment', BP_COMP_TEXTDOMAIN ),
+        'new_item_name'     => __( 'New Compliment Name', BP_COMP_TEXTDOMAIN ),
+        'menu_name'         => __( 'Compliment', BP_COMP_TEXTDOMAIN ),
     );
 
     $args = array(
@@ -54,20 +61,22 @@ function create_compliment_taxonomies() {
 }
 
 //compliment icons
-add_action( 'admin_enqueue_scripts', 'compliments_enqueue_color_picker' );
+add_action( 'admin_enqueue_scripts', 'compliments_enqueue_admin_js' );
 /**
+ * Enqueue admin js for compliments plugin.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param $hook_suffix
+ * @param string $hook_suffix Admin page suffix.
  */
-function compliments_enqueue_color_picker( $hook_suffix ) {
+function compliments_enqueue_admin_js( $hook_suffix ) {
     wp_enqueue_media();
     wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . 'js/admin.js', array(), false, true );
 }
 
 /**
+ * Compliment icon upload form field.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -75,7 +84,7 @@ function compliments_enqueue_color_picker( $hook_suffix ) {
 function compliments_taxonomy_add_new_meta_field() {
     ?>
     <div class="form-field form-required caticon-upload upload">
-        <label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', 'compliments' ); ?></label>
+        <label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', BP_COMP_TEXTDOMAIN ); ?></label>
         <img id="comp-icon-preview" class="image_preview" src="" style="display: none;" /><br/>
         <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="text" name="term_meta[compliments_icon]" value=""/>
         <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , BP_COMP_TEXTDOMAIN ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , BP_COMP_TEXTDOMAIN ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
@@ -87,17 +96,18 @@ function compliments_taxonomy_add_new_meta_field() {
 }
 add_action( 'compliment_add_form_fields', 'compliments_taxonomy_add_new_meta_field', 10, 2 );
 /**
+ * Compliment icon upload form field for edit page.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param $term
+ * @param object $term The term object.
  */
 function compliments_taxonomy_edit_meta_field($term) {
     $t_id = $term->term_id;
     $term_meta = get_option( "taxonomy_$t_id" ); ?>
     <tr class="form-field form-required">
-        <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', 'compliments' ); ?></label></th>
+        <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', BP_COMP_TEXTDOMAIN ); ?></label></th>
         <td>
 		    <span class='caticon-upload upload'>
                 <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="hidden" name="term_meta[compliments_icon]" value="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>"/>
@@ -113,11 +123,12 @@ function compliments_taxonomy_edit_meta_field($term) {
 }
 add_action( 'compliment_edit_form_fields', 'compliments_taxonomy_edit_meta_field', 10, 2 );
 /**
+ * Save taxonomy custom meta.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param $term_id
+ * @param int $term_id The term ID.
  */
 function save_taxonomy_custom_meta( $term_id ) {
     if ( isset( $_POST['term_meta'] ) ) {
@@ -138,34 +149,36 @@ add_action( 'create_compliment', 'save_taxonomy_custom_meta', 10, 2 );
 
 add_filter("manage_edit-compliment_columns", 'modify_compliment_columns');
 /**
+ * Modify compliment page admin columns.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param $columns
- * @return array
+ * @param array $columns The column array.
+ * @return array Modified column array.
  */
 function modify_compliment_columns($columns) {
     $new_columns = array(
         'cb' => '<input type="checkbox" />',
-        'name' => __('Name'),
-        'icon' => __('Icon'),
+        'name' => __('Name', BP_COMP_TEXTDOMAIN),
+        'icon' => __('Icon', BP_COMP_TEXTDOMAIN),
     );
     return $new_columns;
 }
 
-add_filter("manage_compliment_custom_column", 'manage_theme_columns', 10, 3);
+add_filter("manage_compliment_custom_column", 'manage_bp_compliment_columns', 10, 3);
 /**
+ * Modify compliment page admin column content.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  *
- * @param $out
- * @param $column_name
- * @param $t_id
- * @return string
+ * @param string $out The html output.
+ * @param string $column_name The column name.
+ * @param int $t_id The term ID.
+ * @return string The modified html output.
  */
-function manage_theme_columns($out, $column_name, $t_id) {
+function manage_bp_compliment_columns($out, $column_name, $t_id) {
     $term_meta = get_option( "taxonomy_$t_id" );
     $term_icon = esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : "";
     switch ($column_name) {
@@ -181,13 +194,14 @@ function manage_theme_columns($out, $column_name, $t_id) {
 
 add_action( 'admin_head-edit-tags.php', 'compliment_remove_parent_dropdown' );
 /**
+ * Remove irrelevant fields from the compliment taxonomy form.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
  */
 function compliment_remove_parent_dropdown()
 {
-    if ( 'compliment' != $_GET['taxonomy'] )
+    if ( !isset($_GET['taxonomy']) OR ('compliment' != $_GET['taxonomy']) )
         return;
 
     $parent = 'parent()';

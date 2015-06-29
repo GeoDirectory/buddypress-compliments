@@ -28,18 +28,32 @@ define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ * @global object $wpdb WordPress db object.
  */
 function bp_compliments_init() {
     global $wpdb, $bp;
     // get plugin version from plugin data.
     $plugin_data = get_plugin_data( __FILE__ );
     $version = $plugin_data['Version'];
-    // some pertinent defines
+    //define the plugin version.
     define( 'BP_COMPLIMENTS_VER', $version );
+    //define the plugin path.
     define( 'BP_COMPLIMENTS_DIR', dirname( __FILE__ ) );
+    //define the plugin url.
     define( 'BP_COMPLIMENTS_URL', plugin_dir_url( __FILE__ ) );
     if ( !$table_prefix = $bp->table_prefix )
+        /**
+         * Filters the value of BuddyPress table prefix.
+         *
+         * @since 0.0.1
+         * @package BuddyPress_Compliments
+         *
+         * @param string $wpdb->base_prefix WordPress table prefix.
+         */
         $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
+    ////define the plugin table.
     define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
 
     // only supported in BP 1.5+
@@ -62,9 +76,11 @@ add_action( 'bp_include', 'bp_compliments_init' );
 /**
  * Creates Custom table for BuddyPress compliments.
  *
- * @global object $bp BuddyPress instance.
  * @since 0.0.1
  * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ * @global object $wpdb WordPress db object.
  */
 function bp_compliments_activate() {
     global $bp, $wpdb;
@@ -73,6 +89,14 @@ function bp_compliments_activate() {
     if (!$version) {
         $charset_collate = !empty( $wpdb->charset ) ? "DEFAULT CHARACTER SET $wpdb->charset" : '';
         if ( !$table_prefix = $bp->table_prefix )
+            /**
+             * Filters the value of BuddyPress table prefix.
+             *
+             * @since 0.0.1
+             * @package BuddyPress_Compliments
+             *
+             * @param string $wpdb->base_prefix WordPress table prefix.
+             */
             $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
 
         $sql[] = "CREATE TABLE IF NOT EXISTS {$table_prefix}bp_compliments (
@@ -100,6 +124,12 @@ register_activation_hook( __FILE__, 'bp_compliments_activate' );
  * @package BuddyPress_Compliments
  */
 function bp_compliments_localization() {
+    /**
+     * Filters the value of plugin locale.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     */
     $locale = apply_filters('plugin_locale', get_locale(), BP_COMP_TEXTDOMAIN);
 
     load_textdomain(BP_COMP_TEXTDOMAIN, WP_LANG_DIR . '/' . BP_COMP_TEXTDOMAIN . '/' . BP_COMP_TEXTDOMAIN . '-' . $locale . '.mo');

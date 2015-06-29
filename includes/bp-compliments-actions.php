@@ -10,6 +10,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
+ * Handle submitted modal form data.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -26,7 +27,9 @@ function handle_compliments_form_data() {
             return;
         }
 
+
         $term_id = strip_tags(esc_sql($_POST['term_id']));
+        // post id is required for geodirectory's whoop theme.
         $post_id = strip_tags(esc_sql($_POST['post_id']));
         $receiver_id = strip_tags(esc_sql($_POST['receiver_id']));
         $message = strip_tags(esc_sql($_POST['message']));
@@ -40,19 +43,23 @@ function handle_compliments_form_data() {
             $args['receiver_id'] = $receiver_id;
         }
 
+        $receiver_name = bp_core_get_user_displayname($receiver_id);
+        $redirect_url = bp_core_get_user_domain($receiver_id);
+
         if ( ! bp_compliments_start_compliment($args)) {
-            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), bp_get_displayed_user_fullname() ), 'error' );
+            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), $receiver_name ), 'error' );
         } else {
-            bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), bp_get_displayed_user_fullname() ) );
+            bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), $receiver_name ) );
         }
 
-        $redirect = bp_displayed_user_domain().'compliments/';
+        $redirect = $redirect_url.'compliments/';
         bp_core_redirect( $redirect );
     }
 }
 add_action( 'bp_actions', 'handle_compliments_form_data', 99 );
 
 /**
+ * Delete a single complement using compliment ID.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -76,10 +83,26 @@ function delete_single_complement() {
         return;
     }
 
+    /**
+     * Functions hooked to this action will be processed before deleting the complement.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $c_id The compliment ID.
+     */
     do_action( 'bp_compliments_before_remove_compliment', $c_id );
 
     BP_Compliments::delete( $c_id );
 
+    /**
+     * Functions hooked to this action will be processed after deleting the complement.
+     *
+     * @since 0.0.1
+     * @package BuddyPress_Compliments
+     *
+     * @param int $c_id The compliment ID.
+     */
     do_action( 'bp_compliments_after_remove_compliment', $c_id );
 
     $redirect = bp_displayed_user_domain().'compliments/';

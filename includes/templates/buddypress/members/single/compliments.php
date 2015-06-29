@@ -1,4 +1,12 @@
 <?php
+/**
+ * Functions hooked to this action will be processed before displaying compliments page content.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @global object $bp BuddyPress instance.
+ */
 do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
 
 <div class="bp-compliments-wrap">
@@ -8,7 +16,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         'user_id' => bp_displayed_user_id()
     );
     $count_array = bp_compliments_total_counts($count_args);
-    $total = (int)$count_array['senders'];
+    $total = (int)$count_array['received'];
     $items_per_page = 5;
     $page = isset($_GET['cpage']) ? abs((int)$_GET['cpage']) : 1;
     $offset = ($page * $items_per_page) - $items_per_page;
@@ -54,7 +62,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                 $receiver_url    = bp_core_get_userlink( $comp->receiver_id, false, true );
                                 $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$comp->id.'&action=delete';
                                 ?>
-                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;">Delete</a>
+                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;"><?php echo __('Delete', BP_COMP_TEXTDOMAIN); ?></a>
                             <?php } ?>
                         </div>
                         <div class="comp-user-msg-wrap">
@@ -120,4 +128,11 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     ?>
 </div>
 
-<?php do_action('bp_after_member_' . bp_current_action() . '_content'); ?>
+<?php
+/**
+ * Functions hooked to this action will be processed after displaying compliments page content.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+do_action('bp_after_member_' . bp_current_action() . '_content'); ?>
