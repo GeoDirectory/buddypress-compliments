@@ -66,6 +66,19 @@ No questions so far, but don't hesitate to ask!
 
 == Changelog ==
 
+= 0.0.3 =
+* Validation added when adding compliment, icon required - FIXED
+* Some strings are not translatable - FIXED
+* Docblocks added to all functions, filters and actions - ADDED
+
+= 0.0.2 =
+* Support for bp activity component - ADDED
+* Compliments can be deleted by the receiver - ADDED
+* Supports for bp notification component - ADDED
+* Translation support - ADDED
+* Compliment Icon upload form uses latest media uploader - CHANGED
+* Send compliment modal form z-index bug - FIXED
+
 = 0.0.1 =
 * First release.
 
