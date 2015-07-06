@@ -47,7 +47,7 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
 
             if ( 1 == $total_items ) {
                 $text = sprintf( __( '%s has sent you a compliment', BP_COMP_TEXTDOMAIN ), bp_core_get_user_displayname( $item_id ) );
-                $link = bp_core_get_user_domain( $bp->displayed_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
+                $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
             }
             break;
 
@@ -250,7 +250,8 @@ function bp_compliments_notifications_remove_queryarg_from_userlink( $retval ) {
             return $retval;
         }
 
-        $retval = str_replace( '?bpc_read', '', $retval );
+        // individual parameter
+        $retval = preg_replace( '/\?bpc_read=true&bpc_sender_id=[0-9]+/s', '', $retval );
     }
 
     return $retval;
