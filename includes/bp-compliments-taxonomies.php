@@ -15,10 +15,19 @@ add_action('admin_menu', 'register_compliments_submenu_page');
  * @package BuddyPress_Compliments
  */
 function register_compliments_submenu_page() {
+    add_menu_page(
+        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        'manage_options',
+        'bp-compliment-settings',
+        'bp_compliments_settings_page',
+        plugins_url( 'buddypress-compliments/images/smiley-icon.png' ),
+        85
+    );
     add_submenu_page(
-        'options-general.php',
-        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
-        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        'bp-compliment-settings',
+        __( 'Compliment Types', BP_COMP_TEXTDOMAIN ),
+        __( 'Compliment Types', BP_COMP_TEXTDOMAIN ),
         'manage_options',
         'edit-tags.php?taxonomy=compliment'
     );
@@ -222,3 +231,36 @@ function compliment_remove_parent_dropdown()
     </script>
 <?php
 }
+
+add_action( 'admin_init', 'bp_compliments_register_settings' );
+function bp_compliments_register_settings() {
+    register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
+}
+
+function bp_compliments_settings_page() {
+    ?>
+    <div class="wrap">
+        <h2><?php echo __( 'BuddyPress Compliments - Settings', BP_COMP_TEXTDOMAIN ); ?></h2>
+
+        <form method="post" action="options.php">
+            <?php settings_fields( 'bp-compliment-settings' ); ?>
+            <?php do_settings_sections( 'bp-compliment-settings' );
+            $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
+            $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'no';
+            ?>
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row"><?php echo __( 'Members can delete compliments received?', BP_COMP_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <select id="bp_compliment_can_delete" name="bp_compliment_can_delete">
+                            <option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
+                            <option value="no" <?php selected( $bp_compliment_can_delete, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
+                        </select>
+                </tr>
+            </table>
+
+            <?php submit_button(); ?>
+
+        </form>
+    </div>
+<?php } ?>
