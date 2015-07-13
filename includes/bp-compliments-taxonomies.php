@@ -102,6 +102,7 @@ function compliments_taxonomy_add_new_meta_field() {
         <p><?php echo __( 'Recommended icon size: 20px x 20px' , BP_COMP_TEXTDOMAIN ); ?></p>
     </div>
 <?php
+    bp_compliments_taxonomy_highlight_js();
 }
 add_action( 'compliment_add_form_fields', 'compliments_taxonomy_add_new_meta_field', 10, 2 );
 /**
@@ -129,6 +130,7 @@ function compliments_taxonomy_edit_meta_field($term) {
         </td>
     </tr>
 <?php
+    bp_compliments_taxonomy_highlight_js();
 }
 add_action( 'compliment_edit_form_fields', 'compliments_taxonomy_edit_meta_field', 10, 2 );
 /**
@@ -263,4 +265,27 @@ function bp_compliments_settings_page() {
 
         </form>
     </div>
-<?php } ?>
+<?php }
+
+function bp_compliments_taxonomy_highlight_js() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready( function($)
+        {
+            //remove higlighting from the posts menu
+            var posts_menu = $('#menu-posts');
+            posts_menu.removeClass('wp-has-current-submenu wp-menu-open');
+            posts_menu.addClass('wp-not-current-submenu');
+            posts_menu.children('a').removeClass('wp-has-current-submenu');
+
+            // add highlighting to our compliments menu
+            var comp_menu = $('#toplevel_page_bp-compliment-settings');
+            comp_menu.removeClass('wp-not-current-submenu');
+            comp_menu.children('a').removeClass('wp-not-current-submenu');
+            comp_menu.addClass('wp-has-current-submenu wp-menu-open');
+            comp_menu.children('a').addClass('wp-has-current-submenu');
+
+        });
+    </script>
+    <?php
+}
