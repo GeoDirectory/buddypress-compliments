@@ -58,7 +58,9 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                             </em>
                             <?php
                             global $bp;
-                            if (is_user_logged_in() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
+                            $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
+                            $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
+                            if (is_user_logged_in() && ($bp->loggedin_user->id == $bp->displayed_user->id) && ($bp_compliment_can_delete != 'no')) {
                                 $receiver_url    = bp_core_get_userlink( $comp->receiver_id, false, true );
                                 $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$comp->id.'&action=delete';
                                 ?>

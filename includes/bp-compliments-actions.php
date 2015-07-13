@@ -77,6 +77,13 @@ function delete_single_complement() {
         return;
     }
 
+    $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
+    $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
+
+    if ($bp_compliment_can_delete == 'no') {
+        return;
+    }
+
     $c_id = (int) strip_tags(esc_sql($_GET['c_id']));
 
     if (!$c_id) {

@@ -246,7 +246,7 @@ function bp_compliments_settings_page() {
             <?php settings_fields( 'bp-compliment-settings' ); ?>
             <?php do_settings_sections( 'bp-compliment-settings' );
             $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
-            $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'no';
+            $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
             ?>
             <table class="form-table">
                 <tr valign="top">
