@@ -15,10 +15,19 @@ add_action('admin_menu', 'register_compliments_submenu_page');
  * @package BuddyPress_Compliments
  */
 function register_compliments_submenu_page() {
+    add_menu_page(
+        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        'manage_options',
+        'bp-compliment-settings',
+        'bp_compliments_settings_page',
+        plugins_url( 'buddypress-compliments/images/smiley-icon.png' ),
+        85
+    );
     add_submenu_page(
-        'options-general.php',
-        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
-        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+        'bp-compliment-settings',
+        __( 'Compliment Types', BP_COMP_TEXTDOMAIN ),
+        __( 'Compliment Types', BP_COMP_TEXTDOMAIN ),
         'manage_options',
         'edit-tags.php?taxonomy=compliment'
     );
@@ -93,6 +102,7 @@ function compliments_taxonomy_add_new_meta_field() {
         <p><?php echo __( 'Recommended icon size: 20px x 20px' , BP_COMP_TEXTDOMAIN ); ?></p>
     </div>
 <?php
+    bp_compliments_taxonomy_highlight_js();
 }
 add_action( 'compliment_add_form_fields', 'compliments_taxonomy_add_new_meta_field', 10, 2 );
 /**
@@ -120,6 +130,7 @@ function compliments_taxonomy_edit_meta_field($term) {
         </td>
     </tr>
 <?php
+    bp_compliments_taxonomy_highlight_js();
 }
 add_action( 'compliment_edit_form_fields', 'compliments_taxonomy_edit_meta_field', 10, 2 );
 /**
@@ -221,4 +232,60 @@ function compliment_remove_parent_dropdown()
         });
     </script>
 <?php
+}
+
+add_action( 'admin_init', 'bp_compliments_register_settings' );
+function bp_compliments_register_settings() {
+    register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
+}
+
+function bp_compliments_settings_page() {
+    ?>
+    <div class="wrap">
+        <h2><?php echo __( 'BuddyPress Compliments - Settings', BP_COMP_TEXTDOMAIN ); ?></h2>
+
+        <form method="post" action="options.php">
+            <?php settings_fields( 'bp-compliment-settings' ); ?>
+            <?php do_settings_sections( 'bp-compliment-settings' );
+            $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
+            $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
+            ?>
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row"><?php echo __( 'Members can delete compliments received?', BP_COMP_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <select id="bp_compliment_can_delete" name="bp_compliment_can_delete">
+                            <option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
+                            <option value="no" <?php selected( $bp_compliment_can_delete, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
+                        </select>
+                </tr>
+            </table>
+
+            <?php submit_button(); ?>
+
+        </form>
+    </div>
+<?php }
+
+function bp_compliments_taxonomy_highlight_js() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready( function($)
+        {
+            //remove higlighting from the posts menu
+            var posts_menu = $('#menu-posts');
+            posts_menu.removeClass('wp-has-current-submenu wp-menu-open');
+            posts_menu.addClass('wp-not-current-submenu');
+            posts_menu.children('a').removeClass('wp-has-current-submenu');
+
+            // add highlighting to our compliments menu
+            var comp_menu = $('#toplevel_page_bp-compliment-settings');
+            comp_menu.removeClass('wp-not-current-submenu');
+            comp_menu.children('a').removeClass('wp-not-current-submenu');
+            comp_menu.addClass('wp-has-current-submenu wp-menu-open');
+            comp_menu.children('a').addClass('wp-has-current-submenu');
+
+        });
+    </script>
+    <?php
 }

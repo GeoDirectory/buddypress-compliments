@@ -2,6 +2,7 @@ v0.0.3
 Validation added when adding compliment, icon required - FIXED
 Some strings are not translatable - FIXED
 Docblocks added to all functions, filters and actions - ADDED
+Setting added for Members can delete compliments received? - ADDED
 
 v0.0.2
 BP compliments now supports notification component - ADDED
