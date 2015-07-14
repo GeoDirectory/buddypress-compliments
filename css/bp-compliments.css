@@ -113,6 +113,7 @@
     display: block;
     border-bottom: 1px solid #ccccc8;
     padding: 10px 5px;
+    margin-left: 0;
 }
 .gd-list-item-author.comp-user {
     padding-left: 0;
