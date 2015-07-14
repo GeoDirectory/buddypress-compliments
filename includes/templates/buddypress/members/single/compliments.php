@@ -17,7 +17,10 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     );
     $count_array = bp_compliments_total_counts($count_args);
     $total = (int)$count_array['received'];
-    $items_per_page = 5;
+
+    $comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
+    $items_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
+
     $page = isset($_GET['cpage']) ? abs((int)$_GET['cpage']) : 1;
     $offset = ($page * $items_per_page) - $items_per_page;
     $args = array(

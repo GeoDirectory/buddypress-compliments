@@ -9,7 +9,7 @@
 add_action('admin_menu', 'register_compliments_submenu_page');
 
 /**
- * Register compliments submenu under Settings page.
+ * Register Compliments menu below Settings menu.
  *
  * @since 0.0.1
  * @package BuddyPress_Compliments
@@ -237,6 +237,7 @@ function compliment_remove_parent_dropdown()
 add_action( 'admin_init', 'bp_compliments_register_settings' );
 function bp_compliments_register_settings() {
     register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
+    register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
 }
 
 function bp_compliments_settings_page() {
@@ -249,6 +250,9 @@ function bp_compliments_settings_page() {
             <?php do_settings_sections( 'bp-compliment-settings' );
             $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
             $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
+
+            $comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
+            $comp_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
             ?>
             <table class="form-table">
                 <tr valign="top">
@@ -258,6 +262,10 @@ function bp_compliments_settings_page() {
                             <option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
                             <option value="no" <?php selected( $bp_compliment_can_delete, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
                         </select>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><?php echo __( 'Number of Compliments to display per page?', BP_COMP_TEXTDOMAIN ); ?></th>
+                    <td><input type="number" name="bp_comp_per_page" value="<?php echo $comp_per_page; ?>" /></td>
                 </tr>
             </table>
 
