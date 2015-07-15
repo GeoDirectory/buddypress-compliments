@@ -238,6 +238,7 @@ add_action( 'admin_init', 'bp_compliments_register_settings' );
 function bp_compliments_register_settings() {
     register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
     register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
+    register_setting( 'bp-compliment-settings', 'bp_comp_custom_css' );
 }
 
 function bp_compliments_settings_page() {
@@ -253,8 +254,11 @@ function bp_compliments_settings_page() {
 
             $comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
             $comp_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
+
+            $comp_custom_css_value = esc_attr( get_option('bp_comp_custom_css'));
+            $comp_custom_css = $comp_custom_css_value ? $comp_custom_css_value : '';
             ?>
-            <table class="form-table">
+            <table class="widefat fixed" style="padding:10px;margin-top: 10px;">
                 <tr valign="top">
                     <th scope="row"><?php echo __( 'Members can delete compliments received?', BP_COMP_TEXTDOMAIN ); ?></th>
                     <td>
@@ -265,11 +269,17 @@ function bp_compliments_settings_page() {
                 </tr>
                 <tr valign="top">
                     <th scope="row"><?php echo __( 'Number of Compliments to display per page?', BP_COMP_TEXTDOMAIN ); ?></th>
-                    <td><input type="number" name="bp_comp_per_page" value="<?php echo $comp_per_page; ?>" /></td>
+                    <td><input type="number" class="widefat" name="bp_comp_per_page" value="<?php echo $comp_per_page; ?>" /></td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row"><?php echo __( 'Custom CSS styles', BP_COMP_TEXTDOMAIN ); ?></th>
+                    <td><textarea class="widefat" rows="5" name="bp_comp_custom_css"><?php echo $comp_custom_css; ?></textarea></td>
+                </tr>
+                <tr valign="top">
+                    <th></th>
+                    <td><?php submit_button(null, 'primary','submit',false); ?></td>
                 </tr>
             </table>
-
-            <?php submit_button(); ?>
 
         </form>
     </div>
@@ -297,3 +307,14 @@ function bp_compliments_taxonomy_highlight_js() {
     </script>
     <?php
 }
+
+function bp_comp_custom_css() {
+    $comp_custom_css_value = esc_attr( get_option('bp_comp_custom_css'));
+    $comp_custom_css = $comp_custom_css_value ? $comp_custom_css_value : '';
+    ?>
+    <style type="text/css">
+        <?php echo $comp_custom_css; ?>
+    </style>
+  <?php
+}
+add_action( 'wp_head', 'bp_comp_custom_css' );

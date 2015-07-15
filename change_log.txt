@@ -4,6 +4,7 @@ Some strings are not translatable - FIXED
 Docblocks added to all functions, filters and actions - ADDED
 Members can delete compliments received? setting - ADDED
 Number of Compliments to display per page setting - ADDED
+Custom CSS styles setting - ADDED
 
 v0.0.2
 BP compliments now supports notification component - ADDED
