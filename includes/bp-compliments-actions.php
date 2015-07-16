@@ -28,11 +28,11 @@ function handle_compliments_form_data() {
         }
 
 
-        $term_id = strip_tags(esc_sql($_POST['term_id']));
+        $term_id = strip_tags($_POST['term_id']);
         // post id is required for geodirectory's whoop theme.
-        $post_id = strip_tags(esc_sql($_POST['post_id']));
-        $receiver_id = strip_tags(esc_sql($_POST['receiver_id']));
-        $message = strip_tags(esc_sql($_POST['message']));
+        $post_id = strip_tags($_POST['post_id']);
+        $receiver_id = strip_tags($_POST['receiver_id']);
+        $message = strip_tags($_POST['message']);
         $args = array(
             'term_id' => (int) $term_id,
             'post_id' => (int) $post_id,
