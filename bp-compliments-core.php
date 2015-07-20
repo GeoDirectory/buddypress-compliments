@@ -166,12 +166,21 @@ class BP_Compliments_Component extends BP_Component {
         // Need to change the user ID, so if we're not on a member page, $counts variable is still calculated
         $user_id = bp_is_user() ? bp_displayed_user_id() : bp_loggedin_user_id();
         $counts  = bp_compliments_total_counts( array( 'user_id' => $user_id ) );
-        
+
+        $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
+        $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+        if ($bp_compliment_can_see_others_comp == 'yes') {
+            $show_for_displayed_user = true;
+        } else {
+            $show_for_displayed_user = false;
+        }
+
         bp_core_new_nav_item( array(
             'name'                => sprintf( __( 'Compliments <span>%d</span>', BP_COMP_TEXTDOMAIN ), $counts['received'] ),
             'slug'                => $bp->compliments->compliments->slug,
             'position'            => $this->params['adminbar_myaccount_order'],
             'screen_function'     => 'bp_compliments_screen_compliments',
+            'show_for_displayed_user' => $show_for_displayed_user,
             'default_subnav_slug' => 'compliments',
             'item_css_id'         => 'members-compliments'
         ) );

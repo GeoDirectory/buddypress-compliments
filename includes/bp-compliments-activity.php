@@ -140,13 +140,25 @@ add_action( 'bp_register_activity_actions', 'compliments_register_activity_actio
  */
 function compliments_format_activity_action_compliment_received( $action, $activity ) {
     global $bp;
+
     $receiver_link = bp_core_get_userlink( $activity->user_id );
     $sender_link    = bp_core_get_userlink( $activity->secondary_item_id );
     $receiver_url    = bp_core_get_userlink( $activity->user_id, false, true );
     $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$activity->item_id;
     $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment", BP_COMP_TEXTDOMAIN).'</a>';
 
-    $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $compliment_link, $sender_link );
+    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
+    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+
+    if ($bp->loggedin_user->id == $bp->displayed_user->id) {
+        $bp_compliment_can_see_others_comp = 'yes';
+    }
+
+    if ($bp_compliment_can_see_others_comp == 'yes') {
+        $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $compliment_link, $sender_link );
+    } else {
+        $action = sprintf( __( '%1$s has received a compliment from %2$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $sender_link );
+    }
 
 
     /**
@@ -179,7 +191,18 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
     $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$activity->item_id;
     $compliment_link = '<a href="'.$compliment_url.'">'.__("compliment", BP_COMP_TEXTDOMAIN).'</a>';
 
-    $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, $compliment_link, $receiver_link );
+    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
+    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+
+    if ($bp->loggedin_user->id == $bp->displayed_user->id) {
+        $bp_compliment_can_see_others_comp = 'yes';
+    }
+
+    if ($bp_compliment_can_see_others_comp == 'yes') {
+        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, $compliment_link, $receiver_link );
+    } else {
+        $action = sprintf( __( '%1$s has sent a compliment to %2$s', BP_COMP_TEXTDOMAIN ), $sender_link, $receiver_link );
+    }
 
     /**
      * Filters the 'compliment_sent' activity action format.

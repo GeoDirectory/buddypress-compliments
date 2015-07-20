@@ -21,6 +21,12 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     $comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
     $items_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
 
+    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
+    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+    if (bp_displayed_user_id() == bp_loggedin_user_id()) {
+        $bp_compliment_can_see_others_comp = 'yes';
+    }
+
     $page = isset($_GET['cpage']) ? abs((int)$_GET['cpage']) : 1;
     $offset = ($page * $items_per_page) - $items_per_page;
     $args = array(
@@ -38,7 +44,17 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     $start = $offset ? $offset : 1;
     $end = $offset + $items_per_page;
     $end = ($end > $total) ? $total : $end;
-    if ($compliments) {
+
+    if (isset($_GET['c_id'])) {
+        foreach ($compliments as $comp) {
+            $author_id = $comp->sender_id;
+            if ($author_id == bp_loggedin_user_id()) {
+                $bp_compliment_can_see_others_comp = 'yes';
+            }
+        }
+    }
+
+    if ($compliments && ($bp_compliment_can_see_others_comp == 'yes')) {
         ?>
         <div class="comp-user-content">
             <ul class="comp-user-ul">
@@ -115,6 +131,12 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                 </div>
             </div>
         <?php }
+    } elseif($bp_compliment_can_see_others_comp == 'no') {
+        ?>
+        <div id="message" class="bp-no-compliments info">
+            <p><?php echo __('You don\'t have permission to access this page.', BP_COMP_TEXTDOMAIN); ?></p>
+        </div>
+    <?php
     } else {
         if (bp_displayed_user_id() == bp_loggedin_user_id()) {
             ?>
