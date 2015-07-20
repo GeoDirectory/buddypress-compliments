@@ -1,3 +1,6 @@
+v0.0.4
+Members can see other members compliment page? setting - ADDED
+
 v0.0.3
 Validation added when adding compliment, icon required - FIXED
 Some strings are not translatable - FIXED

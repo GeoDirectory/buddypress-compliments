@@ -236,6 +236,7 @@ function compliment_remove_parent_dropdown()
 
 add_action( 'admin_init', 'bp_compliments_register_settings' );
 function bp_compliments_register_settings() {
+    register_setting( 'bp-compliment-settings', 'bp_compliment_can_see_others_comp' );
     register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
     register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
     register_setting( 'bp-compliment-settings', 'bp_comp_custom_css' );
@@ -249,6 +250,10 @@ function bp_compliments_settings_page() {
         <form method="post" action="options.php">
             <?php settings_fields( 'bp-compliment-settings' ); ?>
             <?php do_settings_sections( 'bp-compliment-settings' );
+
+            $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
+            $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+
             $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
             $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
 
@@ -260,12 +265,22 @@ function bp_compliments_settings_page() {
             ?>
             <table class="widefat fixed" style="padding:10px;margin-top: 10px;">
                 <tr valign="top">
+                    <th scope="row"><?php echo __( 'Members can see other members compliment page?', BP_COMP_TEXTDOMAIN ); ?></th>
+                    <td>
+                        <select id="bp_compliment_can_see_others_comp" name="bp_compliment_can_see_others_comp">
+                            <option value="yes" <?php selected( $bp_compliment_can_see_others_comp, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
+                            <option value="no" <?php selected( $bp_compliment_can_see_others_comp, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr valign="top">
                     <th scope="row"><?php echo __( 'Members can delete compliments received?', BP_COMP_TEXTDOMAIN ); ?></th>
                     <td>
                         <select id="bp_compliment_can_delete" name="bp_compliment_can_delete">
                             <option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
                             <option value="no" <?php selected( $bp_compliment_can_delete, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
                         </select>
+                    </td>
                 </tr>
                 <tr valign="top">
                     <th scope="row"><?php echo __( 'Number of Compliments to display per page?', BP_COMP_TEXTDOMAIN ); ?></th>
