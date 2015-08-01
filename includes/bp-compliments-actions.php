@@ -44,6 +44,7 @@ function handle_compliments_form_data() {
         }
 
         $receiver_name = bp_core_get_user_displayname($receiver_id);
+
         $redirect_url = bp_core_get_user_domain($receiver_id);
 
         if ( ! bp_compliments_start_compliment($args)) {
@@ -52,7 +53,24 @@ function handle_compliments_form_data() {
             bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), $receiver_name ) );
         }
 
-        $redirect = $redirect_url.'compliments/';
+	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
+	    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+	    if ($bp_compliment_can_see_others_comp == 'yes') {
+		    $show_for_displayed_user = true;
+	    } else {
+		    $show_for_displayed_user = false;
+	    }
+
+	    if (current_user_can( 'manage_options' )) {
+		    $show_for_displayed_user = true;
+	    }
+
+	    if ($show_for_displayed_user) {
+		    $redirect = $redirect_url.'compliments/';
+	    } else {
+		    $redirect = $redirect_url;
+	    }
+
         bp_core_redirect( $redirect );
     }
 }

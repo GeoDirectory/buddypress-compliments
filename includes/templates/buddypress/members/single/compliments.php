@@ -25,6 +25,8 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
     if (bp_displayed_user_id() == bp_loggedin_user_id()) {
         $bp_compliment_can_see_others_comp = 'yes';
+    } elseif (current_user_can( 'manage_options' )) {
+        $bp_compliment_can_see_others_comp = 'yes';
     }
 
     $page = isset($_GET['cpage']) ? abs((int)$_GET['cpage']) : 1;
