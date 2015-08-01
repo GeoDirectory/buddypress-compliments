@@ -1,3 +1,6 @@
+v0.0.5
+404 error while sending compliments - FIXED
+
 v0.0.4
 Members can see other members compliment page? setting - ADDED
 

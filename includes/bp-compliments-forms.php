@@ -16,6 +16,9 @@
  * @param int $receiver_id Compliment receiver ID.
  */
 function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
+    if (!$receiver_id && bp_displayed_user_id()) {
+	    $receiver_id = bp_displayed_user_id();
+    }
     ?>
     <div class="comp-modal">
         <div class="comp-modal-content-wrap">
