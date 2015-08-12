@@ -80,7 +80,7 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
      * @param string $receiver_fullname Receiver full name.
      * @param int $r['receiver_id'] Receiver ID.
      */
-    $link_text = sprintf( _x( 'Send Compliment', 'Button', BP_COMP_TEXTDOMAIN ), apply_filters( 'bp_compliments_receiver_name', bp_get_user_firstname( $receiver_fullname ), $r['receiver_id'] ) );
+    $link_text = sprintf( sprintf( __( 'Send %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ), apply_filters( 'bp_compliments_receiver_name', bp_get_user_firstname( $receiver_fullname ), $r['receiver_id'] ) );
 
     if ( empty( $r['link_text'] ) ) {
         $r['link_text'] = $link_text;

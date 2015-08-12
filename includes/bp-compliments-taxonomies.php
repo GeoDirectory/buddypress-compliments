@@ -15,19 +15,10 @@ add_action('admin_menu', 'register_compliments_submenu_page');
  * @package BuddyPress_Compliments
  */
 function register_compliments_submenu_page() {
-    add_menu_page(
-        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
-        __( 'Compliments', BP_COMP_TEXTDOMAIN ),
-        'manage_options',
-        'bp-compliment-settings',
-        'bp_compliments_settings_page',
-        plugins_url( 'buddypress-compliments/images/smiley-icon.png' ),
-        85
-    );
     add_submenu_page(
         'bp-compliment-settings',
-        __( 'Compliment Types', BP_COMP_TEXTDOMAIN ),
-        __( 'Compliment Types', BP_COMP_TEXTDOMAIN ),
+        sprintf( __( '%s Types', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Types', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
         'manage_options',
         'edit-tags.php?taxonomy=compliment'
     );
@@ -44,17 +35,17 @@ add_action( 'init', 'create_compliment_taxonomies', 0 );
 function create_compliment_taxonomies() {
     // Add new taxonomy, make it hierarchical (like categories)
     $labels = array(
-        'name'              => _x( 'Compliments', 'taxonomy general name', BP_COMP_TEXTDOMAIN ),
-        'singular_name'     => _x( 'Compliment', 'taxonomy singular name', BP_COMP_TEXTDOMAIN ),
-        'search_items'      => __( 'Search Compliments', BP_COMP_TEXTDOMAIN ),
-        'all_items'         => __( 'All Compliments', BP_COMP_TEXTDOMAIN ),
-        'parent_item'       => __( 'Parent Compliment', BP_COMP_TEXTDOMAIN ),
-        'parent_item_colon' => __( 'Parent Compliment:', BP_COMP_TEXTDOMAIN ),
-        'edit_item'         => __( 'Edit Compliment', BP_COMP_TEXTDOMAIN ),
-        'update_item'       => __( 'Update Compliment', BP_COMP_TEXTDOMAIN ),
-        'add_new_item'      => __( 'Add New Compliment', BP_COMP_TEXTDOMAIN ),
-        'new_item_name'     => __( 'New Compliment Name', BP_COMP_TEXTDOMAIN ),
-        'menu_name'         => __( 'Compliment', BP_COMP_TEXTDOMAIN ),
+        'name'              => BP_COMP_PLURAL_NAME,
+        'singular_name'     => BP_COMP_SINGULAR_NAME,
+        'search_items'      => sprintf( __( 'Search %s', BP_COMP_TEXTDOMAIN ), BP_COMP_PLURAL_NAME ),
+        'all_items'         => sprintf( __( 'All %s', BP_COMP_TEXTDOMAIN ), BP_COMP_PLURAL_NAME ),
+        'parent_item'       => sprintf( __( 'Parent %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'parent_item_colon' => sprintf( __( 'Parent %s:', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'edit_item'         => sprintf( __( 'Edit %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'update_item'       => sprintf( __( 'Update %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'add_new_item'      => sprintf( __( 'Add New %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'new_item_name'     => sprintf( __( 'New %s Name', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'menu_name'         => BP_COMP_SINGULAR_NAME,
     );
 
     $args = array(
@@ -93,7 +84,7 @@ function compliments_enqueue_admin_js( $hook_suffix ) {
 function compliments_taxonomy_add_new_meta_field() {
     ?>
     <div class="form-field form-required caticon-upload upload">
-        <label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', BP_COMP_TEXTDOMAIN ); ?></label>
+        <label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ) ?></label>
         <img id="comp-icon-preview" class="image_preview" src="" style="display: none;" /><br/>
         <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="text" name="term_meta[compliments_icon]" value=""/>
         <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , BP_COMP_TEXTDOMAIN ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , BP_COMP_TEXTDOMAIN ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
@@ -117,7 +108,7 @@ function compliments_taxonomy_edit_meta_field($term) {
     $t_id = $term->term_id;
     $term_meta = get_option( "taxonomy_$t_id" ); ?>
     <tr class="form-field form-required">
-        <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php _e( 'Compliment Icon', BP_COMP_TEXTDOMAIN ); ?></label></th>
+        <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ) ?></label></th>
         <td>
 		    <span class='caticon-upload upload'>
                 <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="hidden" name="term_meta[compliments_icon]" value="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>"/>
@@ -233,72 +224,6 @@ function compliment_remove_parent_dropdown()
     </script>
 <?php
 }
-
-add_action( 'admin_init', 'bp_compliments_register_settings' );
-function bp_compliments_register_settings() {
-    register_setting( 'bp-compliment-settings', 'bp_compliment_can_see_others_comp' );
-    register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
-    register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
-    register_setting( 'bp-compliment-settings', 'bp_comp_custom_css' );
-}
-
-function bp_compliments_settings_page() {
-    ?>
-    <div class="wrap">
-        <h2><?php echo __( 'BuddyPress Compliments - Settings', BP_COMP_TEXTDOMAIN ); ?></h2>
-
-        <form method="post" action="options.php">
-            <?php settings_fields( 'bp-compliment-settings' ); ?>
-            <?php do_settings_sections( 'bp-compliment-settings' );
-
-            $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
-            $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
-
-            $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
-            $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
-
-            $comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
-            $comp_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
-
-            $comp_custom_css_value = esc_attr( get_option('bp_comp_custom_css'));
-            $comp_custom_css = $comp_custom_css_value ? $comp_custom_css_value : '';
-            ?>
-            <table class="widefat fixed" style="padding:10px;margin-top: 10px;">
-                <tr valign="top">
-                    <th scope="row"><?php echo __( 'Members can see other members compliment page?', BP_COMP_TEXTDOMAIN ); ?></th>
-                    <td>
-                        <select id="bp_compliment_can_see_others_comp" name="bp_compliment_can_see_others_comp">
-                            <option value="yes" <?php selected( $bp_compliment_can_see_others_comp, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
-                            <option value="no" <?php selected( $bp_compliment_can_see_others_comp, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
-                        </select>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row"><?php echo __( 'Members can delete compliments received?', BP_COMP_TEXTDOMAIN ); ?></th>
-                    <td>
-                        <select id="bp_compliment_can_delete" name="bp_compliment_can_delete">
-                            <option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
-                            <option value="no" <?php selected( $bp_compliment_can_delete, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
-                        </select>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row"><?php echo __( 'Number of Compliments to display per page?', BP_COMP_TEXTDOMAIN ); ?></th>
-                    <td><input type="number" class="widefat" name="bp_comp_per_page" value="<?php echo $comp_per_page; ?>" /></td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row"><?php echo __( 'Custom CSS styles', BP_COMP_TEXTDOMAIN ); ?></th>
-                    <td><textarea class="widefat" rows="5" name="bp_comp_custom_css"><?php echo $comp_custom_css; ?></textarea></td>
-                </tr>
-                <tr valign="top">
-                    <th></th>
-                    <td><?php submit_button(null, 'primary','submit',false); ?></td>
-                </tr>
-            </table>
-
-        </form>
-    </div>
-<?php }
 
 function bp_compliments_taxonomy_highlight_js() {
     ?>
