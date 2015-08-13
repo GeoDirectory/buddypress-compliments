@@ -67,8 +67,6 @@ class BP_Compliments_Component extends BP_Component {
         require( $this->path . '/bp-compliments-classes.php' );
         // Functions related to compliment component.
         require( $this->path . '/bp-compliments-functions.php' );
-        // Functions related to compliment types and icons.
-        require( $this->path . '/bp-compliments-taxonomies.php' );
         // Functions related to frontend content display.
         require( $this->path . '/bp-compliments-screens.php' );
         // Functions related to compliment buttons and template tags.
@@ -81,6 +79,10 @@ class BP_Compliments_Component extends BP_Component {
         require( $this->path . '/bp-compliments-activity.php' );
         // Functions related to compliment forms.
         require( $this->path . '/bp-compliments-forms.php' );
+        // Functions related to compliment settings.
+        require( $this->path . '/bp-compliments-settings.php' );
+        // Functions related to compliment types and icons.
+        require( $this->path . '/bp-compliments-taxonomies.php' );
     }
 
     /**
@@ -94,9 +96,6 @@ class BP_Compliments_Component extends BP_Component {
      */
     public function setup_globals( $args = array() ) {
         global $bp;
-
-        if ( ! defined( 'BP_COMPLIMENTS_SLUG' ) )
-            define( 'BP_COMPLIMENTS_SLUG', 'compliments' );
 
         // Set up the $globals array
         $globals = array(
@@ -176,7 +175,7 @@ class BP_Compliments_Component extends BP_Component {
         }
 
         bp_core_new_nav_item( array(
-            'name'                => sprintf( __( 'Compliments <span>%d</span>', BP_COMP_TEXTDOMAIN ), $counts['received'] ),
+            'name'                => BP_COMP_PLURAL_NAME." "."<span>".$counts['received']."</span>",
             'slug'                => $bp->compliments->compliments->slug,
             'position'            => $this->params['adminbar_myaccount_order'],
             'screen_function'     => 'bp_compliments_screen_compliments',

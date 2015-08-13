@@ -48,9 +48,9 @@ function handle_compliments_form_data() {
         $redirect_url = bp_core_get_user_domain($receiver_id);
 
         if ( ! bp_compliments_start_compliment($args)) {
-            bp_core_add_message( sprintf( __( 'There was a problem when trying to send compliment to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), $receiver_name ), 'error' );
+            bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
         } else {
-            bp_core_add_message( sprintf( __( 'Your compliment sent to %s.', BP_COMP_TEXTDOMAIN ), $receiver_name ) );
+            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ) );
         }
 
 	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
@@ -66,7 +66,7 @@ function handle_compliments_form_data() {
 	    }
 
 	    if ($show_for_displayed_user) {
-		    $redirect = $redirect_url.'compliments/';
+		    $redirect = $redirect_url.BP_COMPLIMENTS_SLUG.'/';
 	    } else {
 		    $redirect = $redirect_url;
 	    }
@@ -130,7 +130,7 @@ function delete_single_complement() {
      */
     do_action( 'bp_compliments_after_remove_compliment', $c_id );
 
-    $redirect = bp_displayed_user_domain().'compliments/';
+    $redirect = bp_displayed_user_domain().BP_COMPLIMENTS_SLUG.'/';
     bp_core_redirect( $redirect );
 }
 add_action( 'bp_actions', 'delete_single_complement');

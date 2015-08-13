@@ -25,6 +25,13 @@ define( 'BP_COMPLIMENTS_VER', '0.0.5' );
  * BuddyPress compliments text domain.
  */
 define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
+/**
+ * BuddyPress compliments names.
+ */
+define( 'BP_COMP_SINGULAR_NAME', trim(esc_attr( get_option('bp_compliment_singular_name', __( 'Compliment', BP_COMP_TEXTDOMAIN )))) );
+define( 'BP_COMP_PLURAL_NAME', trim(esc_attr( get_option('bp_compliment_plural_name', __( 'Compliments', BP_COMP_TEXTDOMAIN )))) );
+define( 'BP_COMPLIMENTS_SLUG', strtolower(trim(esc_attr( get_option('bp_compliment_slug', __( 'compliments', BP_COMP_TEXTDOMAIN ))))) );
+
 
 /**
  * Only load the plugin code if BuddyPress is activated.
