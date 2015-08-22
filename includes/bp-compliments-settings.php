@@ -26,6 +26,8 @@ function bp_compliments_register_settings() {
 	register_setting( 'bp-compliment-settings', 'bp_compliment_slug' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_can_see_others_comp' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
+	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_activity' );
+	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_notifications' );
 	register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
 	register_setting( 'bp-compliment-settings', 'bp_comp_custom_css' );
 }
@@ -44,6 +46,12 @@ function bp_compliments_settings_page() {
 			$bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
 			$bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
 
+			$bp_compliment_enable_activity_value = esc_attr( get_option('bp_compliment_enable_activity'));
+			$bp_compliment_enable_activity = $bp_compliment_enable_activity_value ? $bp_compliment_enable_activity_value : 'yes';
+
+			$bp_compliment_enable_notifications_value = esc_attr( get_option('bp_compliment_enable_notifications'));
+			$bp_compliment_enable_notifications = $bp_compliment_enable_notifications_value ? $bp_compliment_enable_notifications_value : 'yes';
+
 			$comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
 			$comp_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
 
@@ -52,15 +60,15 @@ function bp_compliments_settings_page() {
 			?>
 			<table class="widefat fixed" style="padding:10px;margin-top: 10px;">
 				<tr valign="top">
-					<th scope="row"><?php echo __( 'Singlular name ( Ex: Gift. Default: Compliment )', BP_COMP_TEXTDOMAIN ); ?></th>
+					<th scope="row"><?php echo __( 'Singlular name ( e.g. Gift. Default: Compliment )', BP_COMP_TEXTDOMAIN ); ?></th>
 					<td><input type="text" class="widefat" name="bp_compliment_singular_name" value="<?php echo BP_COMP_SINGULAR_NAME; ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo __( 'Plural name ( Ex: Gifts. Default: Compliments )', BP_COMP_TEXTDOMAIN ); ?></th>
+					<th scope="row"><?php echo __( 'Plural name ( e.g. Gifts. Default: Compliments )', BP_COMP_TEXTDOMAIN ); ?></th>
 					<td><input type="text" class="widefat" name="bp_compliment_plural_name" value="<?php echo BP_COMP_PLURAL_NAME; ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo __( 'Slug ( Ex: gifts. Default: compliments. must be lowercase )', BP_COMP_TEXTDOMAIN ); ?></th>
+					<th scope="row"><?php echo __( 'Slug ( e.g. gifts. Default: compliments. must be lowercase )', BP_COMP_TEXTDOMAIN ); ?></th>
 					<td><input type="text" class="widefat" name="bp_compliment_slug" value="<?php echo BP_COMPLIMENTS_SLUG; ?>" /></td>
 				</tr>
 				<tr valign="top">
@@ -78,6 +86,24 @@ function bp_compliments_settings_page() {
 						<select id="bp_compliment_can_delete" name="bp_compliment_can_delete">
 							<option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
 							<option value="no" <?php selected( $bp_compliment_can_delete, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
+						</select>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php echo sprintf( __( 'Enable activity component for %s ?', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_PLURAL_NAME) ); ?></th>
+					<td>
+						<select id="bp_compliment_enable_activity" name="bp_compliment_enable_activity">
+							<option value="yes" <?php selected( $bp_compliment_enable_activity, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
+							<option value="no" <?php selected( $bp_compliment_enable_activity, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
+						</select>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php echo sprintf( __( 'Enable notification component for %s ?', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_PLURAL_NAME) ); ?></th>
+					<td>
+						<select id="bp_compliment_enable_notifications" name="bp_compliment_enable_notifications">
+							<option value="yes" <?php selected( $bp_compliment_enable_notifications, 'yes' ); ?>><?php echo __( 'Yes', BP_COMP_TEXTDOMAIN ); ?></option>
+							<option value="no" <?php selected( $bp_compliment_enable_notifications, 'no' ); ?>><?php echo __( 'No', BP_COMP_TEXTDOMAIN ); ?></option>
 						</select>
 					</td>
 				</tr>

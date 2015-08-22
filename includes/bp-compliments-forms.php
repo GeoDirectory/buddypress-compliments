@@ -55,7 +55,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
                         echo '</ul>';
 
                         ?>
-                        <textarea name="message" maxchar="1000"></textarea>
+                        <textarea placeholder="<?php echo __( 'Type your message here', BP_COMP_TEXTDOMAIN ); ?>" name="message" maxchar="1000"></textarea>
                         <input type="hidden" name="post_id" value="<?php echo $pid; ?>"/>
                         <input type="hidden" name="receiver_id" value="<?php echo $receiver_id; ?>"/>
                         <?php wp_nonce_field( 'handle_compliments_form_data','handle_compliments_nonce' ); ?>
