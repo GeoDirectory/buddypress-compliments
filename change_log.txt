@@ -1,4 +1,4 @@
-v0.0.6
+v0.0.7
 Compliments can be renamed to anything Ex: "Gifts" - ADDED
 
 v0.0.5
