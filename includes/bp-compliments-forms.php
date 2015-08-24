@@ -16,11 +16,14 @@
  * @param int $receiver_id Compliment receiver ID.
  */
 function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
+    if (!$receiver_id && bp_displayed_user_id()) {
+	    $receiver_id = bp_displayed_user_id();
+    }
     ?>
     <div class="comp-modal">
         <div class="comp-modal-content-wrap">
             <div class="comp-modal-title">
-                <h2><?php echo __( 'Choose Your Compliment Type:', BP_COMP_TEXTDOMAIN ); ?></h2>
+                <h2><?php echo sprintf( __( 'Choose Your %s Type:', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ); ?></h2>
             </div>
             <div class="comp-modal-content">
                 <form action="" method="post">

@@ -25,6 +25,8 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
     if (bp_displayed_user_id() == bp_loggedin_user_id()) {
         $bp_compliment_can_see_others_comp = 'yes';
+    } elseif (current_user_can( 'manage_options' )) {
+        $bp_compliment_can_see_others_comp = 'yes';
     }
 
     $page = isset($_GET['cpage']) ? abs((int)$_GET['cpage']) : 1;
@@ -141,13 +143,13 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         if (bp_displayed_user_id() == bp_loggedin_user_id()) {
             ?>
             <div id="message" class="bp-no-compliments info">
-                <p><?php echo __('Aw, you have no compliments yet. To get some try sending compliments to others.', BP_COMP_TEXTDOMAIN); ?></p>
+                <p><?php echo sprintf( __( 'Aw, you have no %1$s yet. To get some try sending %1$s to others.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
             </div>
         <?php
         } else {
             ?>
             <div id="message" class="bp-no-compliments info">
-                <p><?php echo __('Sorry, no compliments just yet.', BP_COMP_TEXTDOMAIN); ?></p>
+                <p><?php echo sprintf( __( 'Sorry, no %1$s just yet.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
             </div>
         <?php
         }

@@ -3,8 +3,8 @@ Contributors: viruthagiri, stiofansisland, paoltaia
 Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
-Tested up to: 4.2.2
-Stable tag: 0.0.1
+Tested up to: 4.3
+Stable tag: 0.0.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,16 +19,21 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * A Compliment button and Compliments tab will appear in each member's profile.
 * When you click the Compliments button, a popup will show up with compliment types
 * Submitted compliments will be visible in user's compliments section.
+* A notification is sent to the compliment receiving member.
+* Compliments are tracked in BuddyPress Activity
+* Members can delete compliments received (option to prevent this available).
+* Compliments are now paginated
+* Compliments can be set as private and visible only to the member receiving them.
 
-We built this plugin especially for Whoop! our upcoming WordPress Directory Theme powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
-
-We decided to release BuddyPress Compliments for free, while we give the final touches to Whoop! so that any BuddyPress users can take advantage of it.
+We built this plugin especially for Whoop! our [WordPress Directory Theme](https://wpgeodirectory.com/themes/wordpress-directory-theme-whoop/ "Whoop! is the latest Social Directory theme for GeoDirectory") powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
 The plugins has been tested with the following themes before release:
 
 Twenty Thirteen, Twenty Fourteen, Twenty Fifteen, GeoDIrectory Framework and Whoop! of course.
 
 Should you find any bug, please report it in the support forum and we will fix it asap!
+
+BuddyPress Compliments is 100% translatable.
 
 == Installation ==
 
@@ -66,10 +71,22 @@ No questions so far, but don't hesitate to ask!
 
 == Changelog ==
 
+= 0.0.7 =
+Compliments can be renamed to anything Ex: Gifts - ADDED
+
+= 0.0.5 =
+404 error while sending compliments - FIXED
+
+= 0.0.4 =
+Members can see other members compliment page? setting - ADDED
+
 = 0.0.3 =
-* Validation added when adding compliment, icon required - FIXED
-* Some strings are not translatable - FIXED
-* Docblocks added to all functions, filters and actions - ADDED
+Docblocks added to all functions, filters and actions - ADDED
+Members can delete compliments received? setting - ADDED
+Number of Compliments to display per page setting - ADDED
+Custom CSS styles setting - ADDED
+Validation added when adding compliment, icon required - FIXED
+Some strings are not translatable - FIXED
 
 = 0.0.2 =
 * Support for bp activity component - ADDED
