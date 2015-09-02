@@ -103,7 +103,7 @@ function compliments_register_activity_actions() {
     bp_activity_set_action(
         $bp->compliments->id,
         'compliment_received',
-        sprintf( __( '%s Received', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Received', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
         'compliments_format_activity_action_compliment_received',
         BP_COMP_PLURAL_NAME,
         array( 'activity' )
@@ -112,7 +112,7 @@ function compliments_register_activity_actions() {
     bp_activity_set_action(
         $bp->compliments->id,
         'compliment_sent',
-        sprintf( __( '%s Sent', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Sent', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
         'compliments_format_activity_action_compliment_sent',
         BP_COMP_PLURAL_NAME,
         array( 'activity' )
@@ -155,9 +155,9 @@ function compliments_format_activity_action_compliment_received( $action, $activ
     }
 
     if ($bp_compliment_can_see_others_comp == 'yes') {
-        $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $compliment_link, $sender_link );
+        $action = sprintf( __( '%1$s has received a %2$s from %3$s', 'bp-compliments' ), $receiver_link, $compliment_link, $sender_link );
     } else {
-        $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, strtolower(BP_COMP_SINGULAR_NAME),  $sender_link );
+        $action = sprintf( __( '%1$s has received a %2$s from %3$s', 'bp-compliments' ), $receiver_link, strtolower(BP_COMP_SINGULAR_NAME),  $sender_link );
     }
 
 
@@ -199,9 +199,9 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
     }
 
     if ($bp_compliment_can_see_others_comp == 'yes') {
-        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, $compliment_link, $receiver_link );
+        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', 'bp-compliments' ), $sender_link, $compliment_link, $receiver_link );
     } else {
-        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, strtolower(BP_COMP_SINGULAR_NAME), $receiver_link );
+        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', 'bp-compliments' ), $sender_link, strtolower(BP_COMP_SINGULAR_NAME), $receiver_link );
     }
 
     /**

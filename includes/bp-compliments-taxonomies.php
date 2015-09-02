@@ -17,8 +17,8 @@ add_action('admin_menu', 'register_compliments_submenu_page');
 function register_compliments_submenu_page() {
     add_submenu_page(
         'bp-compliment-settings',
-        sprintf( __( '%s Types', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
-        sprintf( __( '%s Types', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Types', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Types', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
         'manage_options',
         'edit-tags.php?taxonomy=compliment'
     );
@@ -37,14 +37,14 @@ function create_compliment_taxonomies() {
     $labels = array(
         'name'              => BP_COMP_PLURAL_NAME,
         'singular_name'     => BP_COMP_SINGULAR_NAME,
-        'search_items'      => sprintf( __( 'Search %s', BP_COMP_TEXTDOMAIN ), BP_COMP_PLURAL_NAME ),
-        'all_items'         => sprintf( __( 'All %s', BP_COMP_TEXTDOMAIN ), BP_COMP_PLURAL_NAME ),
-        'parent_item'       => sprintf( __( 'Parent %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
-        'parent_item_colon' => sprintf( __( 'Parent %s:', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
-        'edit_item'         => sprintf( __( 'Edit %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
-        'update_item'       => sprintf( __( 'Update %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
-        'add_new_item'      => sprintf( __( 'Add New %s', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
-        'new_item_name'     => sprintf( __( 'New %s Name', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        'search_items'      => sprintf( __( 'Search %s', 'bp-compliments' ), BP_COMP_PLURAL_NAME ),
+        'all_items'         => sprintf( __( 'All %s', 'bp-compliments' ), BP_COMP_PLURAL_NAME ),
+        'parent_item'       => sprintf( __( 'Parent %s', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
+        'parent_item_colon' => sprintf( __( 'Parent %s:', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
+        'edit_item'         => sprintf( __( 'Edit %s', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
+        'update_item'       => sprintf( __( 'Update %s', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
+        'add_new_item'      => sprintf( __( 'Add New %s', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
+        'new_item_name'     => sprintf( __( 'New %s Name', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
         'menu_name'         => BP_COMP_SINGULAR_NAME,
     );
 
@@ -84,13 +84,13 @@ function compliments_enqueue_admin_js( $hook_suffix ) {
 function compliments_taxonomy_add_new_meta_field() {
     ?>
     <div class="form-field form-required caticon-upload upload">
-        <label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ) ?></label>
+        <label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ) ?></label>
         <img id="comp-icon-preview" class="image_preview" src="" style="display: none;" /><br/>
         <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="text" name="term_meta[compliments_icon]" value=""/>
-        <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , BP_COMP_TEXTDOMAIN ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , BP_COMP_TEXTDOMAIN ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
-        <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
+        <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , 'bp-compliments' ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , 'bp-compliments' ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , 'bp-compliments' ); ?>" />
+        <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , 'bp-compliments' ); ?>" />
         <br/>
-        <p><?php echo __( 'Recommended icon size: 20px x 20px' , BP_COMP_TEXTDOMAIN ); ?></p>
+        <p><?php echo __( 'Recommended icon size: 20px x 20px' , 'bp-compliments' ); ?></p>
     </div>
 <?php
     bp_compliments_taxonomy_highlight_js();
@@ -108,15 +108,15 @@ function compliments_taxonomy_edit_meta_field($term) {
     $t_id = $term->term_id;
     $term_meta = get_option( "taxonomy_$t_id" ); ?>
     <tr class="form-field form-required">
-        <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ) ?></label></th>
+        <th scope="row" valign="top"><label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ) ?></label></th>
         <td>
 		    <span class='caticon-upload upload'>
                 <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="hidden" name="term_meta[compliments_icon]" value="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>"/>
                 <img id="comp-icon-preview" class="image_preview" src="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>" /><br/>
-                <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , BP_COMP_TEXTDOMAIN ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , BP_COMP_TEXTDOMAIN ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
-                <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , BP_COMP_TEXTDOMAIN ); ?>" />
+                <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , 'bp-compliments' ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , 'bp-compliments' ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , 'bp-compliments' ); ?>" />
+                <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , 'bp-compliments' ); ?>" />
                 <br/>
-                <p><?php echo __( 'Recommended icon size: 20px x 20px' , BP_COMP_TEXTDOMAIN ); ?></p>
+                <p><?php echo __( 'Recommended icon size: 20px x 20px' , 'bp-compliments' ); ?></p>
             </span>
         </td>
     </tr>
@@ -162,8 +162,8 @@ add_filter("manage_edit-compliment_columns", 'modify_compliment_columns');
 function modify_compliment_columns($columns) {
     $new_columns = array(
         'cb' => '<input type="checkbox" />',
-        'name' => __('Name', BP_COMP_TEXTDOMAIN),
-        'icon' => __('Icon', BP_COMP_TEXTDOMAIN),
+        'name' => __('Name', 'bp-compliments'),
+        'icon' => __('Icon', 'bp-compliments'),
     );
     return $new_columns;
 }

@@ -23,7 +23,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
     <div class="comp-modal">
         <div class="comp-modal-content-wrap">
             <div class="comp-modal-title">
-                <h2><?php echo sprintf( __( 'Choose Your %s Type:', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ); ?></h2>
+                <h2><?php echo sprintf( __( 'Choose Your %s Type:', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></h2>
             </div>
             <div class="comp-modal-content">
                 <form action="" method="post">
@@ -55,13 +55,13 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
                         echo '</ul>';
 
                         ?>
-                        <textarea placeholder="<?php echo __( 'Type your message here', BP_COMP_TEXTDOMAIN ); ?>" name="message" maxchar="1000"></textarea>
+                        <textarea placeholder="<?php echo __( 'Type your message here', 'bp-compliments' ); ?>" name="message" maxchar="1000"></textarea>
                         <input type="hidden" name="post_id" value="<?php echo $pid; ?>"/>
                         <input type="hidden" name="receiver_id" value="<?php echo $receiver_id; ?>"/>
                         <?php wp_nonce_field( 'handle_compliments_form_data','handle_compliments_nonce' ); ?>
                         <div class="bp-comp-pop-buttons">
-                            <button type="submit" class="comp-submit-btn" name="comp-modal-form" value="submit"><?php echo __( 'Send', BP_COMP_TEXTDOMAIN ); ?></button>
-                            <a class="bp-comp-cancel" href="#"><?php echo __( 'Cancel', BP_COMP_TEXTDOMAIN ); ?></a>
+                            <button type="submit" class="comp-submit-btn" name="comp-modal-form" value="submit"><?php echo __( 'Send', 'bp-compliments' ); ?></button>
+                            <a class="bp-comp-cancel" href="#"><?php echo __( 'Cancel', 'bp-compliments' ); ?></a>
                         </div>
                         <script type="text/javascript">
                             jQuery(document).ready(function() {
