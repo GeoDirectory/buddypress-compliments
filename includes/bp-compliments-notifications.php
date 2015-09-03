@@ -46,7 +46,7 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
             $text = false;
 
             if ( 1 == $total_items ) {
-                $text = sprintf( __( '%s has sent you a %s', BP_COMP_TEXTDOMAIN ), bp_core_get_user_displayname( $item_id ), strtolower(BP_COMP_SINGULAR_NAME) );
+                $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), strtolower(BP_COMP_SINGULAR_NAME) );
                 $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
             }
             break;
@@ -182,12 +182,12 @@ function bp_compliments_new_compliment_email_notification() {
     // Set up and send the message
     $to = $receiver_ud->user_email;
 
-    $subject = '[' . wp_specialchars_decode( bp_get_option( 'blogname' ), ENT_QUOTES ) . '] ' . sprintf( __( '%s has sent you a %s',  BP_COMP_TEXTDOMAIN ), $sender_name, strtolower(BP_COMP_SINGULAR_NAME) );
+    $subject = '[' . wp_specialchars_decode( bp_get_option( 'blogname' ), ENT_QUOTES ) . '] ' . sprintf( __( '%s has sent you a %s',  'bp-compliments' ), $sender_name, strtolower(BP_COMP_SINGULAR_NAME) );
 
     $message = sprintf( __(
         '%s has sent you a %s.
 
-To view %s\'s %s: %s', BP_COMP_TEXTDOMAIN ), $sender_name, strtolower(BP_COMP_SINGULAR_NAME), $sender_name, strtolower(BP_COMP_SINGULAR_NAME), $compliment_link );
+To view %s\'s %s: %s', 'bp-compliments' ), $sender_name, strtolower(BP_COMP_SINGULAR_NAME), $sender_name, strtolower(BP_COMP_SINGULAR_NAME), $compliment_link );
 
     // Add notifications link if settings component is enabled
     if ( bp_is_active( 'settings' ) ) {
@@ -196,7 +196,7 @@ To view %s\'s %s: %s', BP_COMP_TEXTDOMAIN ), $sender_name, strtolower(BP_COMP_SI
 
 ---------------------
 To disable these notifications please log in and go to:
-%s', BP_COMP_TEXTDOMAIN ), $settings_link );
+%s', 'bp-compliments' ), $settings_link );
     }
 
     // Send the message
@@ -275,15 +275,15 @@ function bp_compliments_screen_notification_settings() {
         <tr>
             <th class="icon"></th>
             <th class="title"><?php echo BP_COMP_PLURAL_NAME; ?></th>
-            <th class="yes"><?php _e( 'Yes', BP_COMP_TEXTDOMAIN ) ?></th>
-            <th class="no"><?php _e( 'No', BP_COMP_TEXTDOMAIN )?></th>
+            <th class="yes"><?php _e( 'Yes', 'bp-compliments' ) ?></th>
+            <th class="no"><?php _e( 'No', 'bp-compliments' )?></th>
         </tr>
         </thead>
 
         <tbody>
         <tr>
             <td></td>
-            <td><?php echo sprintf( __( 'A member sends you a %s', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_SINGULAR_NAME)); ?></td>
+            <td><?php echo sprintf( __( 'A member sends you a %s', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME)); ?></td>
             <td class="yes"><input type="radio" name="notifications[notification_on_compliments]" value="yes" <?php checked( $notify, 'yes', true ) ?>/></td>
             <td class="no"><input type="radio" name="notifications[notification_on_compliments]" value="no" <?php checked( $notify, 'no', true ) ?>/></td>
         </tr>

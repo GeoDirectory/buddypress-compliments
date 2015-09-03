@@ -41,7 +41,7 @@ class BP_Compliments_Component extends BP_Component {
 
         parent::start(
             'compliments',
-            __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+            __( 'Compliments', 'bp-compliments' ),
             constant( 'BP_COMPLIMENTS_DIR' ) . '/includes',
             $this->params
         );
@@ -63,6 +63,12 @@ class BP_Compliments_Component extends BP_Component {
      * @package BuddyPress_Compliments
      */
     public function includes( $includes = array() ) {
+        $bp_compliment_enable_activity_value = esc_attr( get_option('bp_compliment_enable_activity'));
+        $bp_compliment_enable_activity = $bp_compliment_enable_activity_value ? $bp_compliment_enable_activity_value : 'yes';
+
+        $bp_compliment_enable_notifications_value = esc_attr( get_option('bp_compliment_enable_notifications'));
+        $bp_compliment_enable_notifications = $bp_compliment_enable_notifications_value ? $bp_compliment_enable_notifications_value : 'yes';
+
         // Include the Class that interact with the custom db table.
         require( $this->path . '/bp-compliments-classes.php' );
         // Functions related to compliment component.
@@ -74,9 +80,13 @@ class BP_Compliments_Component extends BP_Component {
         // Functions related to handling user submitted data and actions.
         require( $this->path . '/bp-compliments-actions.php' );
         // Functions related to notification component.
-        require( $this->path . '/bp-compliments-notifications.php' );
+        if ($bp_compliment_enable_notifications == 'yes') {
+            require( $this->path . '/bp-compliments-notifications.php' );
+        }
         // Functions related to activity component.
-        require( $this->path . '/bp-compliments-activity.php' );
+        if ($bp_compliment_enable_activity == 'yes') {
+            require( $this->path . '/bp-compliments-activity.php' );
+        }
         // Functions related to compliment forms.
         require( $this->path . '/bp-compliments-forms.php' );
         // Functions related to compliment settings.

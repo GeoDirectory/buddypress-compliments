@@ -103,7 +103,7 @@ function compliments_register_activity_actions() {
     bp_activity_set_action(
         $bp->compliments->id,
         'compliment_received',
-        sprintf( __( '%s Received', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Received', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
         'compliments_format_activity_action_compliment_received',
         BP_COMP_PLURAL_NAME,
         array( 'activity' )
@@ -112,7 +112,7 @@ function compliments_register_activity_actions() {
     bp_activity_set_action(
         $bp->compliments->id,
         'compliment_sent',
-        sprintf( __( '%s Sent', BP_COMP_TEXTDOMAIN ), BP_COMP_SINGULAR_NAME ),
+        sprintf( __( '%s Sent', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ),
         'compliments_format_activity_action_compliment_sent',
         BP_COMP_PLURAL_NAME,
         array( 'activity' )
@@ -150,14 +150,14 @@ function compliments_format_activity_action_compliment_received( $action, $activ
     $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
     $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
 
-    if ($bp->loggedin_user->id == $bp->displayed_user->id) {
+    if (bp_is_user() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
         $bp_compliment_can_see_others_comp = 'yes';
     }
 
     if ($bp_compliment_can_see_others_comp == 'yes') {
-        $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, $compliment_link, $sender_link );
+        $action = sprintf( __( '%1$s has received a %2$s from %3$s', 'bp-compliments' ), $receiver_link, $compliment_link, $sender_link );
     } else {
-        $action = sprintf( __( '%1$s has received a %2$s from %3$s', BP_COMP_TEXTDOMAIN ), $receiver_link, strtolower(BP_COMP_SINGULAR_NAME),  $sender_link );
+        $action = sprintf( __( '%1$s has received a %2$s from %3$s', 'bp-compliments' ), $receiver_link, strtolower(BP_COMP_SINGULAR_NAME),  $sender_link );
     }
 
 
@@ -194,14 +194,14 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
     $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
     $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
 
-    if ($bp->loggedin_user->id == $bp->displayed_user->id) {
+    if (bp_is_user() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
         $bp_compliment_can_see_others_comp = 'yes';
     }
 
     if ($bp_compliment_can_see_others_comp == 'yes') {
-        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, $compliment_link, $receiver_link );
+        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', 'bp-compliments' ), $sender_link, $compliment_link, $receiver_link );
     } else {
-        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', BP_COMP_TEXTDOMAIN ), $sender_link, strtolower(BP_COMP_SINGULAR_NAME), $receiver_link );
+        $action = sprintf( __( '%1$s has sent a %2$s to %3$s', 'bp-compliments' ), $sender_link, strtolower(BP_COMP_SINGULAR_NAME), $receiver_link );
     }
 
     /**
@@ -260,3 +260,25 @@ function compliments_delete_activity_for_user( $user_id ) {
     ) );
 }
 add_action('bp_compliments_after_remove_data', 'compliments_delete_activity_for_user');
+
+/**
+ * Compliment activity collapses two filters into one
+ *
+ * @since 0.0.8
+ * @package BuddyPress_Compliments
+ *
+ * @param array $filters Array of filter options for the given context, in the following format: $option_value => $option_name.
+ * @param string $context Context for the filter. 'activity', 'member', 'member_groups', 'group'.
+ *
+ * @return array
+ */
+function compliments_merge_filter( $filters, $context ){
+    if (array_key_exists('compliment_sent', $filters) && array_key_exists('compliment_received', $filters)) {
+        $label = $filters['compliment_sent'];
+        unset($filters['compliment_sent']);
+        unset($filters['compliment_received']);
+        $filters['compliment_sent,compliment_received'] = $label;
+    }
+    return $filters;
+}
+add_filter('bp_get_activity_show_filters_options', 'compliments_merge_filter', 10, 2);

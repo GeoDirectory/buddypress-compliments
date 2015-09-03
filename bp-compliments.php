@@ -28,9 +28,9 @@ define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
 /**
  * BuddyPress compliments names.
  */
-define( 'BP_COMP_SINGULAR_NAME', trim(esc_attr( get_option('bp_compliment_singular_name', __( 'Compliment', BP_COMP_TEXTDOMAIN )))) );
-define( 'BP_COMP_PLURAL_NAME', trim(esc_attr( get_option('bp_compliment_plural_name', __( 'Compliments', BP_COMP_TEXTDOMAIN )))) );
-define( 'BP_COMPLIMENTS_SLUG', strtolower(trim(esc_attr( get_option('bp_compliment_slug', __( 'compliments', BP_COMP_TEXTDOMAIN ))))) );
+define( 'BP_COMP_SINGULAR_NAME', trim(esc_attr( get_option('bp_compliment_singular_name', __( 'Compliment', 'bp-compliments' )))) );
+define( 'BP_COMP_PLURAL_NAME', trim(esc_attr( get_option('bp_compliment_plural_name', __( 'Compliments', 'bp-compliments' )))) );
+define( 'BP_COMPLIMENTS_SLUG', strtolower(trim(esc_attr( get_option('bp_compliment_slug', __( 'compliments', 'bp-compliments' ))))) );
 
 
 /**
@@ -68,7 +68,7 @@ function bp_compliments_init() {
 
     // show admin notice for users on BP 1.2.x
     } else {
-        $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", BP_COMP_TEXTDOMAIN );
+        $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", 'bp-compliments' );
 
         add_action( 'admin_notices', create_function( '', "
 			echo '<div class=\"error\"><p>' . $older_version_notice . '</p></div>';
@@ -136,10 +136,10 @@ function bp_compliments_localization() {
      * @since 0.0.1
      * @package BuddyPress_Compliments
      */
-    $locale = apply_filters('plugin_locale', get_locale(), BP_COMP_TEXTDOMAIN);
+    $locale = apply_filters('plugin_locale', get_locale(), 'bp-compliments');
 
-    load_textdomain(BP_COMP_TEXTDOMAIN, WP_LANG_DIR . '/' . BP_COMP_TEXTDOMAIN . '/' . BP_COMP_TEXTDOMAIN . '-' . $locale . '.mo');
-    load_plugin_textdomain(BP_COMP_TEXTDOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
+    load_textdomain('bp-compliments', WP_LANG_DIR . '/' . 'bp-compliments' . '/' . 'bp-compliments' . '-' . $locale . '.mo');
+    load_plugin_textdomain('bp-compliments', false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
 
 }
 add_action( 'plugins_loaded', 'bp_compliments_localization' );

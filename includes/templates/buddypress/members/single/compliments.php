@@ -85,7 +85,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                 $receiver_url    = bp_core_get_userlink( $comp->receiver_id, false, true );
                                 $compliment_url = $receiver_url . $bp->compliments->id . '/?c_id='.$comp->id.'&action=delete';
                                 ?>
-                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;"><?php echo __('Delete', BP_COMP_TEXTDOMAIN); ?></a>
+                                <a href="<?php echo $compliment_url; ?>" class="button item-button confirm" style="float: right;"><?php echo __('Delete', 'bp-compliments'); ?></a>
                             <?php } ?>
                         </div>
                         <div class="comp-user-msg-wrap">
@@ -117,10 +117,10 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         if (($total > $items_per_page) && !$c_id) { ?>
             <div id="pag-top" class="pagination">
                 <div class="pag-count" id="member-dir-count-top">
-                    <?php echo sprintf(_n('1 of 1', '%1$s to %2$s of %3$s', $total, BP_COMP_TEXTDOMAIN), $start, $end, $total); ?>
+                    <?php echo sprintf(_n('1 of 1', '%1$s to %2$s of %3$s', $total, 'bp-compliments'), $start, $end, $total); ?>
                 </div>
                 <div class="pagination-links">
-                    <span class="bp-comp-pagination-text"><?php echo __('Go to Page', BP_COMP_TEXTDOMAIN) ?></span>
+                    <span class="bp-comp-pagination-text"><?php echo __('Go to Page', 'bp-compliments') ?></span>
                     <?php
                     echo paginate_links(array(
                         'base' => esc_url(add_query_arg('cpage', '%#%')),
@@ -136,20 +136,20 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
     } elseif($bp_compliment_can_see_others_comp == 'no') {
         ?>
         <div id="message" class="bp-no-compliments info">
-            <p><?php echo __('You don\'t have permission to access this page.', BP_COMP_TEXTDOMAIN); ?></p>
+            <p><?php echo __('You don\'t have permission to access this page.', 'bp-compliments'); ?></p>
         </div>
     <?php
     } else {
         if (bp_displayed_user_id() == bp_loggedin_user_id()) {
             ?>
             <div id="message" class="bp-no-compliments info">
-                <p><?php echo sprintf( __( 'Aw, you have no %1$s yet. To get some try sending %1$s to others.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
+                <p><?php echo sprintf( __( 'Aw, you have no %1$s yet. To get some try sending %1$s to others.', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
             </div>
         <?php
         } else {
             ?>
             <div id="message" class="bp-no-compliments info">
-                <p><?php echo sprintf( __( 'Sorry, no %1$s just yet.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
+                <p><?php echo sprintf( __( 'Sorry, no %1$s just yet.', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
             </div>
         <?php
         }
