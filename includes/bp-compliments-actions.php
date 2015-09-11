@@ -48,9 +48,9 @@ function handle_compliments_form_data() {
         $redirect_url = bp_core_get_user_domain($receiver_id);
 
         if ( ! bp_compliments_start_compliment($args)) {
-            bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
+            bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
         } else {
-            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', BP_COMP_TEXTDOMAIN ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ) );
+            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ) );
         }
 
 	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));

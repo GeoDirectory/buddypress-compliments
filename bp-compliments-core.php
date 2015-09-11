@@ -41,7 +41,7 @@ class BP_Compliments_Component extends BP_Component {
 
         parent::start(
             'compliments',
-            __( 'Compliments', BP_COMP_TEXTDOMAIN ),
+            __( 'Compliments', 'bp-compliments' ),
             constant( 'BP_COMPLIMENTS_DIR' ) . '/includes',
             $this->params
         );
