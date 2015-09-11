@@ -5,6 +5,7 @@ Added placeholder text to message textarea - ADDED
 Compliments in activity dropdown filter is ambiguous - FIXED
 Undefined property ID notice - FIXED
 Changed textdomain from defined constant to a string - CHANGED
+Added filters and actions for whoop theme compatibility - ADDED
 
 v0.0.7
 Compliments can be renamed to anything Ex: "Gifts" - ADDED
