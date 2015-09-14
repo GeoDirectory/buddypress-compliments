@@ -98,7 +98,10 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
          */
         return apply_filters( 'bp_compliments_new_compliment_notification', '<a href="' . $link . '">' . $text . '</a>', $total_items, $link, $text, $item_id, $secondary_item_id );
     } else {
-        return false;
+        return apply_filters( 'bp_compliments_new_toolbar_compliment_notification', array(
+            'link' => $link,
+            'text' => $text
+        ), (int) $total_items, $item_id );
     }
 }
 
