@@ -95,12 +95,14 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                     <div class="comp-user-avatar">
                                         <?php
                                         $user = get_user_by('id', $author_id);
-                                        $name = $user->display_name;
-                                        $user_link = bp_core_get_user_domain($author_id);
+                                        $name = apply_filters('bp_compliments_item_user_name', $user->display_name, $user);
+                                        $user_link = apply_filters('bp_compliments_item_user_link', bp_core_get_user_domain($author_id), $author_id);
+                                        $avatar_size = apply_filters('bp_compliments_item_user_avatar_size', 60);
                                         ?>
-                                        <?php echo get_avatar($author_id, 60); ?>
+                                        <?php echo get_avatar($author_id, $avatar_size); ?>
                                         <div class="comp-username">
                                             <a href="<?php echo $user_link; ?>" class="url"><?php echo $name; ?></a>
+                                            <?php do_action('bp_compliments_after_user_name', $author_id); ?>
                                         </div>
                                     </div>
                                 </div>
