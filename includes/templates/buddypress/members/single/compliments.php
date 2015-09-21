@@ -56,7 +56,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         }
     }
 
-    if ($compliments && ($bp_compliment_can_see_others_comp == 'yes')) {
+    if ( ($compliments && $bp_compliment_can_see_others_comp == 'yes') || ( $compliments && is_user_logged_in() && $bp_compliment_can_see_others_comp == 'members_only' )) {
         ?>
         <div class="comp-user-content">
             <ul class="comp-user-ul">

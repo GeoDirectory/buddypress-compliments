@@ -57,9 +57,15 @@ function handle_compliments_form_data() {
 	    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
 	    if ($bp_compliment_can_see_others_comp == 'yes') {
 		    $show_for_displayed_user = true;
-	    } else {
-		    $show_for_displayed_user = false;
-	    }
+	    } elseif ($bp_compliment_can_see_others_comp == 'members_only') {
+            if (is_user_logged_in()) {
+                $show_for_displayed_user = true;
+            } else {
+                $show_for_displayed_user = false;
+            }
+        } else {
+            $show_for_displayed_user = false;
+        }
 
 	    if (current_user_can( 'manage_options' )) {
 		    $show_for_displayed_user = true;
