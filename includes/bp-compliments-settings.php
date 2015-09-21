@@ -72,11 +72,12 @@ function bp_compliments_settings_page() {
 					<td><input type="text" class="widefat" name="bp_compliment_slug" value="<?php echo BP_COMPLIMENTS_SLUG; ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo sprintf( __( 'Members can see other members %s page?', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME) ); ?></th>
+					<th scope="row"><?php echo sprintf( __( 'Who can see other members %s page?', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME) ); ?></th>
 					<td>
 						<select id="bp_compliment_can_see_others_comp" name="bp_compliment_can_see_others_comp">
-							<option value="yes" <?php selected( $bp_compliment_can_see_others_comp, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
-							<option value="no" <?php selected( $bp_compliment_can_see_others_comp, 'no' ); ?>><?php echo __( 'No', 'bp-compliments' ); ?></option>
+							<option value="yes" <?php selected( $bp_compliment_can_see_others_comp, 'yes' ); ?>><?php echo __( 'Anybody', 'bp-compliments' ); ?></option>
+							<option value="no" <?php selected( $bp_compliment_can_see_others_comp, 'no' ); ?>><?php echo __( 'Nobody', 'bp-compliments' ); ?></option>
+							<option value="members_only" <?php selected( $bp_compliment_can_see_others_comp, 'members_only' ); ?>><?php echo __( 'Members Only', 'bp-compliments' ); ?></option>
 						</select>
 					</td>
 				</tr>
