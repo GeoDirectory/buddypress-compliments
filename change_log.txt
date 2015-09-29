@@ -1,3 +1,8 @@
+v1.0.0
+Compliment message uses slug name instead of singular name - FIXED
+Send modal form not showing properly in mobile - FIXED
+
+
 v0.0.9
 Changed textdomain from defined constant to a string - CHANGED
 Added filters and actions for whoop theme compatibility - ADDED

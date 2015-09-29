@@ -50,7 +50,7 @@ function handle_compliments_form_data() {
         if ( ! bp_compliments_start_compliment($args)) {
             bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
         } else {
-            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ) );
+            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
         }
 
 	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
