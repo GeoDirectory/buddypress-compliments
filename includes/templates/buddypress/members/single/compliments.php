@@ -145,13 +145,13 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
         if (bp_displayed_user_id() == bp_loggedin_user_id()) {
             ?>
             <div id="message" class="bp-no-compliments info">
-                <p><?php echo sprintf( __( 'Aw, you have no %1$s yet. To get some try sending %1$s to others.', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
+                <p><?php echo sprintf( __( 'Aw, you have no %1$s yet. To get some try sending %1$s to others.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></p>
             </div>
         <?php
         } else {
             ?>
             <div id="message" class="bp-no-compliments info">
-                <p><?php echo sprintf( __( 'Sorry, no %1$s just yet.', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></p>
+                <p><?php echo sprintf( __( 'Sorry, no %1$s just yet.', 'bp-compliments' ), BP_COMP_PLURAL_NAME ); ?></p>
             </div>
         <?php
         }
