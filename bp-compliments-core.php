@@ -180,6 +180,12 @@ class BP_Compliments_Component extends BP_Component {
         $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
         if ($bp_compliment_can_see_others_comp == 'yes') {
             $show_for_displayed_user = true;
+        } elseif ($bp_compliment_can_see_others_comp == 'members_only') {
+            if (is_user_logged_in()) {
+                $show_for_displayed_user = true;
+            } else {
+                $show_for_displayed_user = false;
+            }
         } else {
             $show_for_displayed_user = false;
         }
@@ -214,16 +220,6 @@ class BP_Compliments_Component extends BP_Component {
      * @package BuddyPress_Compliments
      */
     public function enqueue_scripts() {
-        // Do not enqueue if no user is logged in
-        if ( ! is_user_logged_in() ) {
-            return;
-        }
-
-        // Do not enqueue on multisite if not on multiblog and not on root blog
-        if( ! bp_is_multiblog_mode() && ! bp_is_root_blog() ) {
-            return;
-        }
-
         wp_enqueue_script( 'bp-compliments-js', constant( 'BP_COMPLIMENTS_URL' ) . 'js/bp-compliments.js', array( 'jquery' ) );
         wp_register_style( 'bp-compliments-css', constant( 'BP_COMPLIMENTS_URL' ) . 'css/bp-compliments.css' );
         wp_enqueue_style( 'bp-compliments-css' );

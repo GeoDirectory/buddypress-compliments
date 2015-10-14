@@ -50,16 +50,22 @@ function handle_compliments_form_data() {
         if ( ! bp_compliments_start_compliment($args)) {
             bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
         } else {
-            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ) );
+            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
         }
 
 	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
 	    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
 	    if ($bp_compliment_can_see_others_comp == 'yes') {
 		    $show_for_displayed_user = true;
-	    } else {
-		    $show_for_displayed_user = false;
-	    }
+	    } elseif ($bp_compliment_can_see_others_comp == 'members_only') {
+            if (is_user_logged_in()) {
+                $show_for_displayed_user = true;
+            } else {
+                $show_for_displayed_user = false;
+            }
+        } else {
+            $show_for_displayed_user = false;
+        }
 
 	    if (current_user_can( 'manage_options' )) {
 		    $show_for_displayed_user = true;

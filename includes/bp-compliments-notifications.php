@@ -286,7 +286,7 @@ function bp_compliments_screen_notification_settings() {
         <tbody>
         <tr>
             <td></td>
-            <td><?php echo sprintf( __( 'A member sends you a %s', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME)); ?></td>
+            <td><?php echo sprintf( __( 'A member sends you a %s', 'bp-compliments' ), BP_COMP_SINGULAR_NAME); ?></td>
             <td class="yes"><input type="radio" name="notifications[notification_on_compliments]" value="yes" <?php checked( $notify, 'yes', true ) ?>/></td>
             <td class="no"><input type="radio" name="notifications[notification_on_compliments]" value="no" <?php checked( $notify, 'no', true ) ?>/></td>
         </tr>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyPress Compliments 0.0.8\n"
-"POT-Creation-Date: 2015-09-03 20:38-0000\n"
-"PO-Revision-Date: 2015-09-03 20:38-0000\n"
+"Project-Id-Version: BuddyPress Compliments 1.0.0\n"
+"POT-Creation-Date: 2015-09-29 17:02-0000\n"
+"PO-Revision-Date: 2015-09-29 17:03-0000\n"
 "Last-Translator: \n"
 "Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -54,13 +54,17 @@ msgid "%s Sent"
 msgstr ""
 
 #: includes/bp-compliments-activity.php:158
-#: includes/bp-compliments-activity.php:160
+#: includes/bp-compliments-activity.php:161
+#: includes/bp-compliments-activity.php:163
+#: includes/bp-compliments-activity.php:166
 #, php-format
 msgid "%1$s has received a %2$s from %3$s"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:202
-#: includes/bp-compliments-activity.php:204
+#: includes/bp-compliments-activity.php:208
+#: includes/bp-compliments-activity.php:211
+#: includes/bp-compliments-activity.php:213
+#: includes/bp-compliments-activity.php:216
 #, php-format
 msgid "%1$s has sent a %2$s to %3$s"
 msgstr ""
@@ -83,12 +87,12 @@ msgid "Cancel"
 msgstr ""
 
 #: includes/bp-compliments-notifications.php:49
-#: includes/bp-compliments-notifications.php:185
+#: includes/bp-compliments-notifications.php:188
 #, php-format
 msgid "%s has sent you a %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:188
+#: includes/bp-compliments-notifications.php:191
 #, php-format
 msgid ""
 "%s has sent you a %s.\n"
@@ -96,7 +100,7 @@ msgid ""
 "To view %s's %s: %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:195
+#: includes/bp-compliments-notifications.php:198
 #, php-format
 msgid ""
 "\n"
@@ -106,23 +110,21 @@ msgid ""
 "%s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:278
-#: includes/bp-compliments-settings.php:78
-#: includes/bp-compliments-settings.php:87
-#: includes/bp-compliments-settings.php:96
-#: includes/bp-compliments-settings.php:105
-msgid "Yes"
-msgstr ""
-
-#: includes/bp-compliments-notifications.php:279
-#: includes/bp-compliments-settings.php:79
+#: includes/bp-compliments-notifications.php:281
 #: includes/bp-compliments-settings.php:88
 #: includes/bp-compliments-settings.php:97
 #: includes/bp-compliments-settings.php:106
+msgid "Yes"
+msgstr ""
+
+#: includes/bp-compliments-notifications.php:282
+#: includes/bp-compliments-settings.php:89
+#: includes/bp-compliments-settings.php:98
+#: includes/bp-compliments-settings.php:107
 msgid "No"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:286
+#: includes/bp-compliments-notifications.php:289
 #, php-format
 msgid "A member sends you a %s"
 msgstr ""
@@ -146,30 +148,42 @@ msgstr ""
 
 #: includes/bp-compliments-settings.php:75
 #, php-format
-msgid "Members can see other members %s page?"
+msgid "Who can see other members %s page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:84
+#: includes/bp-compliments-settings.php:78
+msgid "Anybody"
+msgstr ""
+
+#: includes/bp-compliments-settings.php:79
+msgid "Nobody"
+msgstr ""
+
+#: includes/bp-compliments-settings.php:80
+msgid "Members Only"
+msgstr ""
+
+#: includes/bp-compliments-settings.php:85
 #, php-format
 msgid "Members can delete %s received?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:93
+#: includes/bp-compliments-settings.php:94
 #, php-format
 msgid "Enable activity component for %s ?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:102
+#: includes/bp-compliments-settings.php:103
 #, php-format
 msgid "Enable notification component for %s ?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:111
+#: includes/bp-compliments-settings.php:112
 #, php-format
 msgid "Number of %s to display per page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:115
+#: includes/bp-compliments-settings.php:116
 msgid "Custom CSS styles"
 msgstr ""
 
@@ -267,27 +281,27 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:120
+#: includes/templates/buddypress/members/single/compliments.php:122
 #, php-format
 msgid "1 of 1"
 msgid_plural "%1$s to %2$s of %3$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/templates/buddypress/members/single/compliments.php:123
+#: includes/templates/buddypress/members/single/compliments.php:125
 msgid "Go to Page"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:139
+#: includes/templates/buddypress/members/single/compliments.php:141
 msgid "You don't have permission to access this page."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:146
+#: includes/templates/buddypress/members/single/compliments.php:148
 #, php-format
 msgid "Aw, you have no %1$s yet. To get some try sending %1$s to others."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:152
+#: includes/templates/buddypress/members/single/compliments.php:154
 #, php-format
 msgid "Sorry, no %1$s just yet."
 msgstr ""
