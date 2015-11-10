@@ -93,8 +93,10 @@ function delete_single_complement() {
         return;
     }
 
-    if ( bp_displayed_user_id() != bp_loggedin_user_id() ) {
-        return;
+    if (!current_user_can( 'manage_options' )) {
+        if ( bp_displayed_user_id() != bp_loggedin_user_id() ) {
+            return;
+        }
     }
 
     if (!isset($_GET['c_id']) OR !isset($_GET['action']) ) {
@@ -103,6 +105,10 @@ function delete_single_complement() {
 
     $bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
     $bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
+
+    if (current_user_can( 'manage_options' )) {
+        $bp_compliment_can_delete = 'yes';
+    }
 
     if ($bp_compliment_can_delete == 'no') {
         return;

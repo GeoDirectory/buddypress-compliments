@@ -1,5 +1,7 @@
 v1.0.1
 Use singular name instead of slug name - FIXED
+Admin can delete compliments - ADDED
+404 page when deleting compliments - FIXED
 
 v1.0.0
 Compliment message uses slug name instead of singular name - FIXED
