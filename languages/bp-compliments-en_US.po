@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyPress Compliments 0.0.8\n"
-"POT-Creation-Date: 2015-09-26 19:40-0000\n"
-"PO-Revision-Date: 2015-09-26 19:40-0000\n"
+"Project-Id-Version: BuddyPress Compliments 1.0.1\n"
+"POT-Creation-Date: 2015-11-10 15:37-0000\n"
+"PO-Revision-Date: 2015-11-10 15:37-0000\n"
 "Last-Translator: \n"
 "Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -277,31 +277,31 @@ msgstr ""
 msgid "Send %s"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:88
+#: includes/templates/buddypress/members/single/compliments.php:93
 msgid "Delete"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:122
+#: includes/templates/buddypress/members/single/compliments.php:127
 #, php-format
 msgid "1 of 1"
 msgid_plural "%1$s to %2$s of %3$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/templates/buddypress/members/single/compliments.php:125
+#: includes/templates/buddypress/members/single/compliments.php:130
 msgid "Go to Page"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:141
+#: includes/templates/buddypress/members/single/compliments.php:146
 msgid "You don't have permission to access this page."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:148
+#: includes/templates/buddypress/members/single/compliments.php:153
 #, php-format
 msgid "Aw, you have no %1$s yet. To get some try sending %1$s to others."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:154
+#: includes/templates/buddypress/members/single/compliments.php:159
 #, php-format
 msgid "Sorry, no %1$s just yet."
 msgstr ""
