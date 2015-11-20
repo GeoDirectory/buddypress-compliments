@@ -28,6 +28,7 @@ function bp_compliments_register_settings() {
 	register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_activity' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_notifications' );
+	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_categories' );
 	register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
 	register_setting( 'bp-compliment-settings', 'bp_comp_custom_css' );
 }
@@ -51,6 +52,9 @@ function bp_compliments_settings_page() {
 
 			$bp_compliment_enable_notifications_value = esc_attr( get_option('bp_compliment_enable_notifications'));
 			$bp_compliment_enable_notifications = $bp_compliment_enable_notifications_value ? $bp_compliment_enable_notifications_value : 'yes';
+
+			$bp_compliment_enable_categories_value = esc_attr( get_option('bp_compliment_enable_categories'));
+			$bp_compliment_enable_categories = $bp_compliment_enable_categories_value ? $bp_compliment_enable_categories_value : 'no';
 
 			$comp_per_page_value = esc_attr( get_option('bp_comp_per_page'));
 			$comp_per_page = $comp_per_page_value ? (int) $comp_per_page_value : 5;
@@ -105,6 +109,15 @@ function bp_compliments_settings_page() {
 						<select id="bp_compliment_enable_notifications" name="bp_compliment_enable_notifications">
 							<option value="yes" <?php selected( $bp_compliment_enable_notifications, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
 							<option value="no" <?php selected( $bp_compliment_enable_notifications, 'no' ); ?>><?php echo __( 'No', 'bp-compliments' ); ?></option>
+						</select>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php echo sprintf( __( 'Enable categories for %s ?', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></th>
+					<td>
+						<select id="bp_compliment_enable_categories" name="bp_compliment_enable_categories">
+							<option value="yes" <?php selected( $bp_compliment_enable_categories, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
+							<option value="no" <?php selected( $bp_compliment_enable_categories, 'no' ); ?>><?php echo __( 'No', 'bp-compliments' ); ?></option>
 						</select>
 					</td>
 				</tr>
