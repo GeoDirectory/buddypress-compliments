@@ -144,3 +144,13 @@ function bp_compliments_localization() {
 }
 add_action( 'plugins_loaded', 'bp_compliments_localization' );
 
+add_action( 'admin_notices', 'bp_compliments_required_plugins_nag' );
+function bp_compliments_required_plugins_nag() {
+    // Check for BuddyPress
+    $class = "update-nag";
+    $url = 'https://wordpress.org/plugins/buddypress/';
+    $message = sprintf( wp_kses( __( 'BuddyPress Compliments requires <a target="_blank" href="%s">BuddyPress</a> plugin.', 'bp-compliments' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
+    if(!class_exists('BuddyPress')){
+        echo"<div class=\"$class\"> <p>$message</p></div>";
+    }
+}

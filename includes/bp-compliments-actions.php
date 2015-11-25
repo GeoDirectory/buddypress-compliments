@@ -55,7 +55,13 @@ function handle_compliments_form_data() {
 
 	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
 	    $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
-	    if ($bp_compliment_can_see_others_comp == 'yes') {
+
+        if ($bp_compliment_can_see_others_comp == 'members_choice') {
+            $bp_compliment_can_see_your_comp_value = esc_attr( get_user_meta(bp_displayed_user_id(), 'bp_compliment_can_see_your_comp', true));
+            $bp_compliment_can_see_others_comp = $bp_compliment_can_see_your_comp_value ? $bp_compliment_can_see_your_comp_value : 'yes';
+        }
+
+        if ($bp_compliment_can_see_others_comp == 'yes') {
 		    $show_for_displayed_user = true;
 	    } elseif ($bp_compliment_can_see_others_comp == 'members_only') {
             if (is_user_logged_in()) {
