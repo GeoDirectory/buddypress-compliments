@@ -399,3 +399,95 @@ function bp_comp_custom_css() {
   <?php
 }
 add_action( 'wp_head', 'bp_comp_custom_css' );
+
+function bp_comp_delete_category($term, $taxonomy) {
+    if ($taxonomy == 'compliment_category') {
+        $cat_id = $term;
+        $cat_meta = get_option("taxonomy_$cat_id");
+        if ($cat_meta) {
+            foreach ($cat_meta as $icon_id => $value) {
+                $icon_meta = get_option("taxonomy_$icon_id");
+                if ($icon_meta && is_array($icon_meta)) {
+                    $icon_meta['compliments_category'] = '';
+                    update_option("taxonomy_$icon_id", $icon_meta);
+                }
+            }
+        }
+    }
+
+    if ($taxonomy == 'compliment') {
+        $t_id = $term;
+        $term_meta = get_option("taxonomy_$t_id");
+        if ($term_meta) {
+            $cat_id = $term_meta['compliments_category'];
+            if ($cat_id) {
+                $cat_id = (int) $cat_id;
+                $cat_meta = get_option("taxonomy_$cat_id");
+                if ($cat_meta) {
+                    unset($cat_meta[$t_id]);
+                    update_option("taxonomy_$cat_id", $cat_meta);
+                }
+            }
+        }
+    }
+}
+add_action('pre_delete_term', 'bp_comp_delete_category', 10, 2);
+
+add_filter("manage_edit-compliment_category_columns", 'modify_compliment_category_columns');
+/**
+ * Modify compliment category page admin columns.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param array $columns The column array.
+ * @return array Modified column array.
+ */
+function modify_compliment_category_columns($columns) {
+
+    unset($columns['posts']);
+    $columns['item_count'] = __('Count', 'bp-compliments');
+
+    return $columns;
+}
+
+add_filter("manage_compliment_category_custom_column", 'manage_bp_compliment_category_columns', 10, 3);
+/**
+ * Modify compliment category page admin column content.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ *
+ * @param string $out The html output.
+ * @param string $column_name The column name.
+ * @param int $t_id The term ID.
+ * @return string The modified html output.
+ */
+function manage_bp_compliment_category_columns($out, $column_name, $t_id) {
+    $term_meta = get_option( "taxonomy_$t_id" );
+    switch ($column_name) {
+        case 'item_count':
+            if ($term_meta && is_array($term_meta)) {
+                $out .= count($term_meta);
+            } else {
+                $out .= "0";
+            }
+            break;
+
+        default:
+            break;
+    }
+    return $out;
+}
+
+add_action('admin_head', 'hide_bp_comp_category_parent_field');
+function hide_bp_comp_category_parent_field() {
+    ?>
+    <style type="text/css">
+        body.taxonomy-compliment_category #addtag .term-parent-wrap,
+        body.taxonomy-compliment_category #edittag .term-parent-wrap {
+            display: none;
+        }
+    </style>
+    <?php
+}
