@@ -14,8 +14,9 @@
  *
  * @param int $pid The post ID.
  * @param int $receiver_id Compliment receiver ID.
+ * @param int $category_id Compliment category ID.
  */
-function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
+function bp_compliments_modal_form($pid = 0, $receiver_id = 0, $category_id = 0) {
     if (!$receiver_id && bp_displayed_user_id()) {
 	    $receiver_id = bp_displayed_user_id();
     }
@@ -26,12 +27,56 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
                 <h2><?php echo sprintf( __( 'Choose Your %s Type:', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></h2>
             </div>
             <div class="comp-modal-content">
-                <form action="" method="post">
+                <?php
+                $bp_compliment_enable_categories_value = esc_attr( get_option('bp_compliment_enable_categories'));
+                $bp_compliment_enable_categories = $bp_compliment_enable_categories_value ? $bp_compliment_enable_categories_value : 'no';
+
+                if ($bp_compliment_enable_categories == 'yes') {
+                    $cat_args = array(
+                        'orderby' => 'name',
+                        'hide_empty' => 0,
+                    );
+                    $cat_terms = get_terms('compliment_category', $cat_args);
+                    $output = "<ul class='comp-modal-category'>";
+                    $count = 0;
+                    foreach ($cat_terms as $cat_term) {
+                        $count++;
+                        $cat_term_id = $cat_term->term_id;
+                        $cat_term_meta = get_option("taxonomy_$cat_term_id");
+                        if ($cat_term_meta) {
+                            $cat_term_name = $cat_term->name;
+                            if ($count == 1 && !$category_id) {
+                                $output .= "<li class='selected'>";
+                                $category_id = $cat_term_id;
+                            } elseif ($cat_term_id == $category_id) {
+                                $output .= "<li class='selected'>";
+                            } else {
+                                $output .= "<li>";
+                            }
+                            $output .= "<a href='#' class='comp-modal-category-cat' data-catid='" . $cat_term_id . "'>" . $cat_term_name . "</a>";
+                            $output .= "</li>";
+                        }
+                    }
+                    $output .= "</ul>";
+                    echo $output;
+                }
+                ?>
+               <form action="" method="post">
                     <?php
                     $args = array(
                         'hide_empty' => false,
                         'orderby'  => 'id'
                     );
+                    if ($category_id) {
+                        $cat_meta = get_option("taxonomy_$category_id");
+                        if ($cat_meta) {
+                            $cat_ids = array();
+                            foreach ($cat_meta as $id) {
+                                $cat_ids[] = (int) $id;
+                            }
+                            $args['include'] = $cat_ids;
+                        }
+                    }
                     $terms = get_terms( 'compliment', $args );
                     if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
                         echo '<ul class="comp-form-ul">';
@@ -53,7 +98,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
                         <?php
                         }
                         echo '</ul>';
-
+                        $ajax_nonce = wp_create_nonce("bp-compliments-nonce");
                         ?>
                         <textarea placeholder="<?php echo __( 'Type your message here', 'bp-compliments' ); ?>" name="message" maxchar="1000"></textarea>
                         <input type="hidden" name="post_id" value="<?php echo $pid; ?>"/>
@@ -73,9 +118,28 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
                                     container.replaceWith("<div class='comp-modal' style='display: none;'><div class='comp-modal-content-wrap'><div class='comp-modal-title comp-loading-icon'><div class='bp-loading-icon'></div></div></div></div>");
                                     mod_shadow.hide();
                                 });
+                                jQuery('a.comp-modal-category-cat').click(function (e) {
+                                    e.preventDefault();
+                                    var mod_shadow = jQuery('#bp_compliments_modal_shadow');
+                                    var container = jQuery('.comp-modal');
+                                    container.html("<div class='comp-modal-content-wrap'><div class='comp-modal-title comp-loading-icon'><div class='bp-loading-icon'></div></div></div>");
+                                    var category_id = jQuery(this).data('catid');
+                                    mod_shadow.show();
+                                    var data = {
+                                        'action': 'bp_compliments_modal_ajax',
+                                        'bp_compliments_nonce': '<?php echo $ajax_nonce; ?>',
+                                        'category_id': category_id
+                                    };
+
+                                    jQuery.post('<?php echo admin_url('admin-ajax.php'); ?>', data, function (response) {
+                                        container.replaceWith(response);
+                                    });
+                                });
                             });
                         </script>
                     <?php
+                    } else {
+                        echo __( 'No compliments found.', 'bp-compliments' );
                     }
                     ?>
                 </form>
@@ -94,7 +158,14 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0) {
 function bp_compliments_modal_ajax()
 {
     check_ajax_referer('bp-compliments-nonce', 'bp_compliments_nonce');
-    bp_compliments_modal_form();
+
+    if (isset($_POST['category_id'])) {
+        $category_id = (int) strip_tags(esc_sql($_POST['category_id']));
+        bp_compliments_modal_form(0, 0, $category_id);
+    } else {
+        bp_compliments_modal_form();
+    }
+
     wp_die();
 }
 
