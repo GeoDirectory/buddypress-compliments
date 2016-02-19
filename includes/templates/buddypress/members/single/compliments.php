@@ -118,7 +118,7 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                     </div>
                                 </div>
                                 <?php
-                                echo stripcslashes($comp->message); ?>
+                                echo make_clickable(apply_filters('the_content', $comp->message)); ?>
                             </div>
                         </div>
                     </li>
