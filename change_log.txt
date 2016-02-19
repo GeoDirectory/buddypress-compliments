@@ -1,5 +1,4 @@
 v1.0.2
-Category support added for compliments - ADDED
 Compliment user settings page - ADDED
 
 v1.0.1
