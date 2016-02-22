@@ -1,6 +1,7 @@
 v1.0.2
-Category support added for compliments - ADDED
 Compliment user settings page - ADDED
+Linebreaks are removed on compliment messages - FIXED
+Compliments message links are clickable - ADDED
 
 v1.0.1
 Use singular name instead of slug name - FIXED
