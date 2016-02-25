@@ -63,10 +63,7 @@ function bp_compliments_load_template_filter( $found_template, $templates ) {
         $found_template = locate_template( 'members/single/plugins.php', false, false );
 
         // add our hook to inject content into BP
-        // note the new template name for our template part
-        add_action( 'bp_template_content', create_function( '', "
-			bp_get_template_part( 'members/single/compliments' );
-		" ) );
+        add_action( 'bp_template_content', 'bp_compliments_single_compliments_content' );
     }
 
     /**
