@@ -4,11 +4,11 @@ Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
 Tested up to: 4.3
-Stable tag: 0.0.7
+Stable tag: 1.0.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Inspired by Yelp compliments system BuddyPress Compliments is a BuddyPress addon that allows members to compliment each other. 
+Inspired by Yelp compliments system BuddyPress Compliments is a BuddyPress addon that allows members to send each other compliments or eGifts. 
 
 == Description ==
 
@@ -19,11 +19,12 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * A Compliment button and Compliments tab will appear in each member's profile.
 * When you click the Compliments button, a popup will show up with compliment types
 * Submitted compliments will be visible in user's compliments section.
-* A notification is sent to the compliment receiving member.
-* Compliments are tracked in BuddyPress Activity
+* Compliments can be set as private and visible only to the member receiving them.
+* A notification is optioonally sent to the compliment receiving member.
+* Compliments can optionally be tracked in BuddyPress Activity
 * Members can delete compliments received (option to prevent this available).
 * Compliments are now paginated
-* Compliments can be set as private and visible only to the member receiving them.
+* Compliments can be renamed to anything Ex: "Gifts"
 
 We built this plugin especially for Whoop! our [WordPress Directory Theme](https://wpgeodirectory.com/themes/wordpress-directory-theme-whoop/ "Whoop! is the latest Social Directory theme for GeoDirectory") powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
@@ -70,6 +71,36 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+
+= 1.0.2 =
+Compliment user settings page - ADDED
+Linebreaks are removed on compliment messages - FIXED
+Compliments message links are clickable - ADDED
+
+= 1.0.1 =
+Admin can delete compliments - ADDED
+Use singular name instead of slug name - FIXED
+404 page when deleting compliments - FIXED
+
+= 1.0.0 =
+Compliment message uses slug name instead of singular name - FIXED
+Send modal form not showing properly in mobile - FIXED
+Plugin out of BETA
+
+= 0.0.9 =
+Added support for member only compliment display - ADDED
+Added filters and actions for whoop theme compatibility - ADDED
+Changed textdomain from defined constant to a string - CHANGED
+Notification not showing properly - FIXED
+
+
+= 0.0.8 =
+Option added to enable/disable activity component - ADDED
+Option added to enable/disable notifications component - ADDED
+Added placeholder text to message textarea - ADDED
+Changed textdomain from defined constant to a string - CHANGED
+Compliments in activity dropdown filter is ambiguous - FIXED
+Undefined property ID notice - FIXED
 
 = 0.0.7 =
 Compliments can be renamed to anything Ex: Gifts - ADDED
