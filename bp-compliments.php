@@ -68,12 +68,8 @@ function bp_compliments_init() {
 
     // show admin notice for users on BP 1.2.x
     } else {
-        $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", 'bp-compliments' );
-
-        add_action( 'admin_notices', create_function( '', "
-			echo '<div class=\"error\"><p>' . $older_version_notice . '</p></div>';
-		" ) );
-
+        add_action( 'admin_notices', 'bp_compliments_older_version_notice' );
+       
         return;
     }
 }
@@ -105,7 +101,7 @@ function bp_compliments_activate() {
              */
             $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
 
-        $sql[] = "CREATE TABLE IF NOT EXISTS {$table_prefix}bp_compliments (
+        $sql = "CREATE TABLE {$table_prefix}bp_compliments (
 			id bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			term_id int(10) NOT NULL,
 			post_id int(10) NULL DEFAULT NULL,
@@ -153,4 +149,10 @@ function bp_compliments_required_plugins_nag() {
     if(!class_exists('BuddyPress')){
         echo"<div class=\"$class\"> <p>$message</p></div>";
     }
+}
+
+function bp_compliments_older_version_notice() {
+    $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", 'bp-compliments' );
+    
+    echo '<div class="error"><p>' . $older_version_notice . '</p></div>';
 }

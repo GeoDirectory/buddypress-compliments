@@ -2,6 +2,7 @@ v1.0.2
 Compliment user settings page - ADDED
 Linebreaks are removed on compliment messages - FIXED
 Compliments message links are clickable - ADDED
+Security issues fixed - SECURITY
 
 v1.0.1
 Use singular name instead of slug name - FIXED
