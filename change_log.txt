@@ -1,4 +1,4 @@
-v1.0.3
+v1.0.4
 Compliment user settings page - ADDED
 Linebreaks are removed on compliment messages - FIXED
 Compliments message links are clickable - ADDED
