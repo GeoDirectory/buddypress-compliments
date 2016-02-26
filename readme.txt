@@ -4,7 +4,7 @@ Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
 Tested up to: 4.3
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -72,7 +72,7 @@ No questions so far, but don't hesitate to ask!
 
 == Changelog ==
 
-= 1.0.2 =
+= 1.0.3 =
 Compliment user settings page - ADDED
 Linebreaks are removed on compliment messages - FIXED
 Compliments message links are clickable - ADDED
