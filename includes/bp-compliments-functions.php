@@ -151,6 +151,17 @@ function bp_compliments_remove_data( $user_id ) {
      */
     do_action( 'bp_compliments_after_remove_data', $user_id );
 }
+
+/**
+ * Inject buddypress compliments content into BP.
+ *
+ * @since 0.0.1
+ * @package BuddyPress_Compliments
+ */
+function bp_compliments_single_compliments_content() {
+    bp_get_template_part( 'members/single/compliments' ); // note the new template name for our template part.
+}
+
 add_action( 'wpmu_delete_user',	'bp_compliments_remove_data' );
 add_action( 'delete_user',	'bp_compliments_remove_data' );
 add_action( 'make_spam_user',	'bp_compliments_remove_data' );
