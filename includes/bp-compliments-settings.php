@@ -72,7 +72,7 @@ function bp_compliments_settings_page() {
 					<td><input type="text" class="widefat" name="bp_compliment_slug" value="<?php echo BP_COMPLIMENTS_SLUG; ?>" /></td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo sprintf( __( 'Who can see other members %s page?', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME) ); ?></th>
+					<th scope="row"><?php echo sprintf( __( 'Who can see other members %s page?', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></th>
 					<td>
 						<select id="bp_compliment_can_see_others_comp" name="bp_compliment_can_see_others_comp">
 							<option value="yes" <?php selected( $bp_compliment_can_see_others_comp, 'yes' ); ?>><?php echo __( 'Anybody', 'bp-compliments' ); ?></option>
@@ -83,7 +83,7 @@ function bp_compliments_settings_page() {
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo sprintf( __( 'Members can delete %s received?', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></th>
+					<th scope="row"><?php echo sprintf( __( 'Members can delete %s received?', 'bp-compliments' ), BP_COMP_PLURAL_NAME ); ?></th>
 					<td>
 						<select id="bp_compliment_can_delete" name="bp_compliment_can_delete">
 							<option value="yes" <?php selected( $bp_compliment_can_delete, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
@@ -92,7 +92,7 @@ function bp_compliments_settings_page() {
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo sprintf( __( 'Enable activity component for %s ?', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></th>
+					<th scope="row"><?php echo sprintf( __( 'Enable activity component for %s ?', 'bp-compliments' ), BP_COMP_PLURAL_NAME ); ?></th>
 					<td>
 						<select id="bp_compliment_enable_activity" name="bp_compliment_enable_activity">
 							<option value="yes" <?php selected( $bp_compliment_enable_activity, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
@@ -101,7 +101,7 @@ function bp_compliments_settings_page() {
 					</td>
 				</tr>
 				<tr valign="top">
-					<th scope="row"><?php echo sprintf( __( 'Enable notification component for %s ?', 'bp-compliments' ), strtolower(BP_COMP_PLURAL_NAME) ); ?></th>
+					<th scope="row"><?php echo sprintf( __( 'Enable notification component for %s ?', 'bp-compliments' ), BP_COMP_PLURAL_NAME ); ?></th>
 					<td>
 						<select id="bp_compliment_enable_notifications" name="bp_compliment_enable_notifications">
 							<option value="yes" <?php selected( $bp_compliment_enable_notifications, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
