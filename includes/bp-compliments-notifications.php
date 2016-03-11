@@ -46,7 +46,7 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
             $text = false;
 
             if ( 1 == $total_items ) {
-                $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), strtolower(BP_COMP_SINGULAR_NAME) );
+                $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), BP_COMP_SINGULAR_NAME );
                 $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
             }
             break;
