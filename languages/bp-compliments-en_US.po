@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyPress Compliments 1.0.3\n"
-"POT-Creation-Date: 2016-02-25 14:58-0000\n"
-"PO-Revision-Date: 2016-02-25 14:58-0000\n"
+"Project-Id-Version: BuddyPress Compliments 1.0.5\n"
+"POT-Creation-Date: 2016-03-11 11:11-0000\n"
+"PO-Revision-Date: 2016-03-11 11:11-0000\n"
 "Last-Translator: \n"
 "Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -99,12 +99,12 @@ msgid "No compliments found."
 msgstr ""
 
 #: includes/bp-compliments-notifications.php:49
-#: includes/bp-compliments-notifications.php:188
+#: includes/bp-compliments-notifications.php:178
 #, php-format
 msgid "%s has sent you a %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:191
+#: includes/bp-compliments-notifications.php:181
 #, php-format
 msgid ""
 "%s has sent you a %s.\n"
@@ -112,7 +112,7 @@ msgid ""
 "To view %s's %s: %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:198
+#: includes/bp-compliments-notifications.php:188
 #, php-format
 msgid ""
 "\n"
@@ -122,21 +122,21 @@ msgid ""
 "%s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:281
+#: includes/bp-compliments-notifications.php:271
 #: includes/bp-compliments-settings.php:89
 #: includes/bp-compliments-settings.php:98
 #: includes/bp-compliments-settings.php:107
 msgid "Yes"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:282
+#: includes/bp-compliments-notifications.php:272
 #: includes/bp-compliments-settings.php:90
 #: includes/bp-compliments-settings.php:99
 #: includes/bp-compliments-settings.php:108
 msgid "No"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:289
+#: includes/bp-compliments-notifications.php:279
 #, php-format
 msgid "A member sends you a %s"
 msgstr ""
@@ -316,27 +316,27 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:133
+#: includes/templates/buddypress/members/single/compliments.php:134
 #, php-format
 msgid "1 of 1"
 msgid_plural "%1$s to %2$s of %3$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/templates/buddypress/members/single/compliments.php:136
+#: includes/templates/buddypress/members/single/compliments.php:137
 msgid "Go to Page"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:152
+#: includes/templates/buddypress/members/single/compliments.php:153
 msgid "You don't have permission to access this page."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:159
+#: includes/templates/buddypress/members/single/compliments.php:160
 #, php-format
 msgid "Aw, you have no %1$s yet. To get some try sending %1$s to others."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:165
+#: includes/templates/buddypress/members/single/compliments.php:166
 #, php-format
 msgid "Sorry, no %1$s just yet."
 msgstr ""
