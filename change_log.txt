@@ -1,3 +1,7 @@
+v1.0.5
+Email notifications not working - FIXED
+Compliment line break and clickable support removed. Use filter to override - CHANGED
+
 v1.0.4
 Compliment user settings page - ADDED
 Linebreaks are removed on compliment messages - FIXED

@@ -2,24 +2,28 @@
 /**
  * This is the main BuddyPress Compliments plugin file, here we declare and call the important stuff
  *
- * @since 0.0.1
- * @package BuddyPress_Compliments
+ * @package     BuddyPress_Compliments
+ * @copyright   2016 AyeCode Ltd
+ * @license     GPL-2.0+
+ *
+ * @wordpress-plugin
+ * Plugin Name: BuddyPress Compliments
+ * Plugin URI: http://wpgeodirectory.com/
+ * Description: Compliments module for BuddyPress.
+ * Version: 1.0.5
+ * Author: GeoDirectory
+ * Author URI: http://wpgeodirectory.com
+ * Text Domain: bp-compliments
+ * Domain Path: /languages
+ * Requires at least: 3.1
+ * Tested up to: 4.4
  */
-
-/*
-Plugin Name: BuddyPress Compliments
-Plugin URI: http://wpgeodirectory.com/
-Description: Compliments module for BuddyPress.
-Version: 1.0.4
-Author: GeoDirectory
-Author URI: http://wpgeodirectory.com
-*/
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // Define the plugin version.
-define( 'BP_COMPLIMENTS_VER', '1.0.4' );
+define( 'BP_COMPLIMENTS_VER', '1.0.5' );
 
 /**
  * BuddyPress compliments text domain.

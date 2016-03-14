@@ -1,10 +1,10 @@
 === BuddyPress Compliments ===
 Contributors: viruthagiri, stiofansisland, paoltaia
 Donate link: http://wpgeodirectory.com/
-Tags: buddypress, buddypress compliments, wordpress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
+Tags: buddypress, buddypress compliments, WordPress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
-Tested up to: 4.3
-Stable tag: 1.0.4
+Tested up to: 4.4
+Stable tag: 1.0.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,7 +20,7 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * When you click the Compliments button, a popup will show up with compliment types
 * Submitted compliments will be visible in user's compliments section.
 * Compliments can be set as private and visible only to the member receiving them.
-* A notification is optioonally sent to the compliment receiving member.
+* A notification is optionally sent to the compliment receiving member.
 * Compliments can optionally be tracked in BuddyPress Activity
 * Members can delete compliments received (option to prevent this available).
 * Compliments are now paginated
@@ -71,6 +71,10 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+
+= 1.0.5 =
+Email notifications not working - FIXED
+Compliment line break and clickable support removed. Use filter to override - CHANGED
 
 = 1.0.4 =
 Compliment user settings page - ADDED

@@ -118,7 +118,8 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                     </div>
                                 </div>
                                 <?php
-                                echo make_clickable(apply_filters('the_content', $comp->message)); ?>
+                                $comp_message = apply_filters('bp_comp_message', $comp->message);
+                                echo $comp_message; ?>
                             </div>
                         </div>
                     </li>

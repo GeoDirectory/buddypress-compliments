@@ -46,7 +46,7 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
             $text = false;
 
             if ( 1 == $total_items ) {
-                $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), strtolower(BP_COMP_SINGULAR_NAME) );
+                $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), BP_COMP_SINGULAR_NAME );
                 $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
             }
             break;
@@ -151,10 +151,11 @@ add_action( 'bp_compliments_start_compliment', 'bp_compliments_notifications_add
  * @since 0.0.2
  * @package BuddyPress_Compliments
  *
+ * @param array $args Sender and Receiver user ID.
  * @return bool
  */
-function bp_compliments_new_compliment_email_notification() {
-    $args = '';
+function bp_compliments_new_compliment_email_notification($args = array()) {
+//    $args = '';
 
     $defaults = array(
         'receiver_id'   => bp_displayed_user_id(),
@@ -165,17 +166,6 @@ function bp_compliments_new_compliment_email_notification() {
 
     if ( 'no' == bp_get_user_meta( (int) $r['receiver_id'], 'notification_on_compliments', true ) )
         return false;
-
-    // Check to see if this receiver has already been notified of this sender before
-    $has_notified = bp_get_user_meta( $r['sender_id'], 'bp_compliments_has_notified', true );
-
-    // Already notified so don't send another email
-    if ( in_array( $r['receiver_id'], (array) $has_notified ) )
-        return false;
-
-    // Not been notified before, update usermeta and continue to mail
-    $has_notified[] = $r['receiver_id'];
-    bp_update_user_meta( $r['sender_id'], 'bp_compliments_has_notified', $has_notified );
 
     $sender_name = bp_core_get_user_displayname( $r['sender_id'] );
     $compliment_link = bp_core_get_user_domain( $r['receiver_id'] ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$r['sender_id'];
