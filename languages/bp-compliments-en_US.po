@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyPress Compliments 1.0.5\n"
-"POT-Creation-Date: 2016-03-11 11:11-0000\n"
-"PO-Revision-Date: 2016-03-11 11:11-0000\n"
+"Project-Id-Version: BuddyPress Compliments 1.0.6\n"
+"POT-Creation-Date: 2016-03-26 14:32-0000\n"
+"PO-Revision-Date: 2016-03-26 14:32-0000\n"
 "Last-Translator: \n"
 "Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
@@ -15,27 +15,27 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bp-compliments-core.php:44 bp-compliments.php:32
+#: bp-compliments-core.php:44 bp-compliments.php:36
 #: includes/bp-compliments-settings.php:154
 msgid "Compliments"
 msgstr ""
 
-#: bp-compliments.php:31
+#: bp-compliments.php:35
 msgid "Compliment"
 msgstr ""
 
-#: bp-compliments.php:33
+#: bp-compliments.php:37
 msgid "compliments"
 msgstr ""
 
-#: bp-compliments.php:148
+#: bp-compliments.php:152
 #, php-format
 msgid ""
 "BuddyPress Compliments requires <a target=\"_blank\" href=\"%s\">BuddyPress</"
 "a> plugin."
 msgstr ""
 
-#: bp-compliments.php:155
+#: bp-compliments.php:159
 msgid "Hey! BP Compliments requires BuddyPress 1.5 or higher."
 msgstr ""
 
@@ -122,21 +122,21 @@ msgid ""
 "%s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:271
+#: includes/bp-compliments-notifications.php:305
 #: includes/bp-compliments-settings.php:89
 #: includes/bp-compliments-settings.php:98
 #: includes/bp-compliments-settings.php:107
 msgid "Yes"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:272
+#: includes/bp-compliments-notifications.php:306
 #: includes/bp-compliments-settings.php:90
 #: includes/bp-compliments-settings.php:99
 #: includes/bp-compliments-settings.php:108
 msgid "No"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:279
+#: includes/bp-compliments-notifications.php:313
 #, php-format
 msgid "A member sends you a %s"
 msgstr ""
