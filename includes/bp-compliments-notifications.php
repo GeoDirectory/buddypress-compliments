@@ -192,6 +192,40 @@ To disable these notifications please log in and go to:
 %s', 'bp-compliments' ), $settings_link );
     }
 
+    // check for GeoDirectory plugin settings first
+    if (function_exists('geodir_sendEmail')) {
+        $sitefromEmail = get_option('site_email');
+        $sitefromEmailName = get_site_emailName();
+    } else {
+        $sitefromEmail = get_option( 'admin_email' );
+        $sitefromEmailName = stripslashes(get_option('blogname'));
+    }
+
+
+    /**
+     * Filters the notification from email.
+     *
+     * @since 1.0.6
+     * @package BuddyPress_Compliments
+     *
+     * @param string $sitefromEmail Notification from email.
+     */
+    $sitefromEmail      = apply_filters( 'bp_compliments_notification_from_email', $sitefromEmail );
+
+    /**
+     * Filters the notification from name.
+     *
+     * @since 1.0.6
+     * @package BuddyPress_Compliments
+     *
+     * @param string $sitefromEmail Notification from name.
+     */
+    $sitefromEmailName      = apply_filters( 'bp_compliments_notification_from_name', $sitefromEmailName );
+
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+    $headers .= 'From: ' . $sitefromEmailName . ' <' . $sitefromEmail . '>' . "\r\n";
+
     // Send the message
 
     /**
@@ -224,7 +258,7 @@ To disable these notifications please log in and go to:
      * @param string $compliment_link Compliment Link.
      */
     $message = apply_filters( 'bp_compliments_notification_message', $message, $sender_name, $compliment_link );
-    wp_mail( $to, $subject, $message );
+    wp_mail( $to, $subject, $message, $headers );
 }
 
 /**

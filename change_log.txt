@@ -1,3 +1,6 @@
+v1.0.6
+Notification incorrect from email - FIXED
+
 v1.0.5
 Email notifications not working - FIXED
 Compliment line break and clickable support removed. Use filter to override - CHANGED
