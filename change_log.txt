@@ -1,3 +1,7 @@
+v1.0.7
+Send compliment button can be displayed in /members page - ADDED
+PHP undefined notices in wordpress admin - FIXED
+
 v1.0.6
 Notification incorrect from email - FIXED
 

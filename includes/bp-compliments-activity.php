@@ -150,14 +150,19 @@ function compliments_format_activity_action_compliment_received( $action, $activ
     $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
     $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
 
-    if ($bp_compliment_can_see_others_comp == 'members_choice') {
-        $bp_compliment_can_see_your_comp_value = esc_attr( get_user_meta($bp->displayed_user->id, 'bp_compliment_can_see_your_comp', true));
-        $bp_compliment_can_see_others_comp = $bp_compliment_can_see_your_comp_value ? $bp_compliment_can_see_your_comp_value : 'yes';
+    if (current_user_can('manage_options')) {
+        $bp_compliment_can_see_others_comp = 'yes';
+    } else {
+        if ($bp_compliment_can_see_others_comp == 'members_choice') {
+            $bp_compliment_can_see_your_comp_value = esc_attr( get_user_meta($bp->displayed_user->id, 'bp_compliment_can_see_your_comp', true));
+            $bp_compliment_can_see_others_comp = $bp_compliment_can_see_your_comp_value ? $bp_compliment_can_see_your_comp_value : 'yes';
+        }
+
+        if (bp_is_user() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
+            $bp_compliment_can_see_others_comp = 'yes';
+        }
     }
 
-    if (bp_is_user() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
-        $bp_compliment_can_see_others_comp = 'yes';
-    }
 
     if ($bp_compliment_can_see_others_comp == 'yes') {
         $action = sprintf( __( '%1$s has received a %2$s from %3$s', 'bp-compliments' ), $receiver_link, $compliment_link, $sender_link );
@@ -205,14 +210,20 @@ function compliments_format_activity_action_compliment_sent( $action, $activity 
     $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
     $bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
 
-    if ($bp_compliment_can_see_others_comp == 'members_choice') {
-        $bp_compliment_can_see_your_comp_value = esc_attr( get_user_meta($bp->displayed_user->id, 'bp_compliment_can_see_your_comp', true));
-        $bp_compliment_can_see_others_comp = $bp_compliment_can_see_your_comp_value ? $bp_compliment_can_see_your_comp_value : 'yes';
+
+    if (current_user_can('manage_options')) {
+        $bp_compliment_can_see_others_comp = 'yes';
+    } else {
+        if ($bp_compliment_can_see_others_comp == 'members_choice') {
+            $bp_compliment_can_see_your_comp_value = esc_attr( get_user_meta($bp->displayed_user->id, 'bp_compliment_can_see_your_comp', true));
+            $bp_compliment_can_see_others_comp = $bp_compliment_can_see_your_comp_value ? $bp_compliment_can_see_your_comp_value : 'yes';
+        }
+
+        if (bp_is_user() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
+            $bp_compliment_can_see_others_comp = 'yes';
+        }
     }
 
-    if (bp_is_user() && ($bp->loggedin_user->id == $bp->displayed_user->id)) {
-        $bp_compliment_can_see_others_comp = 'yes';
-    }
 
     if ($bp_compliment_can_see_others_comp == 'yes') {
         $action = sprintf( __( '%1$s has sent a %2$s to %3$s', 'bp-compliments' ), $sender_link, $compliment_link, $receiver_link );

@@ -16,7 +16,7 @@
  * @param int $receiver_id Compliment receiver ID.
  */
 function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
-    if (!$receiver_id && bp_displayed_user_id()) {
+    if (!$receiver_id) {
 	    $receiver_id = bp_displayed_user_id();
     }
     ?>
@@ -95,7 +95,18 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
 function bp_compliments_modal_ajax()
 {
     check_ajax_referer('bp-compliments-nonce', 'bp_compliments_nonce');
-    bp_compliments_modal_form();
+
+    //Get the receiver id
+    $btn_id = strip_tags($_POST["btn_id"]);
+    if ($btn_id && (strpos($btn_id, '-') !== false)) {
+        $btn_id = explode("-", $btn_id);
+        $btn_id = (int) $btn_id[1];
+    }
+
+    if (empty($btn_id)) {
+        $btn_id = 0;
+    }
+    bp_compliments_modal_form(0, $btn_id);
 
     wp_die();
 }
@@ -112,9 +123,14 @@ add_action('wp_footer', 'bp_compliments_modal_init');
  * @package BuddyPress_Compliments
  */
 function bp_compliments_modal_init() {
-    if (!bp_is_user() || !is_user_logged_in()){
+    if (!is_user_logged_in()){
         return;
     }
+
+    if (!bp_is_user() && !bp_is_directory()){
+        return;
+    }
+
     $ajax_nonce = wp_create_nonce("bp-compliments-nonce");
     ?>
     <div id="bp_compliments_modal_shadow" style="display: none;"></div>
@@ -131,11 +147,13 @@ function bp_compliments_modal_init() {
                 e.preventDefault();
                 var mod_shadow = jQuery('#bp_compliments_modal_shadow');
                 var container = jQuery('.comp-modal');
+                var btn_id = jQuery(this).attr('id');
                 mod_shadow.show();
                 container.show();
                 var data = {
                     'action': 'bp_compliments_modal_ajax',
-                    'bp_compliments_nonce': '<?php echo $ajax_nonce; ?>'
+                    'bp_compliments_nonce': '<?php echo $ajax_nonce; ?>',
+                    'btn_id': btn_id
                 };
 
                 jQuery.post('<?php echo admin_url('admin-ajax.php'); ?>', data, function (response) {
