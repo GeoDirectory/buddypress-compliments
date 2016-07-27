@@ -188,3 +188,23 @@ function bp_compliments_get_compliments( $args = '' ) {
      */
     return apply_filters( 'bp_compliments_get_compliments', BP_Compliments::get_compliments( $r['user_id'], $r['offset'], $r['limit'], $r['c_id'] ) );
 }
+
+/**
+ * Add compliment button to the members page.
+ *
+ * @since 0.0.7
+ * @package BuddyPress_Compliments
+ */
+function bp_compliments_add_members_compliment_button() {
+    $bp_compliment_member_dir_btn_value = esc_attr( get_option('bp_compliment_member_dir_btn'));
+    $bp_compliment_member_dir_btn = $bp_compliment_member_dir_btn_value ? $bp_compliment_member_dir_btn_value : 'no';
+
+    if ($bp_compliment_member_dir_btn == 'yes') {
+        $args = array(
+            'receiver_id' => bp_get_member_user_id(),
+            'sender_id'   => bp_loggedin_user_id()
+        );
+        bp_compliments_add_compliment_button($args);
+    }
+}
+add_action( 'bp_directory_members_actions', 'bp_compliments_add_members_compliment_button' );

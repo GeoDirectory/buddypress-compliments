@@ -25,6 +25,7 @@ function bp_compliments_register_settings() {
 	register_setting( 'bp-compliment-settings', 'bp_compliment_plural_name' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_slug' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_can_see_others_comp' );
+	register_setting( 'bp-compliment-settings', 'bp_compliment_member_dir_btn' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_can_delete' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_activity' );
 	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_notifications' );
@@ -42,6 +43,9 @@ function bp_compliments_settings_page() {
 
 			$bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
 			$bp_compliment_can_see_others_comp = $bp_compliment_can_see_others_comp_value ? $bp_compliment_can_see_others_comp_value : 'yes';
+
+			$bp_compliment_member_dir_btn_value = esc_attr( get_option('bp_compliment_member_dir_btn'));
+			$bp_compliment_member_dir_btn = $bp_compliment_member_dir_btn_value ? $bp_compliment_member_dir_btn_value : 'no';
 
 			$bp_compliment_can_delete_value = esc_attr( get_option('bp_compliment_can_delete'));
 			$bp_compliment_can_delete = $bp_compliment_can_delete_value ? $bp_compliment_can_delete_value : 'yes';
@@ -79,6 +83,15 @@ function bp_compliments_settings_page() {
 							<option value="no" <?php selected( $bp_compliment_can_see_others_comp, 'no' ); ?>><?php echo __( 'Nobody', 'bp-compliments' ); ?></option>
 							<option value="members_only" <?php selected( $bp_compliment_can_see_others_comp, 'members_only' ); ?>><?php echo __( 'Members Only', 'bp-compliments' ); ?></option>
 							<option value="members_choice" <?php selected( $bp_compliment_can_see_others_comp, 'members_choice' ); ?>><?php echo __( 'Let members take care of this setting', 'bp-compliments' ); ?></option>
+						</select>
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php echo sprintf( __( 'Display "Send %s" button in /members page?', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></th>
+					<td>
+						<select id="bp_compliment_can_delete" name="bp_compliment_member_dir_btn">
+							<option value="yes" <?php selected( $bp_compliment_member_dir_btn, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
+							<option value="no" <?php selected( $bp_compliment_member_dir_btn, 'no' ); ?>><?php echo __( 'No', 'bp-compliments' ); ?></option>
 						</select>
 					</td>
 				</tr>
