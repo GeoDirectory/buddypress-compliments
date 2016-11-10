@@ -222,9 +222,9 @@ To disable these notifications please log in and go to:
      */
     $sitefromEmailName      = apply_filters( 'bp_compliments_notification_from_name', $sitefromEmailName );
 
-    $headers = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
-    $headers .= 'From: ' . $sitefromEmailName . ' <' . $sitefromEmail . '>' . "\r\n";
+    $headers = array();
+    $headers[] = 'Content-type: text/html; charset=UTF-8';
+    $headers[] = 'From: ' . $sitefromEmailName . ' <' . $sitefromEmail . '>';
 
     // Send the message
 
