@@ -176,7 +176,6 @@ function compliments_format_activity_action_compliment_received( $action, $activ
         $action = sprintf( __( '%1$s has received a %2$s from %3$s', 'bp-compliments' ), $receiver_link, strtolower(BP_COMP_SINGULAR_NAME),  $sender_link );
     }
 
-
     /**
      * Filters the 'compliment_received' activity action format.
      *
@@ -315,3 +314,35 @@ function compliments_merge_filter( $filters, $context ){
     return $filters;
 }
 add_filter('bp_get_activity_show_filters_options', 'compliments_merge_filter', 10, 2);
+
+add_filter('compliments_format_activity_action_compliment_received', 'bp_comp_add_compliment_received_content', 10, 2);
+function bp_comp_add_compliment_received_content($action, $activity) {
+    
+    $display_comp_content = apply_filters('bp_comp_display_comp_content_in_activity', false);
+    if (!$display_comp_content) {
+        return $action;
+    }
+
+    global $wpdb;
+    $comp = $wpdb->get_row($wpdb->prepare("select * from " . BP_COMPLIMENTS_TABLE . " where id= %d", array($activity->item_id)));
+    $t_id = $comp->term_id;
+    $term = get_term_by('id', $t_id, 'compliment');
+    $term_meta = get_option("taxonomy_$t_id");
+    $compliments_icon = esc_attr($term_meta['compliments_icon']) ? esc_attr($term_meta['compliments_icon']) : '';
+    if (is_ssl()) {
+        $compliments_icon = str_replace('http://', 'https://', $compliments_icon);
+    }
+    $image = "<div class=\"comp-user-header\">";
+    $image .= '<img style="height: 20px; width: 20px; vertical-align:middle"
+              src="'.$compliments_icon.'"
+              />';
+    $image .= $term->name;
+    $image .= '</div>';
+    $image .= '<br/>';
+
+    $message = '<div class="comp-user-message">';
+    $message .= $comp->message;
+    $message .= '</div>';
+    $activity->content = $message;
+    return $action;
+}
