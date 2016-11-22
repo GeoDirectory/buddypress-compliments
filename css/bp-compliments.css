@@ -171,7 +171,7 @@
 .bp-compliments-wrap .pagination span {
     display: inline-block;
 }
-.bp-loading-icon {
+.bp-comp-loading-icon {
     background-image: url("../images/loading.gif");
     width: 32px;
     height: 32px;

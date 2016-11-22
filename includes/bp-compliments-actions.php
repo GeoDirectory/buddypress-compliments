@@ -47,10 +47,26 @@ function handle_compliments_form_data() {
 
         $redirect_url = bp_core_get_user_domain($receiver_id);
 
-        if ( ! bp_compliments_start_compliment($args)) {
-            bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
+        //check duplicate
+        $check_duplicate = apply_filters('bp_comp_check_duplicate', false);
+
+        if ($check_duplicate) {
+            $count = bp_comp_check_duplicate_comp($args);
+            if ($count != 0) {
+                bp_core_add_message( __( 'Duplicate compliment detected.', 'bp-compliments' ), 'error' );
+            } else {
+                if ( ! bp_compliments_start_compliment($args)) {
+                    bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
+                } else {
+                    bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
+                }
+            }
         } else {
-            bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
+            if ( ! bp_compliments_start_compliment($args)) {
+                bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
+            } else {
+                bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
+            }
         }
 
 	    $bp_compliment_can_see_others_comp_value = esc_attr( get_option('bp_compliment_can_see_others_comp'));
@@ -152,4 +168,24 @@ function delete_single_complement() {
     bp_core_redirect( $redirect );
 }
 add_action( 'bp_actions', 'delete_single_complement');
+
+function bp_comp_check_duplicate_comp($args) {
+
+    global $wpdb;
+
+    $r = wp_parse_args( $args, array(
+        'receiver_id'   => bp_displayed_user_id(),
+        'sender_id' => bp_loggedin_user_id(),
+        'term_id' => 0,
+        'post_id' => 0,
+        'message' => null
+    ) );
+
+    $term_id = (int) $r['term_id'];
+    $sender_id = (int) $r['sender_id'];
+    $receiver_id = (int) $r['receiver_id'];
+
+    $count = $wpdb->get_var($wpdb->prepare("select COUNT(id) from " . BP_COMPLIMENTS_TABLE . " where term_id= %d AND sender_id= %d AND receiver_id= %d", array($term_id, $sender_id, $receiver_id)));
+    return $count;
+}
 
