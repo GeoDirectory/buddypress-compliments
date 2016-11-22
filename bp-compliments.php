@@ -120,8 +120,37 @@ function bp_compliments_activate() {
         dbDelta( $sql );
         update_option( 'bp_compliments_version', BP_COMPLIMENTS_VER );
     }
+    
+    add_option( 'bp_compliments_activation_redirect', 1 );
 }
-register_activation_hook( __FILE__, 'bp_compliments_activate' );
+
+if ( is_admin() ) {
+    register_activation_hook( __FILE__, 'bp_compliments_activate' );
+    register_deactivation_hook( __FILE__, 'bp_compliments_deactivate' );
+    add_filter( 'geodir_plugins_uninstall_settings', 'bp_compliments_uninstall_settings', 10, 1 );
+    add_action( 'admin_init', 'bp_compliments_activation_redirect' );
+}
+
+/**
+ * Plugin deactivation hook.
+ *
+ * @since 1.0.7
+ */
+function bp_compliments_deactivate() {
+    // Plugin deactivation stuff.
+}
+
+/**
+ * Redirects user to BuddyPress Compliments settings page after plugin activation.
+ *
+ * @since 1.0.7
+ */
+function bp_compliments_activation_redirect() {
+    if ( get_option( 'bp_compliments_activation_redirect', false ) ) {
+        delete_option( 'bp_compliments_activation_redirect' );
+        wp_redirect( admin_url( 'admin.php?page=bp-compliment-settings' ) );
+    }
+}
 
 /**
  * Custom text domain loader.
@@ -159,4 +188,18 @@ function bp_compliments_older_version_notice() {
     $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", 'bp-compliments' );
     
     echo '<div class="error"><p>' . $older_version_notice . '</p></div>';
+}
+
+/**
+ * Add the plugin to uninstall settings.
+ *
+ * @since 1.0.7
+ *
+ * @return array $settings the settings array.
+ * @return array The modified settings.
+ */
+function bp_compliments_uninstall_settings($settings) {
+    $settings[] = plugin_basename(dirname(__FILE__));
+    
+    return $settings;
 }
