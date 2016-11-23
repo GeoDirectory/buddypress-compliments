@@ -69,7 +69,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
                                     var mod_shadow = jQuery('#bp_compliments_modal_shadow');
                                     var container = jQuery('.comp-modal');
                                     container.hide();
-                                    container.replaceWith("<div class='comp-modal' style='display: none;'><div class='comp-modal-content-wrap'><div class='comp-modal-title comp-loading-icon'><div class='bp-loading-icon'></div></div></div></div>");
+                                    container.replaceWith("<div class='comp-modal' style='display: none;'><div class='comp-modal-content-wrap'><div class='comp-modal-title comp-loading-icon'><div class='bp-comp-loading-icon'></div></div></div></div>");
                                     mod_shadow.hide();
                                 });
                             });
@@ -137,7 +137,7 @@ function bp_compliments_modal_init() {
     <div class="comp-modal" style="display: none;">
         <div class="comp-modal-content-wrap">
             <div class="comp-modal-title comp-loading-icon">
-                <div class="bp-loading-icon"></div>
+                <div class="bp-comp-loading-icon"></div>
             </div>
         </div>
     </div>
