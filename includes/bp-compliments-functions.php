@@ -38,10 +38,13 @@ function bp_compliments_start_compliment( $args = '' ) {
 
     $compliment = new BP_Compliments( $r['receiver_id'], $r['sender_id'], $r['term_id'], $r['post_id'], $r['message'] );
 
-    if ( ! $compliment->save() ) {
+    $insert_id = $compliment->save();
+    if ( ! $insert_id ) {
         return false;
     }
 
+    // Add compliment ID
+    $compliment->id = $insert_id;
     /**
      * Functions hooked to this action will be processed after compliments data stored into the db.
      *
@@ -52,7 +55,7 @@ function bp_compliments_start_compliment( $args = '' ) {
      */
     do_action_ref_array( 'bp_compliments_start_compliment', array( &$compliment ) );
 
-    return true;
+    return $insert_id;
 }
 
 /**

@@ -47,7 +47,11 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
 
             if ( 1 == $total_items ) {
                 $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), BP_COMP_SINGULAR_NAME );
-                $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
+                if ($secondary_item_id) {
+                    $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?c_id='.$secondary_item_id.'&bpc_read=true&bpc_sender_id='.$item_id;
+                } else {
+                    $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
+                }
             }
             break;
 
@@ -121,6 +125,7 @@ function bp_compliments_notifications_add_on_compliment( BP_Compliments $complim
         bp_notifications_add_notification( array(
             'item_id'           => $compliment->sender_id,
             'user_id'           => $compliment->receiver_id,
+            'secondary_item_id' => $compliment->id,
             'component_name'    => buddypress()->compliments->id,
             'component_action'  => 'new_compliment'
         ) );
@@ -347,6 +352,11 @@ function bp_compliments_notifications_mark_compliments_as_read() {
         return;
     }
 
+    $compliment_id = false;
+    if ( isset($_GET['c_id'])) {
+        $compliment_id = (int) strip_tags(esc_sql($_GET['c_id']));
+    }
+
     $sender_id = (int) strip_tags(esc_sql($_GET['bpc_sender_id']));
 
     if (!is_int($sender_id)) {
@@ -366,7 +376,11 @@ function bp_compliments_notifications_mark_compliments_as_read() {
         bp_core_delete_notifications_by_item_id( bp_loggedin_user_id(), $sender_id, buddypress()->compliments->id, 'new_compliment' );
     }
     // Redirect
-    bp_core_redirect( bp_displayed_user_domain() . BP_COMPLIMENTS_SLUG . '/' );
+    if ($compliment_id) {
+        bp_core_redirect( bp_displayed_user_domain() . BP_COMPLIMENTS_SLUG . '/?c_id='.$compliment_id);
+    } else {
+        bp_core_redirect( bp_displayed_user_domain() . BP_COMPLIMENTS_SLUG . '/' );
+    }
 }
 add_action( 'bp_actions', 'bp_compliments_notifications_mark_compliments_as_read' );
 
