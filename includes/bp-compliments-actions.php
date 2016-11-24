@@ -27,7 +27,7 @@ function handle_compliments_form_data() {
             return;
         }
 
-
+        $insert_id = false;
         $term_id = strip_tags($_POST['term_id']);
         // post id is required for geodirectory's whoop theme.
         $post_id = strip_tags($_POST['post_id']);
@@ -55,14 +55,16 @@ function handle_compliments_form_data() {
             if ($count != 0) {
                 bp_core_add_message( __( 'Duplicate compliment detected.', 'bp-compliments' ), 'error' );
             } else {
-                if ( ! bp_compliments_start_compliment($args)) {
+                $insert_id = bp_compliments_start_compliment($args);
+                if ( ! $insert_id) {
                     bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
                 } else {
                     bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
                 }
             }
         } else {
-            if ( ! bp_compliments_start_compliment($args)) {
+            $insert_id = bp_compliments_start_compliment($args);
+            if ( ! $insert_id) {
                 bp_core_add_message( sprintf( __( 'There was a problem when trying to send %s to %s, please contact administrator.', 'bp-compliments' ), strtolower(BP_COMP_SINGULAR_NAME), $receiver_name ), 'error' );
             } else {
                 bp_core_add_message( sprintf( __( 'Your %s sent to %s.', 'bp-compliments' ), BP_COMP_SINGULAR_NAME, $receiver_name ) );
@@ -94,7 +96,13 @@ function handle_compliments_form_data() {
 	    }
 
 	    if ($show_for_displayed_user) {
-		    $redirect = $redirect_url.BP_COMPLIMENTS_SLUG.'/';
+            $redirect_to_single_comp = apply_filters('redirect_to_single_comp', false);
+            if ($insert_id && $redirect_to_single_comp) {
+                $redirect = $redirect_url.BP_COMPLIMENTS_SLUG.'/?c_id='.$insert_id;
+            } else {
+                $redirect = $redirect_url.BP_COMPLIMENTS_SLUG.'/';
+            }
+
 	    } else {
 		    $redirect = $redirect_url;
 	    }

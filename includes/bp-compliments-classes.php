@@ -162,7 +162,7 @@ class BP_Compliments {
          */
         do_action_ref_array( 'bp_compliments_after_save', array( &$this ) );
 
-        return $result;
+        return $wpdb->insert_id;
     }
 
     /**
