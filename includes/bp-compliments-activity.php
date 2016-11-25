@@ -315,6 +315,7 @@ function compliments_merge_filter( $filters, $context ){
 }
 add_filter('bp_get_activity_show_filters_options', 'compliments_merge_filter', 10, 2);
 
+add_filter('compliments_format_activity_action_compliment_sent', 'bp_comp_add_compliment_received_content', 10, 2);
 add_filter('compliments_format_activity_action_compliment_received', 'bp_comp_add_compliment_received_content', 10, 2);
 function bp_comp_add_compliment_received_content($action, $activity) {
     
