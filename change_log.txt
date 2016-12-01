@@ -3,6 +3,10 @@ Send compliment button can be displayed in /members page - ADDED
 PHP undefined notices in wordpress admin - FIXED
 Option added to remove plugin data on plugin delete - ADDED
 Email headers changed from string to array() and MIME-Version removed - CHANGED
+Compliment not displaying content in activity page - FIXED
+Filter added to prevent duplicate compliments - ADDED
+Compliment can be redirected to individual compliment page after send - ADDED
+Compliment can be redirected to individual compliment from notifications - ADDED
 
 v1.0.6
 Notification incorrect from email - FIXED

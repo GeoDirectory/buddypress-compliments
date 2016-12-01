@@ -74,12 +74,18 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                     ?>
                     <li>
                         <div class="comp-user-header">
-        <span>
-            <img style="height: 20px; width: 20px; vertical-align:middle"
-                 src='<?php echo esc_attr($term_meta['compliments_icon']) ? esc_attr($term_meta['compliments_icon']) : ''; ?>'
-                 class='preview-upload'/>
-            <?php echo $term->name; ?>
-        </span>
+                          <span>
+                            <?php
+                            $compliments_icon = esc_attr($term_meta['compliments_icon']) ? esc_attr($term_meta['compliments_icon']) : '';
+                            if (is_ssl()) {
+                                $compliments_icon = str_replace('http://', 'https://', $compliments_icon);
+                            }
+                            ?>
+                              <img style="height: 20px; width: 20px; vertical-align:middle"
+                                   src='<?php echo $compliments_icon; ?>'
+                                   class='preview-upload'/>
+                              <?php echo $term->name; ?>
+                           </span>
                             <em>
                                 <?php echo date_i18n(get_option('date_format'), strtotime($comp->created_at)); ?>
                             </em>
