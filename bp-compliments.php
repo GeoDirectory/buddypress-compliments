@@ -10,20 +10,20 @@
  * Plugin Name: BuddyPress Compliments
  * Plugin URI: http://wpgeodirectory.com/
  * Description: Compliments module for BuddyPress.
- * Version: 1.0.6
+ * Version: 1.0.7
  * Author: GeoDirectory
  * Author URI: http://wpgeodirectory.com
  * Text Domain: bp-compliments
  * Domain Path: /languages
  * Requires at least: 3.1
- * Tested up to: 4.4
+ * Tested up to: 4.7
  */
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // Define the plugin version.
-define( 'BP_COMPLIMENTS_VER', '1.0.6' );
+define( 'BP_COMPLIMENTS_VER', '1.0.7' );
 
 /**
  * BuddyPress compliments text domain.

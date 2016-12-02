@@ -1,22 +1,22 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyPress Compliments 1.0.6\n"
-"POT-Creation-Date: 2016-03-26 14:32-0000\n"
-"PO-Revision-Date: 2016-03-26 14:32-0000\n"
+"Project-Id-Version: BuddyPress Compliments 1.0.7\n"
+"POT-Creation-Date: 2016-12-01 12:47+0000\n"
+"PO-Revision-Date: 2016-12-01 12:47+0000\n"
 "Last-Translator: \n"
 "Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
-"X-Poedit-Basepath: ../\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: bp-compliments-core.php:44 bp-compliments.php:36
-#: includes/bp-compliments-settings.php:154
+#: includes/bp-compliments-settings.php:167
 msgid "Compliments"
 msgstr ""
 
@@ -28,14 +28,14 @@ msgstr ""
 msgid "compliments"
 msgstr ""
 
-#: bp-compliments.php:152
+#: bp-compliments.php:181
 #, php-format
 msgid ""
 "BuddyPress Compliments requires <a target=\"_blank\" href=\"%s\">BuddyPress</"
 "a> plugin."
 msgstr ""
 
-#: bp-compliments.php:159
+#: bp-compliments.php:188
 msgid "Hey! BP Compliments requires BuddyPress 1.5 or higher."
 msgstr ""
 
@@ -61,18 +61,18 @@ msgstr ""
 msgid "%s Sent"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:163
-#: includes/bp-compliments-activity.php:166
 #: includes/bp-compliments-activity.php:168
 #: includes/bp-compliments-activity.php:171
+#: includes/bp-compliments-activity.php:173
+#: includes/bp-compliments-activity.php:176
 #, php-format
 msgid "%1$s has received a %2$s from %3$s"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:218
-#: includes/bp-compliments-activity.php:221
-#: includes/bp-compliments-activity.php:223
-#: includes/bp-compliments-activity.php:226
+#: includes/bp-compliments-activity.php:229
+#: includes/bp-compliments-activity.php:232
+#: includes/bp-compliments-activity.php:234
+#: includes/bp-compliments-activity.php:237
 #, php-format
 msgid "%1$s has sent a %2$s to %3$s"
 msgstr ""
@@ -123,16 +123,18 @@ msgid ""
 msgstr ""
 
 #: includes/bp-compliments-notifications.php:305
-#: includes/bp-compliments-settings.php:89
-#: includes/bp-compliments-settings.php:98
-#: includes/bp-compliments-settings.php:107
+#: includes/bp-compliments-settings.php:93
+#: includes/bp-compliments-settings.php:102
+#: includes/bp-compliments-settings.php:111
+#: includes/bp-compliments-settings.php:120
 msgid "Yes"
 msgstr ""
 
 #: includes/bp-compliments-notifications.php:306
-#: includes/bp-compliments-settings.php:90
-#: includes/bp-compliments-settings.php:99
-#: includes/bp-compliments-settings.php:108
+#: includes/bp-compliments-settings.php:94
+#: includes/bp-compliments-settings.php:103
+#: includes/bp-compliments-settings.php:112
+#: includes/bp-compliments-settings.php:121
 msgid "No"
 msgstr ""
 
@@ -141,84 +143,89 @@ msgstr ""
 msgid "A member sends you a %s"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:38
+#: includes/bp-compliments-settings.php:39
 #, php-format
 msgid "BuddyPress %s - Settings"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:63
+#: includes/bp-compliments-settings.php:67
 msgid "Singlular name ( e.g. Gift. Default: Compliment )"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:67
+#: includes/bp-compliments-settings.php:71
 msgid "Plural name ( e.g. Gifts. Default: Compliments )"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:71
+#: includes/bp-compliments-settings.php:75
 msgid "Slug ( e.g. gifts. Default: compliments. must be lowercase )"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:75
+#: includes/bp-compliments-settings.php:79
 #, php-format
 msgid "Who can see other members %s page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:78
-#: includes/bp-compliments-settings.php:225
+#: includes/bp-compliments-settings.php:82
+#: includes/bp-compliments-settings.php:238
 msgid "Anybody"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:79
-#: includes/bp-compliments-settings.php:226
+#: includes/bp-compliments-settings.php:83
+#: includes/bp-compliments-settings.php:239
 msgid "Nobody"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:80
-#: includes/bp-compliments-settings.php:227
+#: includes/bp-compliments-settings.php:84
+#: includes/bp-compliments-settings.php:240
 msgid "Members Only"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:81
+#: includes/bp-compliments-settings.php:85
 msgid "Let members take care of this setting"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:86
+#: includes/bp-compliments-settings.php:90
+#, php-format
+msgid "Display \"Send %s\" button in /members page?"
+msgstr ""
+
+#: includes/bp-compliments-settings.php:99
 #, php-format
 msgid "Members can delete %s received?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:95
+#: includes/bp-compliments-settings.php:108
 #, php-format
 msgid "Enable activity component for %s ?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:104
+#: includes/bp-compliments-settings.php:117
 #, php-format
 msgid "Enable notification component for %s ?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:113
+#: includes/bp-compliments-settings.php:126
 #, php-format
 msgid "Number of %s to display per page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:117
+#: includes/bp-compliments-settings.php:130
 msgid "Custom CSS styles"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:192
+#: includes/bp-compliments-settings.php:205
 msgid "There was an error with your form. Please contact administrator."
 msgstr ""
 
-#: includes/bp-compliments-settings.php:203
+#: includes/bp-compliments-settings.php:216
 msgid "Setting updated successfully."
 msgstr ""
 
-#: includes/bp-compliments-settings.php:217
+#: includes/bp-compliments-settings.php:230
 msgid "Compliments Settings"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:222
+#: includes/bp-compliments-settings.php:235
 msgid "Who can see your compliment page?"
 msgstr ""
 
