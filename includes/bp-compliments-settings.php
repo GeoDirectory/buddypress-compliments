@@ -31,6 +31,7 @@ function bp_compliments_register_settings() {
 	register_setting( 'bp-compliment-settings', 'bp_compliment_enable_notifications' );
 	register_setting( 'bp-compliment-settings', 'bp_comp_per_page' );
 	register_setting( 'bp-compliment-settings', 'bp_comp_custom_css' );
+	register_setting( 'bp-compliment-settings', 'bp_compliment_uninstall_delete');
 }
 
 function bp_compliments_settings_page() {
@@ -61,6 +62,9 @@ function bp_compliments_settings_page() {
 
 			$comp_custom_css_value = esc_attr( get_option('bp_comp_custom_css'));
 			$comp_custom_css = $comp_custom_css_value ? $comp_custom_css_value : '';
+
+			$bp_compliment_uninstall_delete_value = esc_attr( get_option('bp_compliment_uninstall_delete'));
+			$bp_compliment_uninstall_delete = $bp_compliment_uninstall_delete_value ? $bp_compliment_uninstall_delete_value : 'no';
 			?>
 			<table class="widefat fixed" style="padding:10px;margin-top: 10px;">
 				<tr valign="top">
@@ -129,6 +133,15 @@ function bp_compliments_settings_page() {
 				<tr valign="top">
 					<th scope="row"><?php echo __( 'Custom CSS styles', 'bp-compliments' ); ?></th>
 					<td><textarea class="widefat" rows="5" name="bp_comp_custom_css"><?php echo $comp_custom_css; ?></textarea></td>
+				</tr>
+				<tr valign="top">
+					<th scope="row"><?php echo sprintf( __( 'Delete plugin data when you uninstall BuddyPress Compliments?', 'bp-compliments' ), BP_COMP_PLURAL_NAME ); ?></th>
+					<td>
+						<select id="bp_compliment_uninstall_delete" name="bp_compliment_uninstall_delete">
+							<option value="yes" <?php selected( $bp_compliment_uninstall_delete, 'yes' ); ?>><?php echo __( 'Yes', 'bp-compliments' ); ?></option>
+							<option value="no" <?php selected( $bp_compliment_uninstall_delete, 'no' ); ?>><?php echo __( 'No', 'bp-compliments' ); ?></option>
+						</select>
+					</td>
 				</tr>
 				<tr valign="top">
 					<th></th>
