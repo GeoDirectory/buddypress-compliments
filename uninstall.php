@@ -15,7 +15,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 global $wpdb, $bp;
 
-if ( get_option( 'geodir_un_buddypress-compliments' ) ) {    
+if ( get_option( 'bp_compliment_uninstall_delete' ) ) {    
     $wpdb->hide_errors();
 
     if ( !defined( 'BP_COMPLIMENTS_VER' ) ) {

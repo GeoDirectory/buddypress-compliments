@@ -127,7 +127,6 @@ function bp_compliments_activate() {
 if ( is_admin() ) {
     register_activation_hook( __FILE__, 'bp_compliments_activate' );
     register_deactivation_hook( __FILE__, 'bp_compliments_deactivate' );
-    add_filter( 'geodir_plugins_uninstall_settings', 'bp_compliments_uninstall_settings', 10, 1 );
     add_action( 'admin_init', 'bp_compliments_activation_redirect' );
 }
 
@@ -188,18 +187,4 @@ function bp_compliments_older_version_notice() {
     $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", 'bp-compliments' );
     
     echo '<div class="error"><p>' . $older_version_notice . '</p></div>';
-}
-
-/**
- * Add the plugin to uninstall settings.
- *
- * @since 1.0.7
- *
- * @return array $settings the settings array.
- * @return array The modified settings.
- */
-function bp_compliments_uninstall_settings($settings) {
-    $settings[] = plugin_basename(dirname(__FILE__));
-    
-    return $settings;
 }

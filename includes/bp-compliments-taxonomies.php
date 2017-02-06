@@ -73,8 +73,10 @@ add_action( 'admin_enqueue_scripts', 'compliments_enqueue_admin_js' );
  * @param string $hook_suffix Admin page suffix.
  */
 function compliments_enqueue_admin_js( $hook_suffix ) {
-    wp_enqueue_media();
-    wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . 'js/admin.js', array(), false, true );
+    if (($hook_suffix == 'edit-tags.php' || $hook_suffix == 'term.php') && isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'compliment') {
+        wp_enqueue_media();
+        wp_enqueue_script( 'compliments-adminjs', constant( 'BP_COMPLIMENTS_URL' ) . 'js/admin.js', array(), false, true );
+    }
 }
 
 /**
