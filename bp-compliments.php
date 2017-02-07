@@ -124,7 +124,7 @@ function bp_compliments_activate() {
     add_option( 'bp_compliments_activation_redirect', 1 );
 }
 
-if ( is_admin() ) {
+if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
     register_activation_hook( __FILE__, 'bp_compliments_activate' );
     register_deactivation_hook( __FILE__, 'bp_compliments_deactivate' );
     add_action( 'admin_init', 'bp_compliments_activation_redirect' );
