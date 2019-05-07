@@ -1,6 +1,9 @@
 v1.0.8
 Fix issue for plugin installation via WP-CLI - FIXED
 
+
+Add a close button at the top of lightboxes - ADDED
+
 v1.0.7
 Send compliment button can be displayed in /members page - ADDED
 PHP undefined notices in wordpress admin - FIXED
