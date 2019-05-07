@@ -147,7 +147,10 @@ function bp_compliments_deactivate() {
 function bp_compliments_activation_redirect() {
     if ( get_option( 'bp_compliments_activation_redirect', false ) ) {
         delete_option( 'bp_compliments_activation_redirect' );
-        wp_redirect( admin_url( 'admin.php?page=bp-compliment-settings' ) );
+        if(class_exists('BuddyPress')){
+            wp_redirect( admin_url( 'admin.php?page=bp-compliment-settings' ) );
+            exit;
+        }
     }
 }
 
