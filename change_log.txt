@@ -1,6 +1,8 @@
 v1.0.8
 Fix issue for plugin installation via WP-CLI - FIXED
 
+Installation redirects only if user has BP - FIXED
+
 v1.0.7
 Send compliment button can be displayed in /members page - ADDED
 PHP undefined notices in wordpress admin - FIXED
