@@ -98,7 +98,21 @@ do_action('bp_before_member_' . bp_current_action() . '_content'); ?>
                                 $bp_compliment_can_delete = 'yes';
                             }
 
-                            if (is_user_logged_in() && (($bp->loggedin_user->id == $bp->displayed_user->id) || current_user_can( 'manage_options' )) && ($bp_compliment_can_delete == 'yes')) {
+                            //Admins can delete any complement
+                            $current_user_can_delete = current_user_can( 'manage_options' );
+
+                            //Complement sender and receiver can delete compliment if admin has allowed it
+                            if( is_user_logged_in() ){
+                                //Is this the receiver
+                                if( $bp->loggedin_user->id == $bp->displayed_user->id ){
+                                    $current_user_can_delete = true;
+                                }
+                                //Is this the sender
+                                if( $bp->loggedin_user->id == $comp->sender_id ){
+                                    $current_user_can_delete = true;
+                                }
+                            }
+                            if ( $current_user_can_delete && ($bp_compliment_can_delete == 'yes')) {
                                 $receiver_url    = bp_core_get_userlink( $comp->receiver_id, false, true );
                                 $compliment_url = $receiver_url . BP_COMPLIMENTS_SLUG . '/?c_id='.$comp->id.'&action=delete';
                                 ?>
