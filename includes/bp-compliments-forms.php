@@ -22,7 +22,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
     ?>
     <div class="comp-modal">
         <div class="comp-modal-content-wrap">
-            <span class="comp-close-x" title="Close Lightbox" aria-action="close">X</span>
+            <span class="comp-close-x dashicons dashicons-no" title="<?php _e( 'Close Lightbox', 'bp-compliments' ); ?>" aria-action="close"></span>
             <div class="comp-modal-title">
                 <h2><?php echo sprintf( __( 'Choose Your %s Type:', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></h2>
             </div>
