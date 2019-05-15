@@ -1,0 +1,17 @@
+{
+    "name": "ayeCode/buddypress_compliments",
+    "description": "Compliments module for BuddyPress.",
+    "type": "project",
+    "require": {
+        "tgmpa/tgm-plugin-activation": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "AyeCode",
+            "email": "contact@ayecode.io",
+            "homepage": "https://ayecode.io",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev"
+}
