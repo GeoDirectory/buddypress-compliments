@@ -8,11 +8,11 @@
  *
  * @wordpress-plugin
  * Plugin Name: BuddyPress Compliments
- * Plugin URI: http://wpgeodirectory.com/
+ * Plugin URI: https://appwp.io/
  * Description: Compliments module for BuddyPress.
  * Version: 1.0.7
- * Author: GeoDirectory
- * Author URI: http://wpgeodirectory.com
+ * Author: AyeCode Ltd
+ * Author URI: https://ayecode.io
  * Text Domain: bp-compliments
  * Domain Path: /languages
  * Requires at least: 3.1
