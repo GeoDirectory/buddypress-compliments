@@ -22,6 +22,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
     ?>
     <div class="comp-modal">
         <div class="comp-modal-content-wrap">
+            <span class="comp-close-x dashicons dashicons-no" title="<?php _e( 'Close Lightbox', 'bp-compliments' ); ?>" aria-action="close"></span>
             <div class="comp-modal-title">
                 <h2><?php echo sprintf( __( 'Choose Your %s Type:', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></h2>
             </div>
@@ -62,23 +63,23 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
                             <button type="submit" class="comp-submit-btn" name="comp-modal-form" value="submit"><?php echo __( 'Send', 'bp-compliments' ); ?></button>
                             <a class="bp-comp-cancel" href="#"><?php echo __( 'Cancel', 'bp-compliments' ); ?></a>
                         </div>
-                        <script type="text/javascript">
-                            jQuery(document).ready(function() {
-                                jQuery('a.bp-comp-cancel').click(function (e) {
-                                    e.preventDefault();
-                                    var mod_shadow = jQuery('#bp_compliments_modal_shadow');
-                                    var container = jQuery('.comp-modal');
-                                    container.hide();
-                                    container.replaceWith("<div class='comp-modal' style='display: none;'><div class='comp-modal-content-wrap'><div class='comp-modal-title comp-loading-icon'><div class='bp-comp-loading-icon'></div></div></div></div>");
-                                    mod_shadow.hide();
-                                });
-                            });
-                        </script>
                     <?php
                     } else {
                         echo __( 'No compliments found.', 'bp-compliments' );
                     }
                     ?>
+                    <script type="text/javascript">
+                        jQuery(document).ready(function() {
+                            jQuery('a.bp-comp-cancel, .comp-close-x').click(function (e) {
+                                e.preventDefault();
+                                var mod_shadow = jQuery('#bp_compliments_modal_shadow');
+                                var container = jQuery('.comp-modal');
+                                container.hide();
+                                container.replaceWith("<div class='comp-modal' style='display: none;'><div class='comp-modal-content-wrap'><div class='comp-modal-title comp-loading-icon'><div class='bp-comp-loading-icon'></div></div></div></div>");
+                                 mod_shadow.hide();
+                            });
+                        });
+                    </script>
                 </form>
             </div>
         </div>
