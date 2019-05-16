@@ -65,8 +65,8 @@ function bp_compliments_init() {
         $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
     ////define the plugin table.
     define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
-	if( file_exists(APPWP_PLUGIN_DIR . 'vendor/autoload.php' ) ){
-		require_once( APPWP_PLUGIN_DIR . 'vendor/autoload.php' );
+	if( file_exists(BP_COMPLIMENTS_DIR . 'vendor/autoload.php' ) ){
+		require_once( BP_COMPLIMENTS_DIR . 'vendor/autoload.php' );
 	}
     // only supported in BP 1.5+
     if ( version_compare( BP_VERSION, '1.3', '>' ) ) {
