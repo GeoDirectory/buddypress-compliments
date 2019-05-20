@@ -10,7 +10,7 @@
  * Plugin Name: BuddyPress Compliments
  * Plugin URI: https://appwp.io/
  * Description: Compliments module for BuddyPress.
- * Version: 1.0.7
+ * Version: 1.0.8
  * Author: AyeCode Ltd
  * Author URI: https://ayecode.io
  * Text Domain: bp-compliments
