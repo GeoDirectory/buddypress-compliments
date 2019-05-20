@@ -3,6 +3,10 @@ Fix issue for plugin installation via WP-CLI - FIXED
 Compliments can be deleted by the sender - ADDED
 Installation redirects only if user has BP - FIXED
 Add a close button at the top of lightboxes - ADDED
+Add a close button at the top of lightboxes - ADDED
+Add multiple compliment notification issue - ADDED
+Add multiple compliment notification issue - ADDED
+Fix invalid html issue for send compliment button - FIXED
 
 v1.0.7
 Send compliment button can be displayed in /members page - ADDED
