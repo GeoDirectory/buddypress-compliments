@@ -78,7 +78,6 @@ Installation redirects only if user has BP - FIXED
 Add a close button at the top of lightboxes - ADDED
 Add multiple compliment notification issue - ADDED
 Fix invalid html issue for send compliment button - FIXED
-Add security fix for XSS issue - FIXED
 
 = 1.0.7 =
 Send compliment button can be displayed in /members page - ADDED
