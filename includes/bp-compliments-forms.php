@@ -57,7 +57,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
                         ?>
                         <textarea placeholder="<?php echo __( 'Type your message here', 'bp-compliments' ); ?>" name="message" maxchar="1000"></textarea>
                         <input type="hidden" name="post_id" value="<?php echo $pid; ?>"/>
-                        <input type="hidden" name="receiver_id" value="<?php echo $receiver_id; ?>"/>
+                        <input type="hidden" name="receiver_id" value="<?php echo absint( $receiver_id ); ?>"/>
                         <?php wp_nonce_field( 'handle_compliments_form_data','handle_compliments_nonce' ); ?>
                         <div class="bp-comp-pop-buttons">
                             <button type="submit" class="comp-submit-btn" name="comp-modal-form" value="submit"><?php echo __( 'Send', 'bp-compliments' ); ?></button>
