@@ -71,7 +71,7 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
-= v1.0.8 =
+= 1.0.8 =
 Fix issue for plugin installation via WP-CLI - FIXED
 Compliments can be deleted by the sender - ADDED
 Installation redirects only if user has BP - FIXED
