@@ -44,14 +44,11 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
         case 'new_compliment':
             $link = false;
             $text = false;
-
-            if ( 1 == $total_items ) {
-                $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), BP_COMP_SINGULAR_NAME );
-                if ($secondary_item_id) {
-                    $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?c_id='.$secondary_item_id.'&bpc_read=true&bpc_sender_id='.$item_id;
-                } else {
-                    $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
-                }
+            $text = sprintf( __( '%s has sent you a %s', 'bp-compliments' ), bp_core_get_user_displayname( $item_id ), BP_COMP_SINGULAR_NAME );
+            if ($secondary_item_id) {
+                $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?c_id='.$secondary_item_id.'&bpc_read=true&bpc_sender_id='.$item_id;
+            } else {
+                $link = bp_core_get_user_domain( $bp->loggedin_user->id ) .BP_COMPLIMENTS_SLUG. '/?bpc_read=true&bpc_sender_id='.$item_id;
             }
             break;
 
@@ -83,29 +80,56 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
             break;
     }
 
-    if ( ! $link || ! $text ) {
-        return false;
-    }
 
-    if ( 'string' == $format ) {
-        /**
-         * Filters the notification link.
-         *
-         * @since 0.0.1
-         * @package BuddyPress_Compliments
-         *
-         * @param int $total_items Total items.
-         * @param string $link Notification URL.
-         * @param string $text Notification Text.
-         * @param int $item_id User ID.
-         * @param int $secondary_item_id Secondary Item ID.
-         */
-        return apply_filters( 'bp_compliments_new_compliment_notification', '<a href="' . $link . '">' . $text . '</a>', $total_items, $link, $text, $item_id, $secondary_item_id );
-    } else {
-        return apply_filters( 'bp_compliments_new_toolbar_compliment_notification', array(
-            'link' => $link,
-            'text' => $text
-        ), (int) $total_items, $item_id );
+	if ( 1 == $total_items ) {
+		if ( 'string' == $format ) {
+			/**
+			 * Filters the notification link.
+			 *
+			 * @since   0.0.1
+			 * @package BuddyPress_Compliments
+			 *
+			 * @param int    $total_items       Total items.
+			 * @param string $link              Notification URL.
+			 * @param string $text              Notification Text.
+			 * @param int    $item_id           User ID.
+			 * @param int    $secondary_item_id Secondary Item ID.
+			 */
+			return apply_filters( 'bp_compliments_new_compliment_notification',
+				'<a href="' . $link . '">' . $text . '</a>', $total_items,
+				$link, $text, $item_id, $secondary_item_id );
+		} else {
+			return apply_filters( 'bp_compliments_new_toolbar_compliment_notification',
+				array(
+					'link' => $link,
+					'text' => $text
+				), (int) $total_items, $item_id );
+		}
+	}else{
+		$text = sprintf( __( 'You have %d new compliments', 'bp-compliments' ), $total_items );
+		if ( 'string' == $format ) {
+			/**
+			 * Filters the notification link.
+			 *
+			 * @since   0.0.1
+			 * @package BuddyPress_Compliments
+			 *
+			 * @param int    $total_items       Total items.
+			 * @param string $link              Notification URL.
+			 * @param string $text              Notification Text.
+			 * @param int    $item_id           User ID.
+			 * @param int    $secondary_item_id Secondary Item ID.
+			 */
+			return apply_filters( 'bp_compliments_multiple_new_compliments_notification',
+				'<a href="' . $link . '">' . $text . '</a>', $total_items,
+				$link, $text, $item_id, $secondary_item_id );
+		} else {
+			return apply_filters( 'bp_compliments_multiple_new_toolbar_compliments_notification',
+				array(
+					'link' => $link,
+					'text' => $text
+				), (int) $total_items, $item_id );
+		}
     }
 }
 
