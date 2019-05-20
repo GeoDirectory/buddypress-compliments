@@ -10,20 +10,20 @@
  * Plugin Name: BuddyPress Compliments
  * Plugin URI: https://appwp.io/
  * Description: Compliments module for BuddyPress.
- * Version: 1.0.8
+ * Version: 1.0.9
  * Author: AyeCode Ltd
  * Author URI: https://ayecode.io
  * Text Domain: bp-compliments
  * Domain Path: /languages
  * Requires at least: 3.1
- * Tested up to: 4.7
+ * Tested up to: 5.2
  */
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // Define the plugin version.
-define( 'BP_COMPLIMENTS_VER', '1.0.7' );
+define( 'BP_COMPLIMENTS_VER', '1.0.9' );
 
 /**
  * BuddyPress compliments text domain.
