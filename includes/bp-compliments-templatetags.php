@@ -48,7 +48,7 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
         'link_title'    => '',
         'wrapper_class' => '',
         'link_class'    => 'compliments-popup',
-        'wrapper'       => 'div'
+        'wrapper'       => 'li'
     ) );
 
     if ( ! $r['receiver_id'] || ! $r['sender_id'] )

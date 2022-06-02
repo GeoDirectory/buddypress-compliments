@@ -229,6 +229,7 @@ class BP_Compliments_Component extends BP_Component {
         wp_enqueue_script( 'bp-compliments-js', constant( 'BP_COMPLIMENTS_URL' ) . 'js/bp-compliments.js', array( 'jquery' ) );
         wp_register_style( 'bp-compliments-css', constant( 'BP_COMPLIMENTS_URL' ) . 'css/bp-compliments.css' );
         wp_enqueue_style( 'bp-compliments-css' );
+	    wp_enqueue_style( 'dashicons' );
     }
 
 }

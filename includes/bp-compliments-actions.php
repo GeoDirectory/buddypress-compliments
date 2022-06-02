@@ -119,14 +119,10 @@ add_action( 'bp_actions', 'handle_compliments_form_data', 99 );
  * @package BuddyPress_Compliments
  */
 function delete_single_complement() {
+    global $wpdb;
+
     if (!bp_is_user()) {
         return;
-    }
-
-    if (!current_user_can( 'manage_options' )) {
-        if ( bp_displayed_user_id() != bp_loggedin_user_id() ) {
-            return;
-        }
     }
 
     if (!isset($_GET['c_id']) OR !isset($_GET['action']) ) {
@@ -149,6 +145,31 @@ function delete_single_complement() {
     if (!$c_id) {
         return;
     }
+
+    $table_name = BP_COMPLIMENTS_TABLE;
+    $sender_id  = $wpdb->get_var( $wpdb->prepare( "SELECT sender_id FROM {$table_name} WHERE id = %d", $c_id ) );
+
+    //Admins can delete any complement
+    $current_user_can_delete = current_user_can( 'manage_options' );
+
+    //Complement sender and receiver can delete compliment if admin has allowed it
+    if( is_user_logged_in() ){
+
+        //Is this the receiver
+        if( bp_loggedin_user_id() == bp_displayed_user_id() ){
+            $current_user_can_delete = true;
+        }
+
+        //Is this the sender
+        if( bp_loggedin_user_id() == $sender_id ){
+            $current_user_can_delete = true;
+        }
+    }
+
+    if ( false == $current_user_can_delete ) {
+        return;
+    }
+
 
     /**
      * Functions hooked to this action will be processed before deleting the complement.

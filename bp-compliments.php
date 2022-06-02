@@ -8,22 +8,22 @@
  *
  * @wordpress-plugin
  * Plugin Name: BuddyPress Compliments
- * Plugin URI: http://wpgeodirectory.com/
+ * Plugin URI: https://appwp.io/
  * Description: Compliments module for BuddyPress.
- * Version: 1.0.7
- * Author: GeoDirectory
- * Author URI: http://wpgeodirectory.com
+ * Version: 1.0.9
+ * Author: AyeCode Ltd
+ * Author URI: https://ayecode.io
  * Text Domain: bp-compliments
  * Domain Path: /languages
  * Requires at least: 3.1
- * Tested up to: 4.7
+ * Tested up to: 5.2
  */
 
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // Define the plugin version.
-define( 'BP_COMPLIMENTS_VER', '1.0.7' );
+define( 'BP_COMPLIMENTS_VER', '1.0.9' );
 
 /**
  * BuddyPress compliments text domain.
@@ -65,19 +65,43 @@ function bp_compliments_init() {
         $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
     ////define the plugin table.
     define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
-
+	if( file_exists(BP_COMPLIMENTS_DIR . 'vendor/autoload.php' ) ){
+		require_once( BP_COMPLIMENTS_DIR . 'vendor/autoload.php' );
+	}
     // only supported in BP 1.5+
     if ( version_compare( BP_VERSION, '1.3', '>' ) ) {
         require( constant( 'BP_COMPLIMENTS_DIR' ) . '/bp-compliments-core.php' );
-
     // show admin notice for users on BP 1.2.x
     } else {
         add_action( 'admin_notices', 'bp_compliments_older_version_notice' );
-       
         return;
     }
 }
 add_action( 'bp_include', 'bp_compliments_init' );
+add_action( 'init', 'bp_compliments_plugin_init' );
+/**
+ * Hook into actions and filters on site init.
+ */
+function bp_compliments_plugin_init(){
+	add_action( 'tgmpa_register', 'bp_compliments_require_plugins');
+}
+
+/**
+ * Add required plugin check.
+ */
+function bp_compliments_require_plugins(){
+	$plugins = array( /* The array to install plugins */ );
+	$plugins = array(
+		array(
+			'name'      => 'BuddPress',
+			'slug'      => 'buddypress',
+			'required'  => true, // this plugin is recommended
+			'version'   => '1.5'
+		)
+	);
+	$config = array( /* The array to configure TGM Plugin Activation */ );
+	tgmpa( $plugins, $config );
+}
 
 /**
  * Creates Custom table for BuddyPress compliments.
@@ -147,7 +171,10 @@ function bp_compliments_deactivate() {
 function bp_compliments_activation_redirect() {
     if ( get_option( 'bp_compliments_activation_redirect', false ) ) {
         delete_option( 'bp_compliments_activation_redirect' );
-        wp_redirect( admin_url( 'admin.php?page=bp-compliment-settings' ) );
+        if(class_exists('BuddyPress')){
+            wp_redirect( admin_url( 'admin.php?page=bp-compliment-settings' ) );
+            exit;
+        }
     }
 }
 
@@ -172,19 +199,8 @@ function bp_compliments_localization() {
 }
 add_action( 'plugins_loaded', 'bp_compliments_localization' );
 
-add_action( 'admin_notices', 'bp_compliments_required_plugins_nag' );
-function bp_compliments_required_plugins_nag() {
-    // Check for BuddyPress
-    $class = "update-nag";
-    $url = 'https://wordpress.org/plugins/buddypress/';
-    $message = sprintf( wp_kses( __( 'BuddyPress Compliments requires <a target="_blank" href="%s">BuddyPress</a> plugin.', 'bp-compliments' ), array(  'a' => array( 'href' => array() ) ) ), esc_url( $url ) );
-    if(!class_exists('BuddyPress')){
-        echo"<div class=\"$class\"> <p>$message</p></div>";
-    }
-}
-
 function bp_compliments_older_version_notice() {
     $older_version_notice = __( "Hey! BP Compliments requires BuddyPress 1.5 or higher.", 'bp-compliments' );
-    
+
     echo '<div class="error"><p>' . $older_version_notice . '</p></div>';
 }

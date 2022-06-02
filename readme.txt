@@ -3,8 +3,8 @@ Contributors: viruthagiri, stiofansisland, paoltaia
 Donate link: http://wpgeodirectory.com/
 Tags: buddypress, buddypress compliments, WordPress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
 Requires at least: 3.1
-Tested up to: 4.7
-Stable tag: 1.0.7
+Tested up to: 5.2
+Stable tag: 1.0.9
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -71,12 +71,23 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+= 1.0.9 =
+Fix issue for plugin installation via WP-CLI - FIXED
+Compliments can be deleted by the sender - ADDED
+Installation redirects only if user has BP - FIXED
+Add a close button at the top of lightboxes - ADDED
+Add multiple compliment notification issue - ADDED
+Fix invalid html issue for send compliment button - FIXED
 
 = 1.0.7 =
 Send compliment button can be displayed in /members page - ADDED
 PHP undefined notices in wordpress admin - FIXED
 Option added to remove plugin data on plugin delete - ADDED
 Email headers changed from string to array() and MIME-Version removed - CHANGED
+Compliment not displaying content in activity page - FIXED
+Filter added to prevent duplicate compliments - ADDED
+Compliment can be redirected to individual compliment page after send - ADDED
+Compliment can be redirected to individual compliment from notifications - ADDED
 
 = 1.0.6 =
 Notification incorrect from email - FIXED
