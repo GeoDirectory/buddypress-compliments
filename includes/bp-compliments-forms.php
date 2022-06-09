@@ -44,9 +44,9 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
                             ?>
                             <li>
                                 <label>
-                                    <input type="radio" name="term_id" value="<?php echo $term->term_id; ?>" <?php if ($count == 1) { echo 'checked="checked"'; } ?>>
+                                    <input type="radio" name="term_id" value="<?php echo (int) $term->term_id; ?>" <?php if ($count == 1) { echo 'checked="checked"'; } ?>>
                                 <span>
-                                    <img style="height: 20px; width: 20px; vertical-align:middle" src='<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>' class='preview-upload'/>
+                                    <img style="height: 20px; width: 20px; vertical-align:middle" src='<?php echo ! empty( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>' class='preview-upload'/>
                                     <?php echo $term->name; ?>
                                 </span>
                                 </label>
@@ -56,7 +56,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
                         echo '</ul>';
                         ?>
                         <textarea placeholder="<?php echo __( 'Type your message here', 'bp-compliments' ); ?>" name="message" maxchar="1000"></textarea>
-                        <input type="hidden" name="post_id" value="<?php echo $pid; ?>"/>
+                        <input type="hidden" name="post_id" value="<?php echo (int) $pid; ?>"/>
                         <input type="hidden" name="receiver_id" value="<?php echo absint( $receiver_id ); ?>"/>
                         <?php wp_nonce_field( 'handle_compliments_form_data','handle_compliments_nonce' ); ?>
                         <div class="bp-comp-pop-buttons">
@@ -70,7 +70,7 @@ function bp_compliments_modal_form($pid = 0, $receiver_id = 0 ) {
                     ?>
                     <script type="text/javascript">
                         jQuery(document).ready(function() {
-                            jQuery('a.bp-comp-cancel, .comp-close-x').click(function (e) {
+                            jQuery('a.bp-comp-cancel, .comp-close-x').on("click",function (e) {
                                 e.preventDefault();
                                 var mod_shadow = jQuery('#bp_compliments_modal_shadow');
                                 var container = jQuery('.comp-modal');
@@ -98,7 +98,7 @@ function bp_compliments_modal_ajax()
     check_ajax_referer('bp-compliments-nonce', 'bp_compliments_nonce');
 
     //Get the receiver id
-    $btn_id = strip_tags($_POST["btn_id"]);
+    $btn_id = sanitize_text_field( strip_tags( $_POST["btn_id"] ) );
     if ($btn_id && (strpos($btn_id, '-') !== false)) {
         $btn_id = explode("-", $btn_id);
         $btn_id = (int) $btn_id[1];
@@ -144,7 +144,7 @@ function bp_compliments_modal_init() {
     </div>
     <script type="text/javascript">
         jQuery(document).ready(function() {
-            jQuery('a.compliments-popup').click(function (e) {
+            jQuery('a.compliments-popup').on("click",function (e) {
                 e.preventDefault();
                 var mod_shadow = jQuery('#bp_compliments_modal_shadow');
                 var container = jQuery('.comp-modal');

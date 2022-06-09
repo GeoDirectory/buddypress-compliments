@@ -1,10 +1,11 @@
 === BuddyPress Compliments ===
-Contributors: viruthagiri, stiofansisland, paoltaia
-Donate link: http://wpgeodirectory.com/
+Contributors: stiofansisland, paoltaia, ayecode
+Donate link: https://wpgeodirectory.com
 Tags: buddypress, buddypress compliments, WordPress yelp compliments, buddypress integration, business directory plugin, directory, directory plugin, geodirectory, geodirectory buddypress, geodirectory buddypress integration, social network, yelp clone, yelp compliments
-Requires at least: 3.1
-Tested up to: 5.2
-Stable tag: 1.0.9
+Requires at least: 4.5
+Tested up to: 6.0
+Requires PHP: 5.6
+Stable tag: 1.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,7 +27,7 @@ BuddyPress compliments adds a smart way for BuddyPress members to interact with 
 * Compliments are now paginated
 * Compliments can be renamed to anything Ex: "Gifts"
 
-We built this plugin especially for Whoop! our [WordPress Directory Theme](https://wpgeodirectory.com/themes/wordpress-directory-theme-whoop/ "Whoop! is the latest Social Directory theme for GeoDirectory") powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
+We built this plugin especially for Whoop! our [WordPress Directory Theme](https://wpgeodirectory.com/downloads/whoop/ "Whoop! is the latest Social Directory theme for GeoDirectory") powered by [GeoDirectory](https://wordpress.org/plugins/geodirectory/ "Whoop! is a GeoDirectory theme and it will be released soon"). 
 
 The plugins has been tested with the following themes before release:
 
@@ -71,6 +72,9 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+= 1.1.0 =
+* WordPress v6 compatibility changes - CHANGED
+
 = 1.0.9 =
 Fix issue for plugin installation via WP-CLI - FIXED
 Compliments can be deleted by the sender - ADDED

@@ -42,12 +42,12 @@ function bp_compliments_get_add_compliment_button( $args = '' ) {
     global $bp, $members_template;
 
     $r = wp_parse_args( $args, array(
-        'receiver_id'     => bp_displayed_user_id(),
-        'sender_id'   => bp_loggedin_user_id(),
+        'receiver_id'   => bp_displayed_user_id(),
+        'sender_id'     => bp_loggedin_user_id(),
         'link_text'     => '',
         'link_title'    => '',
         'wrapper_class' => '',
-        'link_class'    => 'compliments-popup',
+        'link_class'    => 'compliments-popup button',
         'wrapper'       => 'li'
     ) );
 
