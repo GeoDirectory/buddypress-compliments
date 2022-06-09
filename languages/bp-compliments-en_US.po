@@ -1,52 +1,56 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyPress Compliments 1.0.9\n"
-"POT-Creation-Date: 2016-12-01 12:47+0000\n"
-"PO-Revision-Date: 2019-05-20 21:03+0530\n"
+"Project-Id-Version: BuddyPress Compliments 1.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-06-09 11:23+0530\n"
+"PO-Revision-Date: 2022-06-09 11:23+0530\n"
 "Last-Translator: \n"
-"Language-Team: GeoDirectory <info@wpgeodirectory.com>\n"
+"Language-Team: AyeCode Ltd <contact@ayecode.io>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Poedit-KeywordsList: __;__ngettext:1,2;__ngettext_noop:1,2;_c;_e;_ex:1,2c;"
+"_n:1,2;_n_noop:1,2;_nc:4c,1,2;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;gettext;"
+"gettext_noop\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bp-compliments-core.php:44 bp-compliments.php:36
-#: includes/bp-compliments-settings.php:167
+#: bp-compliments-core.php:44 bp-compliments.php:55
+#: includes/bp-compliments-settings.php:180
 msgid "Compliments"
 msgstr ""
 
-#: bp-compliments.php:35
+#: bp-compliments.php:48
 msgid "Compliment"
 msgstr ""
 
-#: bp-compliments.php:37
+#: bp-compliments.php:62
 msgid "compliments"
 msgstr ""
 
-#: bp-compliments.php:181
-#, php-format
-msgid ""
-"BuddyPress Compliments requires <a target=\"_blank\" href=\"%s\">BuddyPress</"
-"a> plugin."
-msgstr ""
-
-#: bp-compliments.php:188
+#: bp-compliments.php:246
 msgid "Hey! BP Compliments requires BuddyPress 1.5 or higher."
 msgstr ""
 
-#: includes/bp-compliments-actions.php:51
+#: includes/bp-compliments-actions.php:56
+msgid "Duplicate compliment detected."
+msgstr ""
+
+#: includes/bp-compliments-actions.php:60
+#: includes/bp-compliments-actions.php:68
 #, php-format
 msgid ""
 "There was a problem when trying to send %s to %s, please contact "
 "administrator."
 msgstr ""
 
-#: includes/bp-compliments-actions.php:53
+#: includes/bp-compliments-actions.php:62
+#: includes/bp-compliments-actions.php:70
 #, php-format
 msgid "Your %s sent to %s."
 msgstr ""
@@ -69,42 +73,51 @@ msgstr ""
 msgid "%1$s has received a %2$s from %3$s"
 msgstr ""
 
-#: includes/bp-compliments-activity.php:229
-#: includes/bp-compliments-activity.php:232
-#: includes/bp-compliments-activity.php:234
-#: includes/bp-compliments-activity.php:237
+#: includes/bp-compliments-activity.php:228
+#: includes/bp-compliments-activity.php:231
+#: includes/bp-compliments-activity.php:233
+#: includes/bp-compliments-activity.php:236
 #, php-format
 msgid "%1$s has sent a %2$s to %3$s"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:26
+#: includes/bp-compliments-forms.php:25
+msgid "Close Lightbox"
+msgstr ""
+
+#: includes/bp-compliments-forms.php:27
 #, php-format
 msgid "Choose Your %s Type:"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:57
+#: includes/bp-compliments-forms.php:58
 msgid "Type your message here"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:62
+#: includes/bp-compliments-forms.php:63
 msgid "Send"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:63
+#: includes/bp-compliments-forms.php:64
 msgid "Cancel"
 msgstr ""
 
-#: includes/bp-compliments-forms.php:79
+#: includes/bp-compliments-forms.php:68
 msgid "No compliments found."
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:49
-#: includes/bp-compliments-notifications.php:178
+#: includes/bp-compliments-notifications.php:47
+#: includes/bp-compliments-notifications.php:207
 #, php-format
 msgid "%s has sent you a %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:181
+#: includes/bp-compliments-notifications.php:109
+#, php-format
+msgid "You have %d new compliments"
+msgstr ""
+
+#: includes/bp-compliments-notifications.php:210
 #, php-format
 msgid ""
 "%s has sent you a %s.\n"
@@ -112,7 +125,7 @@ msgid ""
 "To view %s's %s: %s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:188
+#: includes/bp-compliments-notifications.php:217
 #, php-format
 msgid ""
 "\n"
@@ -122,110 +135,116 @@ msgid ""
 "%s"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:305
-#: includes/bp-compliments-settings.php:93
-#: includes/bp-compliments-settings.php:102
-#: includes/bp-compliments-settings.php:111
-#: includes/bp-compliments-settings.php:120
+#: includes/bp-compliments-notifications.php:334
+#: includes/bp-compliments-settings.php:97
+#: includes/bp-compliments-settings.php:106
+#: includes/bp-compliments-settings.php:115
+#: includes/bp-compliments-settings.php:124
+#: includes/bp-compliments-settings.php:141
 msgid "Yes"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:306
-#: includes/bp-compliments-settings.php:94
-#: includes/bp-compliments-settings.php:103
-#: includes/bp-compliments-settings.php:112
-#: includes/bp-compliments-settings.php:121
+#: includes/bp-compliments-notifications.php:335
+#: includes/bp-compliments-settings.php:98
+#: includes/bp-compliments-settings.php:107
+#: includes/bp-compliments-settings.php:116
+#: includes/bp-compliments-settings.php:125
+#: includes/bp-compliments-settings.php:142
 msgid "No"
 msgstr ""
 
-#: includes/bp-compliments-notifications.php:313
+#: includes/bp-compliments-notifications.php:342
 #, php-format
 msgid "A member sends you a %s"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:39
+#: includes/bp-compliments-settings.php:40
 #, php-format
 msgid "BuddyPress %s - Settings"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:67
+#: includes/bp-compliments-settings.php:71
 msgid "Singlular name ( e.g. Gift. Default: Compliment )"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:71
+#: includes/bp-compliments-settings.php:75
 msgid "Plural name ( e.g. Gifts. Default: Compliments )"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:75
+#: includes/bp-compliments-settings.php:79
 msgid "Slug ( e.g. gifts. Default: compliments. must be lowercase )"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:79
+#: includes/bp-compliments-settings.php:83
 #, php-format
 msgid "Who can see other members %s page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:82
-#: includes/bp-compliments-settings.php:238
+#: includes/bp-compliments-settings.php:86
+#: includes/bp-compliments-settings.php:251
 msgid "Anybody"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:83
-#: includes/bp-compliments-settings.php:239
+#: includes/bp-compliments-settings.php:87
+#: includes/bp-compliments-settings.php:252
 msgid "Nobody"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:84
-#: includes/bp-compliments-settings.php:240
+#: includes/bp-compliments-settings.php:88
+#: includes/bp-compliments-settings.php:253
 msgid "Members Only"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:85
+#: includes/bp-compliments-settings.php:89
 msgid "Let members take care of this setting"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:90
+#: includes/bp-compliments-settings.php:94
 #, php-format
 msgid "Display \"Send %s\" button in /members page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:99
+#: includes/bp-compliments-settings.php:103
 #, php-format
 msgid "Members can delete %s received?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:108
+#: includes/bp-compliments-settings.php:112
 #, php-format
 msgid "Enable activity component for %s ?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:117
+#: includes/bp-compliments-settings.php:121
 #, php-format
 msgid "Enable notification component for %s ?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:126
+#: includes/bp-compliments-settings.php:130
 #, php-format
 msgid "Number of %s to display per page?"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:130
+#: includes/bp-compliments-settings.php:134
 msgid "Custom CSS styles"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:205
+#: includes/bp-compliments-settings.php:138
+msgid "Delete plugin data when you uninstall BuddyPress Compliments?"
+msgstr ""
+
+#: includes/bp-compliments-settings.php:218
 msgid "There was an error with your form. Please contact administrator."
 msgstr ""
 
-#: includes/bp-compliments-settings.php:216
+#: includes/bp-compliments-settings.php:229
 msgid "Setting updated successfully."
 msgstr ""
 
-#: includes/bp-compliments-settings.php:230
+#: includes/bp-compliments-settings.php:243
 msgid "Compliments Settings"
 msgstr ""
 
-#: includes/bp-compliments-settings.php:235
+#: includes/bp-compliments-settings.php:248
 msgid "Who can see your compliment page?"
 msgstr ""
 
@@ -275,42 +294,42 @@ msgstr ""
 msgid "New %s Name"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:89
-#: includes/bp-compliments-taxonomies.php:114
+#: includes/bp-compliments-taxonomies.php:91
+#: includes/bp-compliments-taxonomies.php:116
 #, php-format
 msgid "%s Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:92
-#: includes/bp-compliments-taxonomies.php:119
+#: includes/bp-compliments-taxonomies.php:94
+#: includes/bp-compliments-taxonomies.php:121
 msgid "Upload Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:92
-#: includes/bp-compliments-taxonomies.php:119
+#: includes/bp-compliments-taxonomies.php:94
+#: includes/bp-compliments-taxonomies.php:121
 msgid "Use Icon"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:92
-#: includes/bp-compliments-taxonomies.php:119
+#: includes/bp-compliments-taxonomies.php:94
+#: includes/bp-compliments-taxonomies.php:121
 msgid "Upload new Icon"
-msgstr ""
-
-#: includes/bp-compliments-taxonomies.php:93
-#: includes/bp-compliments-taxonomies.php:120
-msgid "Remove Icon"
 msgstr ""
 
 #: includes/bp-compliments-taxonomies.php:95
 #: includes/bp-compliments-taxonomies.php:122
+msgid "Remove Icon"
+msgstr ""
+
+#: includes/bp-compliments-taxonomies.php:97
+#: includes/bp-compliments-taxonomies.php:124
 msgid "Recommended icon size: 20px x 20px"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:169
+#: includes/bp-compliments-taxonomies.php:171
 msgid "Name"
 msgstr ""
 
-#: includes/bp-compliments-taxonomies.php:170
+#: includes/bp-compliments-taxonomies.php:172
 msgid "Icon"
 msgstr ""
 
@@ -319,31 +338,31 @@ msgstr ""
 msgid "Send %s"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:99
+#: includes/templates/buddypress/members/single/compliments.php:119
 msgid "Delete"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:134
+#: includes/templates/buddypress/members/single/compliments.php:154
 #, php-format
 msgid "1 of 1"
 msgid_plural "%1$s to %2$s of %3$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/templates/buddypress/members/single/compliments.php:137
+#: includes/templates/buddypress/members/single/compliments.php:157
 msgid "Go to Page"
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:153
+#: includes/templates/buddypress/members/single/compliments.php:173
 msgid "You don't have permission to access this page."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:160
+#: includes/templates/buddypress/members/single/compliments.php:180
 #, php-format
 msgid "Aw, you have no %1$s yet. To get some try sending %1$s to others."
 msgstr ""
 
-#: includes/templates/buddypress/members/single/compliments.php:166
+#: includes/templates/buddypress/members/single/compliments.php:186
 #, php-format
 msgid "Sorry, no %1$s just yet."
 msgstr ""

@@ -329,13 +329,13 @@ function bp_comp_add_compliment_received_content($action, $activity) {
     $t_id = $comp->term_id;
     $term = get_term_by('id', $t_id, 'compliment');
     $term_meta = get_option("taxonomy_$t_id");
-    $compliments_icon = esc_attr($term_meta['compliments_icon']) ? esc_attr($term_meta['compliments_icon']) : '';
+    $compliments_icon = ! empty( $term_meta['compliments_icon'] ) ? $term_meta['compliments_icon'] : '';
     if (is_ssl()) {
         $compliments_icon = str_replace('http://', 'https://', $compliments_icon);
     }
     $image = "<div class=\"comp-user-header\">";
     $image .= '<img style="height: 20px; width: 20px; vertical-align:middle"
-              src="'.$compliments_icon.'"
+              src="' . esc_attr( $compliments_icon ) . '"
               />';
     $image .= $term->name;
     $image .= '</div>';

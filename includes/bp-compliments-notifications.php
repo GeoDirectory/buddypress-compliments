@@ -121,7 +121,7 @@ function bp_compliments_format_notifications( $action, $item_id, $secondary_item
 			 * @param int    $secondary_item_id Secondary Item ID.
 			 */
 			return apply_filters( 'bp_compliments_multiple_new_compliments_notification',
-				'<a href="' . $link . '">' . $text . '</a>', $total_items,
+				'<a href="' . esc_url( $link ) . '">' . $text . '</a>', $total_items,
 				$link, $text, $item_id, $secondary_item_id );
 		} else {
 			return apply_filters( 'bp_compliments_multiple_new_toolbar_compliments_notification',

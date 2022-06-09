@@ -69,15 +69,15 @@ function bp_compliments_settings_page() {
 			<table class="widefat fixed" style="padding:10px;margin-top: 10px;">
 				<tr valign="top">
 					<th scope="row"><?php echo __( 'Singlular name ( e.g. Gift. Default: Compliment )', 'bp-compliments' ); ?></th>
-					<td><input type="text" class="widefat" name="bp_compliment_singular_name" value="<?php echo BP_COMP_SINGULAR_NAME; ?>" /></td>
+					<td><input type="text" class="widefat" name="bp_compliment_singular_name" value="<?php echo esc_attr( BP_COMP_SINGULAR_NAME ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><?php echo __( 'Plural name ( e.g. Gifts. Default: Compliments )', 'bp-compliments' ); ?></th>
-					<td><input type="text" class="widefat" name="bp_compliment_plural_name" value="<?php echo BP_COMP_PLURAL_NAME; ?>" /></td>
+					<td><input type="text" class="widefat" name="bp_compliment_plural_name" value="<?php echo esc_attr( BP_COMP_PLURAL_NAME ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><?php echo __( 'Slug ( e.g. gifts. Default: compliments. must be lowercase )', 'bp-compliments' ); ?></th>
-					<td><input type="text" class="widefat" name="bp_compliment_slug" value="<?php echo BP_COMPLIMENTS_SLUG; ?>" /></td>
+					<td><input type="text" class="widefat" name="bp_compliment_slug" value="<?php echo esc_attr( BP_COMPLIMENTS_SLUG ); ?>" /></td>
 				</tr>
 				<tr valign="top">
 					<th scope="row"><?php echo sprintf( __( 'Who can see other members %s page?', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ); ?></th>

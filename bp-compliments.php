@@ -1,41 +1,67 @@
 <?php
 /**
- * This is the main BuddyPress Compliments plugin file, here we declare and call the important stuff
+ * BuddyPress Compliments
  *
- * @package     BuddyPress_Compliments
- * @copyright   2016 AyeCode Ltd
- * @license     GPL-2.0+
+ * @package           BuddyPress_Compliments
+ * @author            AyeCode Ltd
+ * @copyright         2016 AyeCode Ltd
+ * @license           GPLv3
  *
  * @wordpress-plugin
- * Plugin Name: BuddyPress Compliments
- * Plugin URI: https://appwp.io/
- * Description: Compliments module for BuddyPress.
- * Version: 1.0.9
- * Author: AyeCode Ltd
- * Author URI: https://ayecode.io
- * Text Domain: bp-compliments
- * Domain Path: /languages
- * Requires at least: 3.1
- * Tested up to: 5.2
+ * Plugin Name:       BuddyPress Compliments
+ * Plugin URI:        https://wordpress.org/plugins/buddypress-compliments/
+ * Description:       BuddyPress Compliments plugin adds a smart way for BuddyPress members to interact with each other via compliments.
+ * Version:           1.1.0
+ * Requires at least: 4.5
+ * Tested up to:      6.0
+ * Requires PHP:      5.6
+ * Author:            AyeCode Ltd
+ * Author URI:        https://ayecode.io
+ * License:           GPLv3
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain:       bp-compliments
+ * Domain Path:       /languages
  */
 
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 
-// Define the plugin version.
-define( 'BP_COMPLIMENTS_VER', '1.0.9' );
+if ( ! defined( 'BP_COMPLIMENTS_VER' ) ) {
+	/**
+	 * Plugin version.
+	 */
+	define( 'BP_COMPLIMENTS_VER', '1.1.0' );
+}
 
-/**
- * BuddyPress compliments text domain.
- */
-define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
-/**
- * BuddyPress compliments names.
- */
-define( 'BP_COMP_SINGULAR_NAME', trim(esc_attr( get_option('bp_compliment_singular_name', __( 'Compliment', 'bp-compliments' )))) );
-define( 'BP_COMP_PLURAL_NAME', trim(esc_attr( get_option('bp_compliment_plural_name', __( 'Compliments', 'bp-compliments' )))) );
-define( 'BP_COMPLIMENTS_SLUG', strtolower(trim(esc_attr( get_option('bp_compliment_slug', __( 'compliments', 'bp-compliments' ))))) );
+if ( ! defined( 'BP_COMP_TEXTDOMAIN' ) ) {
+	/**
+	 * Plugin textdomain.
+	 */
+	define( 'BP_COMP_TEXTDOMAIN', 'bp-compliments' );
+}
 
+if ( ! defined( 'BP_COMP_SINGULAR_NAME' ) ) {
+	/**
+	 * Compliments singular name.
+	 */
+	define( 'BP_COMP_SINGULAR_NAME', trim( esc_attr( get_option( 'bp_compliment_singular_name', __( 'Compliment', 'bp-compliments' ) ) ) ) );
+}
+
+if ( ! defined( 'BP_COMP_PLURAL_NAME' ) ) {
+	/**
+	 * Compliments plural name.
+	 */
+	define( 'BP_COMP_PLURAL_NAME', trim( esc_attr( get_option( 'bp_compliment_plural_name', __( 'Compliments', 'bp-compliments' ) ) ) ) );
+}
+
+if ( ! defined( 'BP_COMPLIMENTS_SLUG' ) ) {
+	/**
+	 * Compliments slug.
+	 */
+	define( 'BP_COMPLIMENTS_SLUG', trim( strtolower( esc_attr( get_option('bp_compliment_slug', __( 'compliments', 'bp-compliments' ) ) ) ) ) );
+}
 
 /**
  * Only load the plugin code if BuddyPress is activated.
@@ -47,43 +73,61 @@ define( 'BP_COMPLIMENTS_SLUG', strtolower(trim(esc_attr( get_option('bp_complime
  * @global object $wpdb WordPress db object.
  */
 function bp_compliments_init() {
-    global $wpdb, $bp;
+	global $wpdb, $bp;
 
-    //define the plugin path.
-    define( 'BP_COMPLIMENTS_DIR', dirname( __FILE__ ) );
-    //define the plugin url.
-    define( 'BP_COMPLIMENTS_URL', plugin_dir_url( __FILE__ ) );
-    if ( !$table_prefix = $bp->table_prefix )
-        /**
-         * Filters the value of BuddyPress table prefix.
-         *
-         * @since 0.0.1
-         * @package BuddyPress_Compliments
-         *
-         * @param string $wpdb->base_prefix WordPress table prefix.
-         */
-        $table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
-    ////define the plugin table.
-    define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
-	if( file_exists(BP_COMPLIMENTS_DIR . 'vendor/autoload.php' ) ){
+	if ( !$table_prefix = $bp->table_prefix )
+		/**
+		 * Filters the value of BuddyPress table prefix.
+		 *
+		 * @since 0.0.1
+		 * @package BuddyPress_Compliments
+		 *
+		 * @param string $wpdb->base_prefix WordPress table prefix.
+		 */
+		$table_prefix = apply_filters( 'bp_core_get_table_prefix', $wpdb->base_prefix );
+
+	if ( ! defined( 'BP_COMPLIMENTS_DIR' ) ) {
+		/**
+		 * Compliments plugin directory.
+		 */
+		define( 'BP_COMPLIMENTS_DIR', plugin_dir_path( __FILE__ ) );
+	}
+
+	if ( ! defined( 'BP_COMPLIMENTS_URL' ) ) {
+		/**
+		 * Compliments plugin url.
+		 */
+		define( 'BP_COMPLIMENTS_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) . '/' );
+	}
+
+	if ( ! defined( 'BP_COMPLIMENTS_TABLE' ) ) {
+		/**
+		 * Compliments database table.
+		 */
+		define( 'BP_COMPLIMENTS_TABLE', $table_prefix . 'bp_compliments' );
+	}
+
+	if ( file_exists( BP_COMPLIMENTS_DIR . 'vendor/autoload.php' ) ) {
 		require_once( BP_COMPLIMENTS_DIR . 'vendor/autoload.php' );
 	}
-    // only supported in BP 1.5+
-    if ( version_compare( BP_VERSION, '1.3', '>' ) ) {
-        require( constant( 'BP_COMPLIMENTS_DIR' ) . '/bp-compliments-core.php' );
-    // show admin notice for users on BP 1.2.x
-    } else {
-        add_action( 'admin_notices', 'bp_compliments_older_version_notice' );
-        return;
-    }
+
+	// Only supported in BP 1.5+
+	if ( version_compare( BP_VERSION, '1.3', '>' ) ) {
+		require( BP_COMPLIMENTS_DIR . 'bp-compliments-core.php' );
+		// Show admin notice for users on BP 1.2.x
+	} else {
+		add_action( 'admin_notices', 'bp_compliments_older_version_notice' );
+		return;
+	}
 }
 add_action( 'bp_include', 'bp_compliments_init' );
 add_action( 'init', 'bp_compliments_plugin_init' );
+
 /**
  * Hook into actions and filters on site init.
  */
-function bp_compliments_plugin_init(){
-	add_action( 'tgmpa_register', 'bp_compliments_require_plugins');
+function bp_compliments_plugin_init() {
+	add_action( 'tgmpa_register', 'bp_compliments_require_plugins' );
 }
 
 /**
@@ -93,13 +137,13 @@ function bp_compliments_require_plugins(){
 	$plugins = array( /* The array to install plugins */ );
 	$plugins = array(
 		array(
-			'name'      => 'BuddPress',
+			'name'      => 'BuddyPress',
 			'slug'      => 'buddypress',
 			'required'  => true, // this plugin is recommended
 			'version'   => '1.5'
 		)
 	);
-	$config = array( /* The array to configure TGM Plugin Activation */ );
+	$config = array(); /* The array to configure TGM Plugin Activation */
 	tgmpa( $plugins, $config );
 }
 
@@ -185,16 +229,21 @@ function bp_compliments_activation_redirect() {
  * @package BuddyPress_Compliments
  */
 function bp_compliments_localization() {
-    /**
-     * Filters the value of plugin locale.
-     *
-     * @since 0.0.1
-     * @package BuddyPress_Compliments
-     */
-    $locale = apply_filters('plugin_locale', get_locale(), 'bp-compliments');
+	global $wp_version;
 
-    load_textdomain('bp-compliments', WP_LANG_DIR . '/' . 'bp-compliments' . '/' . 'bp-compliments' . '-' . $locale . '.mo');
-    load_plugin_textdomain('bp-compliments', false, dirname( plugin_basename( __FILE__ ) ) . '/languages');
+	$locale = $wp_version >= 4.7 ? get_user_locale() : get_locale();
+
+	/**
+	 * Filter the plugin locale.
+	 *
+	 * @since   1.0.0
+	 * @package BuddyPress_Compliments
+	 */
+	$locale = apply_filters( 'plugin_locale', $locale, 'bp-compliments' );
+
+	unload_textdomain( 'bp-compliments' );
+	load_textdomain( 'bp-compliments', WP_LANG_DIR . '/bp-compliments/bp-compliments-' . $locale . '.mo' );
+	load_plugin_textdomain( 'bp-compliments', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 
 }
 add_action( 'plugins_loaded', 'bp_compliments_localization' );

@@ -91,8 +91,8 @@ function compliments_taxonomy_add_new_meta_field() {
         <label for="term_meta[compliments_icon]"><?php echo sprintf( __( '%s Icon', 'bp-compliments' ), BP_COMP_SINGULAR_NAME ) ?></label>
         <img id="comp-icon-preview" class="image_preview" src="" style="display: none;" /><br/>
         <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="text" name="term_meta[compliments_icon]" value=""/>
-        <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , 'bp-compliments' ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , 'bp-compliments' ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , 'bp-compliments' ); ?>" />
-        <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , 'bp-compliments' ); ?>" />
+        <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo esc_attr( __( 'Upload Icon' , 'bp-compliments' ) ); ?>" data-uploader_button_text="<?php echo esc_attr( __( 'Use Icon' , 'bp-compliments' ) ); ?>" class="image_upload_button button" value="<?php echo esc_attr( __( 'Upload new Icon' , 'bp-compliments' ) ); ?>" />
+        <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo esc_attr( __( 'Remove Icon' , 'bp-compliments' ) ); ?>" />
         <br/>
         <p><?php echo __( 'Recommended icon size: 20px x 20px' , 'bp-compliments' ); ?></p>
     </div>
@@ -118,8 +118,8 @@ function compliments_taxonomy_edit_meta_field($term) {
 		    <span class='caticon-upload upload'>
                 <input id="comp-icon-value" style="position:absolute; left:-500px;width:50px;" class="image_data_field" type="hidden" name="term_meta[compliments_icon]" value="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>"/>
                 <img id="comp-icon-preview" class="image_preview" src="<?php echo esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : ''; ?>" /><br/>
-                <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo __( 'Upload Icon' , 'bp-compliments' ); ?>" data-uploader_button_text="<?php echo __( 'Use Icon' , 'bp-compliments' ); ?>" class="image_upload_button button" value="<?php echo __( 'Upload new Icon' , 'bp-compliments' ); ?>" />
-                <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo __( 'Remove Icon' , 'bp-compliments' ); ?>" />
+                <input id="comp-icon-upload" type="button" data-uploader_title="<?php echo esc_attr( __( 'Upload Icon' , 'bp-compliments' ) ); ?>" data-uploader_button_text="<?php echo esc_attr( __( 'Use Icon' , 'bp-compliments' ) ); ?>" class="image_upload_button button" value="<?php echo esc_attr( __( 'Upload new Icon' , 'bp-compliments' ) ); ?>" />
+                <input id="comp-icon-delete" type="button" class="image_delete_button button" value="<?php echo esc_attr( __( 'Remove Icon' , 'bp-compliments' ) ); ?>" />
                 <br/>
                 <p><?php echo __( 'Recommended icon size: 20px x 20px' , 'bp-compliments' ); ?></p>
             </span>
@@ -144,7 +144,7 @@ function save_taxonomy_custom_meta( $term_id ) {
         $cat_keys = array_keys( $_POST['term_meta'] );
         foreach ( $cat_keys as $key ) {
             if ( isset ( $_POST['term_meta'][$key] ) ) {
-                $term_meta[$key] = $_POST['term_meta'][$key];
+                $term_meta[$key] = sanitize_text_field( $_POST['term_meta'][$key] );
             }
         }
 
@@ -189,10 +189,10 @@ add_filter("manage_compliment_custom_column", 'manage_bp_compliment_columns', 10
  */
 function manage_bp_compliment_columns($out, $column_name, $t_id) {
     $term_meta = get_option( "taxonomy_$t_id" );
-    $term_icon = esc_attr( $term_meta['compliments_icon'] ) ? esc_attr( $term_meta['compliments_icon'] ) : "";
+    $term_icon = ! empty( $term_meta['compliments_icon'] ) ? $term_meta['compliments_icon'] : "";
     switch ($column_name) {
         case 'icon':
-            $out .= '<img src="'.$term_icon.'" />';
+            $out .= '<img src="' . esc_url( $term_icon ) . '" />';
             break;
 
         default:
