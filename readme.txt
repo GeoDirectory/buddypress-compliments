@@ -5,13 +5,15 @@ Tags: buddypress, buddypress compliments, WordPress yelp compliments, buddypress
 Requires at least: 4.5
 Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Inspired by Yelp compliments system BuddyPress Compliments is a BuddyPress addon that allows members to send each other compliments or eGifts. 
 
 == Description ==
+
+This plugin is no longer in development, if you wish to take over this plugin please request it here: https://github.com/GeoDirectory/buddypress-compliments/issues
 
 BuddyPress compliments adds a smart way for BuddyPress members to interact with each other via compliments.
 
@@ -72,8 +74,9 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
-= 1.1.0 =
+= 1.1.1 =
 * WordPress v6 compatibility changes - CHANGED
+* No longer supported notice in wp.org repo - ADDED
 
 = 1.0.9 =
 Fix issue for plugin installation via WP-CLI - FIXED

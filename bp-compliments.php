@@ -11,7 +11,7 @@
  * Plugin Name:       BuddyPress Compliments
  * Plugin URI:        https://wordpress.org/plugins/buddypress-compliments/
  * Description:       BuddyPress Compliments plugin adds a smart way for BuddyPress members to interact with each other via compliments.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 4.5
  * Tested up to:      6.0
  * Requires PHP:      5.6
@@ -32,7 +32,7 @@ if ( ! defined( 'BP_COMPLIMENTS_VER' ) ) {
 	/**
 	 * Plugin version.
 	 */
-	define( 'BP_COMPLIMENTS_VER', '1.1.0' );
+	define( 'BP_COMPLIMENTS_VER', '1.1.1' );
 }
 
 if ( ! defined( 'BP_COMP_TEXTDOMAIN' ) ) {
