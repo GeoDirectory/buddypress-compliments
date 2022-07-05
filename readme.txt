@@ -43,10 +43,10 @@ BuddyPress Compliments is 100% translatable.
 
 = Minimum Requirements =
 
-* WordPress 3.1 or greater
-* BuddyPress plugin
-* PHP version 5.2.4 or greater
-* MySQL version 5.0 or greater
+* WordPress 4.5 or greater
+* BuddyPress 5.0 or greater
+* PHP version 5.6 or greater
+* MySQL version 5.6 or greater
 
 = Automatic installation =
 
