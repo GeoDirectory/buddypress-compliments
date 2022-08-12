@@ -178,7 +178,7 @@ function bp_comp_settings_submenu() {
 
 		bp_core_new_subnav_item(array(
 				'name' => __('Compliments', 'bp-compliments'),
-				'slug' => 'compliments',
+				'slug' => $bp->compliments->compliments->slug,
 				'parent_url' => trailingslashit($user_domain . $settings_slug),
 				'parent_slug' => $settings_slug,
 				'screen_function' => 'bp_comp_settings_submenu_page_content',

@@ -74,6 +74,10 @@ No questions so far, but don't hesitate to ask!
 4. Submitted compliments will be visible in user's compliments section.
 
 == Changelog ==
+
+= 1.1.2 =
+* Use dynamic slug for compliments setting tab on user profile - FIXED
+
 = 1.1.1 =
 * WordPress v6 compatibility changes - CHANGED
 * No longer supported notice in wp.org repo - ADDED
